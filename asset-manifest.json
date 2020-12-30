@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/TramiteDocumentarioEPISI_Frontend/static/css/main.ab7136cd.chunk.css",
+    "main.js": "/TramiteDocumentarioEPISI_Frontend/static/js/main.4e3d0802.chunk.js",
+    "main.js.map": "/TramiteDocumentarioEPISI_Frontend/static/js/main.4e3d0802.chunk.js.map",
+    "runtime-main.js": "/TramiteDocumentarioEPISI_Frontend/static/js/runtime-main.7aadf994.js",
+    "runtime-main.js.map": "/TramiteDocumentarioEPISI_Frontend/static/js/runtime-main.7aadf994.js.map",
+    "static/js/2.78e688fc.chunk.js": "/TramiteDocumentarioEPISI_Frontend/static/js/2.78e688fc.chunk.js",
+    "static/js/2.78e688fc.chunk.js.map": "/TramiteDocumentarioEPISI_Frontend/static/js/2.78e688fc.chunk.js.map",
+    "static/js/3.276deb57.chunk.js": "/TramiteDocumentarioEPISI_Frontend/static/js/3.276deb57.chunk.js",
+    "static/js/3.276deb57.chunk.js.map": "/TramiteDocumentarioEPISI_Frontend/static/js/3.276deb57.chunk.js.map",
+    "index.html": "/TramiteDocumentarioEPISI_Frontend/index.html",
+    "static/css/main.ab7136cd.chunk.css.map": "/TramiteDocumentarioEPISI_Frontend/static/css/main.ab7136cd.chunk.css.map",
+    "static/js/2.78e688fc.chunk.js.LICENSE.txt": "/TramiteDocumentarioEPISI_Frontend/static/js/2.78e688fc.chunk.js.LICENSE.txt",
+    "static/media/logo.6ce24c58.svg": "/TramiteDocumentarioEPISI_Frontend/static/media/logo.6ce24c58.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.7aadf994.js",
+    "static/js/2.78e688fc.chunk.js",
+    "static/css/main.ab7136cd.chunk.css",
+    "static/js/main.4e3d0802.chunk.js"
+  ]
+}

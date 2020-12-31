@@ -6,6 +6,11 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 In the project directory, you can run:
 
+### `npm run deploy`
+
+Deploy the app in gh-pages.\
+Open [homepage](https://felixgonzalo.github.io/TramiteDocumentarioEPISI_Frontend/) to view it in the browser.
+
 ### `npm start`
 
 Runs the app in the development mode.\

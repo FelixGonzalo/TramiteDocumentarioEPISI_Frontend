@@ -1,5 +1,5 @@
 import { Fragment } from "react";
-import { BrowserRouter as Router, Switch, Route, NavLink } from "react-router-dom"
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import Header from './Header'
 
 const Routes = () => {
@@ -8,6 +8,9 @@ const Routes = () => {
       <Router>
         <Header/>
         <Switch>
+          <Route path="/registrar.persona">
+            Registrar personas
+          </Route>
           <Route path="/admin.personas">
             Administración personas
           </Route>

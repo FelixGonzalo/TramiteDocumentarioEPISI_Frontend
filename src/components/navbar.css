@@ -1,0 +1,26 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 10px 30px;
+  overflow-x: auto;
+  text-align: center;
+}
+
+.navbar-option {
+  text-decoration: none;
+  color: var(--cclear);
+}
+
+.navbar-option:hover {
+  text-decoration: underline;
+}
+
+.navbar-option:last-child {
+  margin: auto;
+  margin-right: 0;
+}
+
+.navbar-activate {
+  text-decoration: underline;
+}

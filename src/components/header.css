@@ -1,0 +1,15 @@
+.header-information {
+  background: var(--cclear);
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 25px;
+  text-align: center;
+}
+
+.header-title {
+  font-size: 15px;
+  margin: 0px;
+  font-weight: 500;
+}

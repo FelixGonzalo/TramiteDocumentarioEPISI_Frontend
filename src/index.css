@@ -24,14 +24,14 @@ code {
   width: 90%;
   max-width: 1200px;
   margin: auto;
-  padding: 20px 5%;
+  padding: 30px 5% 100px;
   margin-bottom: 40px;
   box-sizing: border-box;
 }
 
 .default-title {
   text-align: center;
-  margin: 0 0 10px 0;
+  margin: 0 0 30px 0;
   color: var(--cred);
   font-size: 30px;
 }
@@ -48,4 +48,16 @@ code {
 .table-responsive td {
   border: 1px solid var(--cdark);
   padding: 5px 10px;
+}
+
+.button-default {
+  background: var(--cred);
+  color: var(--cclear);
+  padding: 12px 25px;
+  border-radius: 20px;
+  outline: none;
+  border: none;
+  font-size: 20px;
+  display: block;
+  margin: 30px auto 0px;
 }

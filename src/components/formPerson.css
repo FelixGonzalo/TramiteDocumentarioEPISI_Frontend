@@ -1,0 +1,21 @@
+.form-default {
+  display: flex;
+  flex-direction: column;
+  max-width: 330px;
+  margin: auto;
+}
+
+.label-default {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.input-default {
+  border: var(--cred) solid 3px;
+  padding: 8px 4px;
+  margin: auto;
+  margin-right: 0px;
+  text-align: center;
+}

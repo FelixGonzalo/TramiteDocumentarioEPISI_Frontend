@@ -1,5 +1,6 @@
 import { Fragment } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
+import AdminPerson from "./AdminPerson";
 import Header from './Header'
 
 const Routes = () => {
@@ -12,7 +13,7 @@ const Routes = () => {
             Registrar personas
           </Route>
           <Route path="/admin.personas">
-            Administración personas
+            <AdminPerson/>
           </Route>
           <Route path="/">
             Principal

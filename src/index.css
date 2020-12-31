@@ -16,5 +16,36 @@ code {
 :root {
   --cred: #d82f4b;
   --cclear: #ffffff;
-  --cblack: black;
+  --cdark: black;
+}
+
+.container-main {
+  background: var(--cclear);
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
+  padding: 20px 5%;
+  margin-bottom: 40px;
+  box-sizing: border-box;
+}
+
+.default-title {
+  text-align: center;
+  margin: 0 0 10px 0;
+  color: var(--cred);
+  font-size: 30px;
+}
+
+.table-responsive {
+  overflow-x: auto;
+}
+
+.table-responsive table {
+  border-collapse: collapse;
+}
+
+.table-responsive th,
+.table-responsive td {
+  border: 1px solid var(--cdark);
+  padding: 5px 10px;
 }

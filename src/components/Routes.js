@@ -2,6 +2,7 @@ import { Fragment } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import AdminPerson from "./AdminPerson";
 import FormPerson from "./FormPerson";
+import FormTramite from "./FormTramite";
 import Header from './Header'
 import TramitesList from "./TramitesList";
 
@@ -11,6 +12,9 @@ const Routes = () => {
       <Router>
         <Header/>
         <Switch>
+          <Route path="/registrar.tramite">
+            <FormTramite/>
+          </Route>
           <Route path="/listar.tramites">
             <TramitesList/>
           </Route>

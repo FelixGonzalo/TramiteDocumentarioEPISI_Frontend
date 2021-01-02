@@ -1,0 +1,16 @@
+.tramite-fecha {
+  display: block;
+  margin: auto;
+  margin-top: 20px;
+  outline: none;
+  border: none;
+  text-align: center;
+}
+
+.info-solicitante {
+  font-size: 13px;
+  margin-top: 5px;
+  padding: 0px;
+  text-align: right;
+  list-style: none;
+}

@@ -26,7 +26,6 @@ code {
   max-width: 1200px;
   margin: auto;
   padding: 30px 5% 100px;
-  margin-top: 20px;
   margin-bottom: 40px;
   box-sizing: border-box;
 }
@@ -36,6 +35,11 @@ code {
   margin: 0 0 30px 0;
   color: var(--cred);
   font-size: 30px;
+}
+
+.default-subtitle {
+  font-size: 25px;
+  margin: 15px 0px;
 }
 
 .table-responsive {

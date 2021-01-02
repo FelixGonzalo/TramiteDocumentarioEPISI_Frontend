@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form"
-import './formPerson.css'
+import './formDefault.css'
 
 const FormPerson = () => {
 

@@ -15,6 +15,9 @@ const Navbar = () => {
       <NavLink to="/registrar.persona" className="navbar-option" activeClassName="navbar-activate">
         Registrar persona
       </NavLink>
+      <NavLink to="/listar.tramites" className="navbar-option" activeClassName="navbar-activate">
+        Lista de trámites
+      </NavLink>
       <NavLink to="/" exact className="navbar-option" activeClassName="navbar-activate">
         Salir
       </NavLink>

@@ -15,6 +15,7 @@ code {
 
 :root {
   --cred: #d82f4b;
+  --cred2: #fad8de;
   --cclear: #ffffff;
   --cdark: black;
 }
@@ -49,6 +50,10 @@ code {
 .table-responsive td {
   border: 1px solid var(--cdark);
   padding: 5px 10px;
+}
+
+.table-responsive th {
+  background: var(--cred2);
 }
 
 .button-default {

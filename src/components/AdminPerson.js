@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState } from 'react'
 import Swal from 'sweetalert2'
 import './adminPerson.css'
 
@@ -14,15 +14,17 @@ const AdminPerson = () => {
 
   const [personas, setPersonas] = useState([])
 
-  useEffect(() => {
-    getDatos()
-  }, [])
-  
   const getDatos = async () => {
     const data = await fetch('http://localhost:8090/api/personas')
     const response = await data.json()
     setPersonas(response)
   }
+
+  useEffect(() => {
+    getDatos()
+  }, [])
+  
+ 
 
   return (
     <main className="container-main">

@@ -1,7 +1,16 @@
 import { useEffect, useState } from "react"
+import Swal from 'sweetalert2'
 import './adminPerson.css'
 
 const AdminPerson = () => {
+
+  const messageError = () => {  
+    Swal.fire({
+      icon: 'warning',
+      title: 'Oops...',
+      text: 'Datos no disponibles',
+    })
+  }
 
   const [personas, setPersonas] = useState([])
 
@@ -38,11 +47,7 @@ const AdminPerson = () => {
                     <td>{item.correo}</td>
                     <td>Puesto</td>
                   </tr>
-                )) : (
-                  <tr>
-                    <td colSpan="4">Datos no disponibles</td>
-                  </tr>
-                )
+                )) : messageError()
             }
           </tbody>
         </table>

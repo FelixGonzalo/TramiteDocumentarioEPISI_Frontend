@@ -21,7 +21,8 @@ const FormPerson = () => {
   }
 
   const postData = (myjson) => {
-    fetch('http://localhost:8090/api/personas', {
+    try {
+      fetch('http://localhost:8090/api/personas', {
         method: 'POST',
         headers: {
         'Content-Type': 'application/json'
@@ -29,7 +30,10 @@ const FormPerson = () => {
 
         body: JSON.stringify(myjson)
       })
-    .then(response => response.json())
+      .then(response => response.json())
+    } catch (error) {
+     
+    }
   }
 
   return (
@@ -49,8 +53,10 @@ const FormPerson = () => {
             }
           />
         </label>
-        <span class="input-error">
-          {errors?.nombre?.message}
+        <span className="input-error">
+          {
+            errors?.nombre?.message
+          }
         </span>
         <label className="label-default"> DNI/RUC
           <input
@@ -67,7 +73,7 @@ const FormPerson = () => {
             }
           />
         </label>
-        <span class="input-error">
+        <span className="input-error">
           {errors?.dniOruc?.message}
         </span>
         <label className="label-default"> Correo
@@ -83,7 +89,7 @@ const FormPerson = () => {
             }
           />
         </label>
-        <span class="input-error">
+        <span className="input-error">
           {errors?.correo?.message}
         </span>
         <label className="label-default"> Cod. estudiante
@@ -101,7 +107,7 @@ const FormPerson = () => {
             }
           />
         </label>
-        <span class="input-error">
+        <span className="input-error">
           {errors?.codigoEstudiante?.message}
         </span>
         <label className="label-default"> Puesto

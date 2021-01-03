@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form"
-import './formDefault.css'
+import './defaultForm.css'
 
-const FormPerson = () => {
+const PersonaForm = () => {
 
   const {register, errors, handleSubmit} = useForm()
 
@@ -126,4 +126,4 @@ const FormPerson = () => {
   );
 }
  
-export default FormPerson;
+export default PersonaForm;

@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
 import Swal from 'sweetalert2'
-import './adminPerson.css'
+import './personasList.css'
 import iconEstudiante from './img/estudiante.svg'
 import iconPersona from './img/persona.svg'
 
-const AdminPerson = () => {
+const PersonasList = () => {
 
   const messageError = () => {  
     Swal.fire({
@@ -69,4 +69,4 @@ const AdminPerson = () => {
   );
 }
  
-export default AdminPerson;
+export default PersonasList;

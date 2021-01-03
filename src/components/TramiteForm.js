@@ -1,8 +1,8 @@
-import { useForm } from "react-hook-form"
-import './formDefault.css'
-import './formTramite.css'
+import { useForm } from 'react-hook-form'
+import './defaultForm.css'
+import './tramiteForm.css'
 
-const FormTramite = () => {
+const TramiteForm = () => {
 
   const {register, errors, handleSubmit} = useForm()
 
@@ -90,4 +90,4 @@ const FormTramite = () => {
   );
 }
  
-export default FormTramite;
+export default TramiteForm;

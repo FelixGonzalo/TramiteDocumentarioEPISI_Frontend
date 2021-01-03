@@ -1,10 +1,10 @@
 import { Fragment } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
-import AdminPerson from "./AdminPerson";
-import FormPerson from "./FormPerson";
-import FormTramite from "./FormTramite";
-import Header from './Header'
-import TramitesList from "./TramitesList";
+import PersonasList from "./components/PersonasList";
+import PersonaForm from "./components/PersonaForm";
+import TramiteForm from "./components/TramiteForm";
+import Header from './components/Header'
+import TramitesList from "./components/TramitesList";
 
 const Routes = () => {
   return (
@@ -13,16 +13,16 @@ const Routes = () => {
         <Header/>
         <Switch>
           <Route path="/registrar.tramite">
-            <FormTramite/>
+            <TramiteForm/>
           </Route>
           <Route path="/listar.tramites">
             <TramitesList/>
           </Route>
           <Route path="/registrar.persona">
-            <FormPerson/>
+            <PersonaForm/>
           </Route>
-          <Route path="/admin.personas">
-            <AdminPerson/>
+          <Route path="/listar.personas">
+            <PersonasList/>
           </Route>
           <Route path="/">
           </Route>

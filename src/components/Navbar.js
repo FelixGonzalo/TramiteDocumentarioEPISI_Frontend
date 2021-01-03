@@ -9,8 +9,8 @@ const Navbar = () => {
       <NavLink to="/" exact className="navbar-option">
         <img src={iconInicio} alt="inicio" height="25px"/>
       </NavLink>
-      <NavLink to="/admin.personas" className="navbar-option" activeClassName="navbar-activate">
-        Administrar personas
+      <NavLink to="/listar.personas" className="navbar-option" activeClassName="navbar-activate">
+        Listar personas
       </NavLink>
       <NavLink to="/registrar.persona" className="navbar-option" activeClassName="navbar-activate">
         Registrar persona

@@ -1,0 +1,27 @@
+.estado-tramite {
+  display: block;
+  text-align: center;
+  font-weight: bold;
+}
+
+.Registrado {
+  color: rgb(86, 85, 172);
+}
+
+.Aceptado {
+  color: rgb(52, 155, 66);
+}
+
+.Rechazado {
+  color: rgb(238, 71, 71);
+}
+
+.Archivado {
+  color: rgb(95, 93, 93);
+}
+
+.fecha-tramite {
+  display: block;
+  text-align: center;
+  font-size: 12px;
+}

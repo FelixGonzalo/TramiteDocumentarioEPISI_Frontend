@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react'
 import Swal from 'sweetalert2'
+import './tramitesList.css'
 import iconAbrir from './img/abrir_documento.svg'
+import iconEstudiante from './img/estudiante.svg'
+import iconPersona from './img/persona.svg'
 
 const TramitesList = () => {
 
@@ -57,10 +60,15 @@ const TramitesList = () => {
               tramites.length > 0 ? 
                 tramites.map((item, index) => (
                   <tr key={item.id}>
-                    <td>{index+1}</td>
-                    <td>{item.personaEmisor.puesto.nombre} {item.personaEmisor.nombre}</td>
+                    <td>{index+1 < 10 ? "0"+(index+1) : index+1}</td>
+                    <td><img src={item.personaEmisor.puesto.id === 1 ? iconEstudiante : iconPersona} alt="" height="18px"/> {item.personaEmisor.nombre}</td>
                     <td>{item.tipoSolicitud.nombre}</td>
-                    <td>{item.estadoSolicitudes[item.estadoSolicitudes.length-1].estado.nombre} - {item.estadoSolicitudes[item.estadoSolicitudes.length-1].fecha}</td>
+                    <td>
+                      <span className={ "estado-tramite "+ item.estadoSolicitudes[item.estadoSolicitudes.length-1].estado.nombre}>
+                        {item.estadoSolicitudes[item.estadoSolicitudes.length-1].estado.nombre}
+                        </span>
+                      <span className="fecha-tramite">{item.estadoSolicitudes[item.estadoSolicitudes.length-1].fecha}</span>
+                    </td>
                     <td><button onClick={() => consultarTramite(item)}><img src={iconAbrir} alt="Abrir documento" height= "20px"/></button></td>
                   </tr>
                 )) : (

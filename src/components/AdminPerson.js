@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
 import Swal from 'sweetalert2'
 import './adminPerson.css'
+import iconEstudiante from './img/estudiante.svg'
+import iconPersona from './img/persona.svg'
 
 const AdminPerson = () => {
 
@@ -45,11 +47,11 @@ const AdminPerson = () => {
               personas.length > 0 ? 
                 personas.map((item, index) => (
                   <tr key={item.id}>
-                    <td>{index+1}</td>
+                    <td>{index+1 < 10 ? "0"+(index+1) : index+1}</td>
                     <td>{item.nombre}</td>
                     <td>{item.correo}</td>
                     <td>{item.puesto.id === 1 ? item.codEstudiante : item.dniRuc}</td>
-                    <td>{item.puesto.nombre}</td>
+                    <td><img src={item.puesto.id === 1 ? iconEstudiante : iconPersona} alt="" height="18px" /> {item.puesto.nombre}</td>
                   </tr>
                 )) : (
                   <tr>

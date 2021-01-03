@@ -41,7 +41,7 @@ const FormTramite = () => {
     <div className="container-main">
       <h2 className="default-title">Registrar nuevo Trámite</h2>
       <form className="form-default " onSubmit={handleSubmit(onSubmit)}>
-      <p class="default-subtitle">Datos generales</p>
+      <p className="default-subtitle">Datos generales</p>
         <label className="label-default"> Tipo de Trámite
           <select 
             name="puesto" 
@@ -60,7 +60,7 @@ const FormTramite = () => {
             ref={register()}
           />
         </label>
-        <p class="default-subtitle">Datos del Solicitante</p>
+        <p className="default-subtitle">Datos del Solicitante</p>
         <label className="label-default"> Solicitante
           <input
             type="search"
@@ -78,13 +78,13 @@ const FormTramite = () => {
             errors?.solicitante?.message
           }
         </span>
-        <ul class="info-solicitante">
+        <ul className="info-solicitante">
           <li>Félix Castro Cubas</li>
           <li>201714029@uns.edu.pe</li>
           <li>Estudiante</li>
         </ul>
         <button className="button-default">Registrar</button>
-        <input name="fecha" type="text" value="07/12/2020" readonly="readonly" class="tramite-fecha" />
+        <input name="fecha" type="text" value="07/12/2020" readOnly="readonly" className="tramite-fecha" />
       </form>
     </div>
   );

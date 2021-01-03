@@ -15,7 +15,7 @@ const AdminPerson = () => {
   const [personas, setPersonas] = useState([])
 
   const getDatos = async () => {
-    const data = await fetch('http://localhost:8090/api/personas')
+    const data = await fetch('http://localhost/API%20PUBLICA/personas.json')
     const response = await data.json()
     setPersonas(response)
   }
@@ -36,6 +36,7 @@ const AdminPerson = () => {
               <th>#</th>
               <th>Nombre</th>
               <th>Correo</th>
+              <th>Identificación</th>
               <th>Puesto</th>
             </tr>
           </thead>
@@ -47,9 +48,17 @@ const AdminPerson = () => {
                     <td>{index+1}</td>
                     <td>{item.nombre}</td>
                     <td>{item.correo}</td>
-                    <td>Puesto</td>
+                    <td>{item.puesto.id === 1 ? item.codEstudiante : item.dniRuc}</td>
+                    <td>{item.puesto.nombre}</td>
                   </tr>
-                )) : messageError()
+                )) : (
+                  <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                )
             }
           </tbody>
         </table>

@@ -60,34 +60,38 @@ const TramiteForm = () => {
   }
 
   const onSubmit = (data, event) => {
-    // var myjson = {
-    //   "dni_ruc": data.dniOruc,
-    //   "nombre": data.nombre,
-    //   "correo": data.correo,
-    //   "cod_estudiante": data.codigoEstudiante,
-    //   "puesto": {
-    //       "id_puesto": data.puesto,
-    //       "nombre": data.puesto === 1 ? "Estudiante" : "Docente"
-    //   }
-    // }
-    // postData(myjson)
-    // event.target.reset()
+    var myjson = {
+      "descripcion": data.descripcion,
+      "tipoSolicitud": {
+          "id": data.tipoTramite,
+      },
+      "personaEmisor": {
+          "id": solicitante.id
+      },
+      "personasReceptoras": [
+          {
+              "id": destinatario.id
+          },
+      ]
+    }
+    console.log(myjson)
+    postData(myjson)
+    event.target.reset()
   }
 
   const postData = (myjson) => {
-    // try {
-    //   fetch('http://localhost:8090/api/personas', {
-    //     method: 'POST',
-    //     headers: {
-    //     'Content-Type': 'application/json'
-    //     },
+      fetch('http://localhost:8090/api/solicitudes', {
+        method: 'POST',
+        headers: {
+        'Content-Type': 'application/json'
+        },
 
-    //     body: JSON.stringify(myjson)
-    //   })
-    //   .then(response => response.json())
-    // } catch (error) {
-     
-    // }
+        body: JSON.stringify(myjson)
+      })
+      .then(response => response.json())
+      .then(response => console.log(response))
+     .catch (err => console.log(err)) 
+
   }
 
   return (
@@ -97,7 +101,7 @@ const TramiteForm = () => {
       <p className="default-subtitle">Datos generales</p>
         <label className="label-default"> Tipo de Trámite
           <select 
-            name="puesto" 
+            name="tipoTramite" 
             className="input-default"
              ref={register()}
           >
@@ -138,7 +142,7 @@ const TramiteForm = () => {
         {
           solicitante !== null && solicitante ? (
             <ul className="info-persona">
-            <li class="info-persona-titulo">Solicitante</li>
+            <li className="info-persona-titulo">Solicitante</li>
             <li><span className="persona-dato">Nombre:</span> {solicitante.nombre}</li>
             <li><span className="persona-dato">Correo:</span> {solicitante.correo}</li>
             <li><span className="persona-dato">Puesto:</span> {solicitante.puesto.nombre}</li>
@@ -168,7 +172,7 @@ const TramiteForm = () => {
         {
           destinatario !== null && destinatario ? (
             <ul className="info-persona">
-            <li class="info-persona-titulo">Destinatario</li>
+            <li className="info-persona-titulo">Destinatario</li>
             <li><span className="persona-dato">Nombre:</span> {destinatario.nombre}</li>
             <li><span className="persona-dato">Correo:</span> {destinatario.correo}</li>
             <li><span className="persona-dato">Puesto:</span> {destinatario.puesto.nombre}</li>

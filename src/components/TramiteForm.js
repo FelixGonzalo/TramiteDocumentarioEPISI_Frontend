@@ -1,10 +1,48 @@
 import { useForm } from 'react-hook-form'
+import { useEffect, useState } from 'react'
 import './defaultForm.css'
 import './tramiteForm.css'
 
 const TramiteForm = () => {
 
   const {register, errors, handleSubmit} = useForm()
+
+  const [tiposTramite, setTiposTramite] = useState([])
+  const [personas, setPersonas] = useState([])
+  const [solicitante, setSolicitante] = useState(null)
+
+  const getTiposTramite = async () => {
+    const data = await fetch('http://localhost/API%20PUBLICA/tipostramites.json')
+    const response = await data.json()
+    setTiposTramite(response)
+  }
+
+  const getPersonas = async () => {
+    const data = await fetch('http://localhost/API%20PUBLICA/personas.json')
+    const response = await data.json()
+    setPersonas(response)
+  }
+
+  useEffect(()=>{
+    getTiposTramite()
+    getPersonas()
+  }, [])
+
+  const buscarSolicitante = (input) => {
+    let text =  input.target.value.trim()
+
+    if (text.length > 0) {
+      for (let item of personas){
+        if (item.nombre.toLowerCase().indexOf(text.toLowerCase()) !== -1) {
+          setSolicitante(item)
+          break;
+        }
+      }
+    } else {
+      setSolicitante(null)
+    }
+    
+  }
 
   const onSubmit = (data, event) => {
     // var myjson = {
@@ -48,9 +86,11 @@ const TramiteForm = () => {
             className="input-default"
              ref={register()}
           >
-            <option value="1">Informe de prácticas</option>
-            <option value="2">Solicitud de asesor</option>
-            <option value="2">Jurado de Informe</option>
+          {
+            tiposTramite.map((item) => (
+              <option key={item.id} value={item.id}>{item.nombre}</option>
+            ))
+          }
           </select>
         </label>
         <label className="label-default"> Descripción
@@ -63,6 +103,7 @@ const TramiteForm = () => {
         <p className="default-subtitle">Datos del Solicitante</p>
         <label className="label-default"> Solicitante
           <input
+            onKeyDown={buscarSolicitante}
             type="search"
             name="solicitante"
             className="input-default"
@@ -78,11 +119,20 @@ const TramiteForm = () => {
             errors?.solicitante?.message
           }
         </span>
-        <ul className="info-solicitante">
-          <li>Félix Castro Cubas</li>
-          <li>201714029@uns.edu.pe</li>
-          <li>Estudiante</li>
-        </ul>
+        
+
+          {
+            solicitante !== null && solicitante ? (
+              <ul className="info-solicitante">
+              <li><b>Datos del solicitante</b></li>
+              <li>{solicitante.nombre}</li>
+              <li>{solicitante.correo}</li>
+              <li>{solicitante.puesto.nombre}</li>
+              </ul>
+            ) : ( <ul className="info-solicitante"><li>Ingrese el nombre</li> </ul>)
+          }
+          
+        
         <button className="button-default">Registrar</button>
         <input name="fecha" type="text" value="07/12/2020" readOnly="readonly" className="tramite-fecha" />
       </form>

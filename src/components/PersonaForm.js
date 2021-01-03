@@ -1,9 +1,38 @@
-import { useForm } from "react-hook-form"
+import { useForm } from 'react-hook-form'
+import { useEffect, useState } from 'react'
 import './defaultForm.css'
 
 const PersonaForm = () => {
 
   const {register, errors, handleSubmit} = useForm()
+
+  const [puestos, setPuestos] = useState([]);
+
+  const getPuestos = async () => {
+    const data = await fetch('http://localhost/API%20PUBLICA/puestos.json')
+    const response = await data.json()
+    setPuestos(response)
+  }
+
+  useEffect(()=>{
+    getPuestos()
+  }, [])
+
+  const postData = (json) => {
+    try {
+      fetch('http://localhost:8090/api/personas', {
+        method: 'POST',
+        headers: {
+        'Content-Type': 'application/json'
+        },
+
+        body: JSON.stringify(json)
+      })
+      .then(response => response.json())
+    } catch (error) {
+     
+    }
+  }
 
   const onSubmit = (data, event) => {
     var myjson = {
@@ -18,22 +47,6 @@ const PersonaForm = () => {
     }
     postData(myjson)
     event.target.reset()
-  }
-
-  const postData = (myjson) => {
-    try {
-      fetch('http://localhost:8090/api/personas', {
-        method: 'POST',
-        headers: {
-        'Content-Type': 'application/json'
-        },
-
-        body: JSON.stringify(myjson)
-      })
-      .then(response => response.json())
-    } catch (error) {
-     
-    }
   }
 
   return (
@@ -116,8 +129,11 @@ const PersonaForm = () => {
             className="input-default"
              ref={register()}
           >
-            <option value="1">Estudiante</option>
-            <option value="2">Docente</option>
+          {
+            puestos.map((item) => (
+              <option key={item.id} value={item.id}>{item.nombre}</option>
+            ))
+          }
           </select>
         </label>
         <button className="button-default">Registrar</button>

@@ -44,6 +44,13 @@ const TramiteForm = () => {
     
   }
 
+  const getFecha = () => {
+    var fecha = new Date();
+    var dia = fecha.getDate() < 10 ? "0"+fecha.getDate() : fecha.getDate()
+    var mes = fecha.getMonth() < 9 ? "0"+(fecha.getMonth() + 1) : (fecha.getMonth() + 1)
+    return `${fecha.getFullYear()}-${mes}-${dia}`
+  }
+
   const onSubmit = (data, event) => {
     // var myjson = {
     //   "dni_ruc": data.dniOruc,
@@ -106,6 +113,7 @@ const TramiteForm = () => {
             onKeyDown={buscarSolicitante}
             type="search"
             name="solicitante"
+            placeholder="Buscador de solicitante"
             className="input-default"
             ref={
               register({
@@ -134,7 +142,7 @@ const TramiteForm = () => {
           
         
         <button className="button-default">Registrar</button>
-        <input name="fecha" type="text" value="07/12/2020" readOnly="readonly" className="tramite-fecha" />
+        <input name="fecha" type="text" value={getFecha()} readOnly="readonly" className="tramite-fecha" />
       </form>
     </div>
   );

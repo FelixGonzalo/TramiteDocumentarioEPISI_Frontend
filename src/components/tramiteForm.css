@@ -7,10 +7,30 @@
   text-align: center;
 }
 
-.info-solicitante {
+.info-persona {
   font-size: 13px;
   margin-top: 5px;
-  padding: 0px;
-  text-align: right;
+  padding: 5px;
+
   list-style: none;
+  display: inline-block;
+  border: 3px solid var(--cred);
+}
+
+.info-persona-titulo {
+  font-weight: bold;
+  text-align: right;
+  color: var(--cred);
+}
+
+.persona-dato {
+  font-weight: 500;
+  color: var(--cred);
+}
+
+.input-buscador {
+  padding: 5px;
+  display: block;
+  margin: auto;
+  margin-right: 0;
 }

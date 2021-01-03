@@ -10,6 +10,7 @@ const TramiteForm = () => {
   const [tiposTramite, setTiposTramite] = useState([])
   const [personas, setPersonas] = useState([])
   const [solicitante, setSolicitante] = useState(null)
+  const [destinatario, setDestinatario] = useState(null)
 
   const getTiposTramite = async () => {
     const data = await fetch('http://localhost/API%20PUBLICA/tipostramites.json')
@@ -28,20 +29,27 @@ const TramiteForm = () => {
     getPersonas()
   }, [])
 
-  const buscarSolicitante = (input) => {
+  const buscarPersona = (input) => {
     let text =  input.target.value.trim()
-
     if (text.length > 0) {
       for (let item of personas){
         if (item.nombre.toLowerCase().indexOf(text.toLowerCase()) !== -1) {
-          setSolicitante(item)
-          break;
+          // setSolicitante(item)
+          return item
         }
       }
     } else {
-      setSolicitante(null)
+      // setSolicitante(null)
+      return null
     }
-    
+  }
+
+  const buscarSolicitante = (input) => {
+    setSolicitante(buscarPersona(input))
+  }
+
+  const buscarDestinatario = (input) => {
+    setDestinatario(buscarPersona(input))
   }
 
   const getFecha = () => {
@@ -114,10 +122,10 @@ const TramiteForm = () => {
             type="search"
             name="solicitante"
             placeholder="Buscador de solicitante"
-            className="input-default"
+            className="input-buscador"
             ref={
               register({
-                required : {value: true, message: 'nombre obligatorio'},
+                required : {value: true, message: 'solicitante obligatorio'},
               })
             }
           />
@@ -127,20 +135,46 @@ const TramiteForm = () => {
             errors?.solicitante?.message
           }
         </span>
-        
-
+        {
+          solicitante !== null && solicitante ? (
+            <ul className="info-persona">
+            <li class="info-persona-titulo">Solicitante</li>
+            <li><span className="persona-dato">Nombre:</span> {solicitante.nombre}</li>
+            <li><span className="persona-dato">Correo:</span> {solicitante.correo}</li>
+            <li><span className="persona-dato">Puesto:</span> {solicitante.puesto.nombre}</li>
+            </ul>
+          ) : ( <ul className="info-persona"><li>No hay Datos, regístrelo !!</li> </ul>)
+        }
+        <p className="default-subtitle">Datos del destinatario</p>
+        <label className="label-default"> Destinatario
+          <input
+            onKeyDown={buscarDestinatario}
+            type="search"
+            name="destinatario"
+            placeholder="Buscador de destinatario"
+            className="input-buscador"
+            ref={
+              register({
+                required : {value: true, message: 'destinatario obligatorio'},
+              })
+            }
+          />
+        </label>
+        <span className="input-error">
           {
-            solicitante !== null && solicitante ? (
-              <ul className="info-solicitante">
-              <li><b>Datos del solicitante</b></li>
-              <li>{solicitante.nombre}</li>
-              <li>{solicitante.correo}</li>
-              <li>{solicitante.puesto.nombre}</li>
-              </ul>
-            ) : ( <ul className="info-solicitante"><li>Ingrese el nombre</li> </ul>)
+            errors?.destinatario?.message
           }
-          
-        
+        </span>
+        {
+          destinatario !== null && destinatario ? (
+            <ul className="info-persona">
+            <li class="info-persona-titulo">Destinatario</li>
+            <li><span className="persona-dato">Nombre:</span> {destinatario.nombre}</li>
+            <li><span className="persona-dato">Correo:</span> {destinatario.correo}</li>
+            <li><span className="persona-dato">Puesto:</span> {destinatario.puesto.nombre}</li>
+            </ul>
+          ) : ( <ul className="info-persona"><li>No hay Datos, regístrelo !!</li> </ul>)
+        }
         <button className="button-default">Registrar</button>
         <input name="fecha" type="text" value={getFecha()} readOnly="readonly" className="tramite-fecha" />
       </form>

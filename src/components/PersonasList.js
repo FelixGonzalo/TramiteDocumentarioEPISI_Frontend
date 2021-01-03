@@ -30,7 +30,7 @@ const PersonasList = () => {
 
   return (
     <main className="container-main">
-      <h2 className="default-title">Administrador de Personas</h2>
+      <h2 className="default-title">Lista de Personas</h2>
       <div className="table-responsive">
         <table className="adminPerson-list">
           <thead>

@@ -13,13 +13,13 @@ const TramiteForm = () => {
   const [destinatario, setDestinatario] = useState(null)
 
   const getTiposTramite = async () => {
-    const data = await fetch('http://localhost/API%20PUBLICA/tipostramites.json')
+    const data = await fetch('http://localhost:8090/api/solicitudes/tipo-solicitudes')
     const response = await data.json()
     setTiposTramite(response)
   }
 
   const getPersonas = async () => {
-    const data = await fetch('http://localhost/API%20PUBLICA/personas.json')
+    const data = await fetch('http://localhost:8090/api/personas')
     const response = await data.json()
     setPersonas(response)
   }

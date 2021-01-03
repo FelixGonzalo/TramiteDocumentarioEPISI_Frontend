@@ -17,7 +17,7 @@ const PersonasList = () => {
   const [personas, setPersonas] = useState([])
 
   const getDatos = async () => {
-    const data = await fetch('http://localhost/API%20PUBLICA/personas.json')
+    const data = await fetch('http://localhost:8090/api/personas')
     const response = await data.json()
     setPersonas(response)
   }

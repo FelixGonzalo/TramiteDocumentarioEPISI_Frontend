@@ -9,7 +9,7 @@ const PersonaForm = () => {
   const [puestos, setPuestos] = useState([]);
 
   const getPuestos = async () => {
-    const data = await fetch('http://localhost/API%20PUBLICA/puestos.json')
+    const data = await fetch('http://localhost:8090/api/personas/puestos')
     const response = await data.json()
     setPuestos(response)
   }
@@ -29,6 +29,7 @@ const PersonaForm = () => {
         body: JSON.stringify(json)
       })
       .then(response => response.json())
+      .then(response => console.log(response))
     } catch (error) {
      
     }
@@ -36,15 +37,15 @@ const PersonaForm = () => {
 
   const onSubmit = (data, event) => {
     var myjson = {
-      "dni_ruc": data.dniOruc,
+      "dniRuc": data.dniOruc,
       "nombre": data.nombre,
       "correo": data.correo,
-      "cod_estudiante": data.codigoEstudiante,
+      "codEstudiante": data.codigoEstudiante,
       "puesto": {
-          "id_puesto": data.puesto,
-          "nombre": data.puesto === 1 ? "Estudiante" : "Docente"
+          "id": Number(data.puesto),
       }
     }
+    console.log(myjson)
     postData(myjson)
     event.target.reset()
   }

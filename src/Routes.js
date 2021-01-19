@@ -4,7 +4,8 @@ import PersonasList from "./components/PersonasList";
 import PersonaForm from "./components/PersonaForm";
 import TramiteForm from "./components/TramiteForm";
 import Header from './components/Header'
-import TramitesList from "./components/TramitesList";
+import TramitesList from './components/TramitesList';
+import ArchivosList from './components/ArchivosList'
 
 const Routes = () => {
   return (
@@ -23,6 +24,9 @@ const Routes = () => {
           </Route>
           <Route path="/listar.personas">
             <PersonasList/>
+          </Route>
+          <Route path="/listar.archivos">
+            <ArchivosList/>
           </Route>
           <Route path="/">
           </Route>

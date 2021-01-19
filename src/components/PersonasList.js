@@ -1,4 +1,4 @@
-import { useEffect} from 'react'
+import {useEffect} from 'react'
 import Swal from 'sweetalert2'
 import './personasList.css'
 import iconEstudiante from './img/estudiante.svg'

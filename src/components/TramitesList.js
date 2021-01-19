@@ -1,11 +1,17 @@
-import { useEffect, useState } from 'react'
+import {useEffect} from 'react'
 import Swal from 'sweetalert2'
 import './tramitesList.css'
 import iconAbrir from './img/abrir_documento.svg'
 import iconEstudiante from './img/estudiante.svg'
 import iconPersona from './img/persona.svg'
 
+import {useDispatch, useSelector} from 'react-redux'
+import {getSolicitudes} from '../redux/solicitudDucks'
+
 const TramitesList = () => {
+
+  const dispatch = useDispatch()
+  const tramites = useSelector(store => store.solicitudes.array)
 
   const consultarTramite = (data) => {
     console.log("pulsado " + data.personaEmisor.nombre)
@@ -28,16 +34,17 @@ const TramitesList = () => {
     })
   }
 
-  const [tramites, setTramites] = useState([])
+  // const [tramites, setTramites] = useState([])
 
-  const getDatos = async () => {
-    const data = await fetch('http://localhost:8090/api/solicitudes')
-    const response = await data.json()
-    setTramites(response)
-  }
+  // const getDatos = async () => {
+  //   const data = await fetch('http://localhost:8090/api/solicitudes')
+  //   const response = await data.json()
+  //   setTramites(response)
+  // }
 
   useEffect(() => {
-    getDatos()
+    // getDatos()
+    dispatch(getSolicitudes())
     
   }, [])
 

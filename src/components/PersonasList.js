@@ -1,10 +1,20 @@
-import { useEffect, useState } from 'react'
+import { useEffect} from 'react'
 import Swal from 'sweetalert2'
 import './personasList.css'
 import iconEstudiante from './img/estudiante.svg'
 import iconPersona from './img/persona.svg'
 
+import {useDispatch, useSelector} from 'react-redux'
+import {getPersonas} from '../redux/personaDucks'
+
 const PersonasList = () => {
+
+  const dispatch = useDispatch()
+  const personas = useSelector(store => store.personas.array)
+
+  useEffect(() => {
+    dispatch(getPersonas())
+  }, [])
 
   const messageError = () => {  
     Swal.fire({
@@ -13,21 +23,7 @@ const PersonasList = () => {
       text: 'Datos no disponibles',
     })
   }
-
-  const [personas, setPersonas] = useState([])
-
-  const getDatos = async () => {
-    const data = await fetch('http://localhost:8090/api/personas')
-    const response = await data.json()
-    setPersonas(response)
-  }
-
-  useEffect(() => {
-    getDatos()
-  }, [])
   
- 
-
   return (
     <main className="container-main">
       <h2 className="default-title">Lista de Personas</h2>

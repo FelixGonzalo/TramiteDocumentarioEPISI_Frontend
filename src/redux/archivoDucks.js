@@ -23,6 +23,9 @@ export const getArchivos = () => async (dispatch, getState) => {
       type: GET_ARCHIVOS,
       payload: data
     })
+    if(data.status === 500) {
+      alert.alertError(`${data.status}: ${data.error}`)
+    }
   } catch (error) {
     console.log(error)
     alert.alertError(error)

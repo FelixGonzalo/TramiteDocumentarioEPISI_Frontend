@@ -20,8 +20,7 @@ const PersonaForm = () => {
 
 
   const onSubmit = (data, event) => {
-    dispatch(postPersona(data))
-    event.target.reset()
+    dispatch(postPersona(data, event))
   }
 
   return (

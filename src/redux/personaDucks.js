@@ -29,13 +29,16 @@ export const getPersonas = () => async (dispatch, getState) => {
       type: GET_PERSONAS,
       payload: data
     })
+    if(data.status === 500) {
+      alert.alertError(`${data.status}: ${data.error}`)
+    }
   } catch (error) {
     console.log(error)
     alert.alertError(error)
   }
 }
 
-export const postPersona = (persona) => async (dispatch, getState) => {
+export const postPersona = (persona, event) => async (dispatch, getState) => {
   try {
     var myjson = {
       "dniRuc": persona.dniOruc,
@@ -54,7 +57,12 @@ export const postPersona = (persona) => async (dispatch, getState) => {
       body: JSON.stringify(myjson)
     })
     const data = await response.json()
-    alert.alertOk(`${data.nombre} registrado !!`)
+    if(data.status === 500) {
+      alert.alertError(`${data.status}: ${data.error}`)
+    } else {
+      alert.alertOk(`${data.nombre} registrado !!`)
+      event.target.reset()
+    }
   } catch (error) {
     console.log(error)
     alert.alertError(error)

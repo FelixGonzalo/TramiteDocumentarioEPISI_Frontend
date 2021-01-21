@@ -1,4 +1,4 @@
-import alertError from '../helpers/alertas'
+import alert from '../helpers/alertas'
 
 // constantes
 const dataInicial = {
@@ -32,6 +32,36 @@ export const getPersonas = () => async (dispatch, getState) => {
     })
   } catch (error) {
     console.log(error)
-    alertError(error)
+    alert.alertError(error)
+  }
+}
+
+export const postPersonas = (data) => async (dispatch, getState) => {
+  try {
+    var myjson = {
+      "dniRuc": data.dniOruc,
+      "nombre": data.nombre,
+      "correo": data.correo,
+      "codEstudiante": data.codigoEstudiante,
+      "puesto": {
+          "id": Number(data.puesto),
+      }
+    }
+    const response = await fetch('http://localhost:8090/api/personas', {
+      method: 'POST',
+      headers: {
+      'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(myjson)
+    })
+    const data = await response.json()
+    // dispatch({
+    //   type: GET_PERSONAS,
+    //   payload: data
+    // })
+    alert.alertOk(data)
+  } catch (error) {
+    console.log(error)
+    alert.alertError(error)
   }
 }

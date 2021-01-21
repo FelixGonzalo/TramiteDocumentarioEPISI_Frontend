@@ -1,0 +1,30 @@
+import alertError from '../helpers/alertas'
+
+const dataInicial = {
+  array : []
+}
+
+const GET_PUESTOS = 'GET_PUESTOS'
+
+export default function puestoReducer(state = dataInicial, action){
+  switch(action.type){
+    case GET_PUESTOS:
+      return {...state, array: action.payload}
+    default:
+      return state
+  }
+}
+
+export const getPuestos = () => async (dispatch, getState) => {
+  try {
+    const response = await fetch('http://localhost:8090/api/personas/puestos')
+    const data = await response.json()
+    dispatch({
+      type: GET_PUESTOS,
+      payload: data
+    })
+  } catch (error) {
+    console.log(error)
+    alertError(error)
+  }
+}

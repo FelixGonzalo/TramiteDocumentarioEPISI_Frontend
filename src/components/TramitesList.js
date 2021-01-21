@@ -36,6 +36,7 @@ const TramitesList = () => {
 
   useEffect(() => {
     dispatch(getSolicitudes())
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (

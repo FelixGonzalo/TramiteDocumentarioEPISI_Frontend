@@ -16,4 +16,9 @@ const alertOk = (mensaje) => {
   })
 }
 
-export default {alertError,alertOk}
+const alert = {
+  alertError,
+  alertOk
+}
+
+export default alert

@@ -27,6 +27,7 @@ const TramiteForm = () => {
   useEffect(()=>{
     getTiposTramite()
     getPersonas()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const buscarPersona = (input) => {

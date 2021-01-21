@@ -1,52 +1,26 @@
-import { useForm } from 'react-hook-form'
-import { useEffect, useState } from 'react'
+import {useForm} from 'react-hook-form'
+import {useEffect} from 'react'
 import './defaultForm.css'
+
+import {useDispatch, useSelector} from 'react-redux'
+import {getPuestos} from '../redux/puestoDucks'
+import {postPersona} from '../redux/personaDucks'
 
 const PersonaForm = () => {
 
+  const dispatch = useDispatch()
+  const puestos = useSelector(store => store.puestos.array)
+
   const {register, errors, handleSubmit} = useForm()
 
-  const [puestos, setPuestos] = useState([]);
-
-  const getPuestos = async () => {
-    const data = await fetch('http://localhost:8090/api/personas/puestos')
-    const response = await data.json()
-    setPuestos(response)
-  }
-
   useEffect(()=>{
-    getPuestos()
+    dispatch(getPuestos())
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const postData = (json) => {
-    try {
-      fetch('http://localhost:8090/api/personas', {
-        method: 'POST',
-        headers: {
-        'Content-Type': 'application/json'
-        },
-
-        body: JSON.stringify(json)
-      })
-      .then(response => response.json())
-      .then(response => console.log(response))
-    } catch (error) {
-     
-    }
-  }
 
   const onSubmit = (data, event) => {
-    var myjson = {
-      "dniRuc": data.dniOruc,
-      "nombre": data.nombre,
-      "correo": data.correo,
-      "codEstudiante": data.codigoEstudiante,
-      "puesto": {
-          "id": Number(data.puesto),
-      }
-    }
-    console.log(myjson)
-    postData(myjson)
+    dispatch(postPersona(data))
     event.target.reset()
   }
 

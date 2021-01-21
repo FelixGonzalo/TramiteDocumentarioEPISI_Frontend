@@ -9,6 +9,7 @@ const ArchivosList = () => {
 
   useEffect(() => {
     dispatch(getArchivos())
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (

@@ -8,7 +8,6 @@ const dataInicial = {
 
 // action.type:
 const GET_PERSONAS = 'GET_PERSONAS'
-const POST_PERSONAS = 'POST_PERSONAS'
 
 //reducer
 export default function personaReducer(state = dataInicial, action){
@@ -36,15 +35,15 @@ export const getPersonas = () => async (dispatch, getState) => {
   }
 }
 
-export const postPersonas = (data) => async (dispatch, getState) => {
+export const postPersona = (persona) => async (dispatch, getState) => {
   try {
     var myjson = {
-      "dniRuc": data.dniOruc,
-      "nombre": data.nombre,
-      "correo": data.correo,
-      "codEstudiante": data.codigoEstudiante,
+      "dniRuc": persona.dniOruc,
+      "nombre": persona.nombre,
+      "correo": persona.correo,
+      "codEstudiante": persona.codigoEstudiante,
       "puesto": {
-          "id": Number(data.puesto),
+          "id": Number(persona.puesto),
       }
     }
     const response = await fetch('http://localhost:8090/api/personas', {
@@ -55,11 +54,7 @@ export const postPersonas = (data) => async (dispatch, getState) => {
       body: JSON.stringify(myjson)
     })
     const data = await response.json()
-    // dispatch({
-    //   type: GET_PERSONAS,
-    //   payload: data
-    // })
-    alert.alertOk(data)
+    alert.alertOk(`${data.nombre} registrado !!`)
   } catch (error) {
     console.log(error)
     alert.alertError(error)

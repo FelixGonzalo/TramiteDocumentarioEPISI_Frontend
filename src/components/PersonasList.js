@@ -13,6 +13,7 @@ const PersonasList = () => {
 
   useEffect(() => {
     dispatch(getPersonas())
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   
   return (

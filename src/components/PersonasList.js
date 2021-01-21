@@ -1,5 +1,4 @@
 import {useEffect} from 'react'
-import Swal from 'sweetalert2'
 import './personasList.css'
 import iconEstudiante from './img/estudiante.svg'
 import iconPersona from './img/persona.svg'
@@ -15,14 +14,6 @@ const PersonasList = () => {
   useEffect(() => {
     dispatch(getPersonas())
   }, [])
-
-  const messageError = () => {  
-    Swal.fire({
-      icon: 'warning',
-      title: 'Oops...',
-      text: 'Datos no disponibles',
-    })
-  }
   
   return (
     <main className="container-main">

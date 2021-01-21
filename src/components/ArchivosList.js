@@ -1,3 +1,4 @@
+import {useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {getArchivos} from '../redux/archivoDucks'
 
@@ -5,6 +6,10 @@ const ArchivosList = () => {
 
   const dispatch = useDispatch()
   const archivos = useSelector(store => store.archivos.array)
+
+  useEffect(() => {
+    dispatch(getArchivos())
+  }, [])
 
   return (
     <div>

@@ -34,18 +34,8 @@ const TramitesList = () => {
     })
   }
 
-  // const [tramites, setTramites] = useState([])
-
-  // const getDatos = async () => {
-  //   const data = await fetch('http://localhost:8090/api/solicitudes')
-  //   const response = await data.json()
-  //   setTramites(response)
-  // }
-
   useEffect(() => {
-    // getDatos()
     dispatch(getSolicitudes())
-    
   }, [])
 
   return (

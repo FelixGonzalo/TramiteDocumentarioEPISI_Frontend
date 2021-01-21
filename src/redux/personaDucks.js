@@ -1,3 +1,4 @@
+import alertError from '../helpers/alertas'
 
 // constantes
 const dataInicial = {
@@ -7,6 +8,7 @@ const dataInicial = {
 
 // action.type:
 const GET_PERSONAS = 'GET_PERSONAS'
+const POST_PERSONAS = 'POST_PERSONAS'
 
 //reducer
 export default function personaReducer(state = dataInicial, action){
@@ -30,5 +32,6 @@ export const getPersonas = () => async (dispatch, getState) => {
     })
   } catch (error) {
     console.log(error)
+    alertError(error)
   }
 }

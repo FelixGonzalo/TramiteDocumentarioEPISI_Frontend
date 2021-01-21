@@ -1,3 +1,4 @@
+import alertError from '../helpers/alertas'
 
 const dataInicial = {
   array : []
@@ -24,5 +25,6 @@ export const getSolicitudes = () => async (dispatch, getState) => {
     })
   } catch (error) {
     console.log(error)
+    alertError(error)
   }
 }

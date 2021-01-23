@@ -6,6 +6,7 @@ import TramiteForm from "./components/TramiteForm";
 import Header from './components/Header'
 import TramitesList from './components/TramitesList';
 import ArchivosList from './components/ArchivosList'
+import ArchivoForm from './components/ArchivoForm'
 
 const Routes = () => {
   return (
@@ -27,6 +28,9 @@ const Routes = () => {
           </Route>
           <Route path="/listar.archivos">
             <ArchivosList/>
+          </Route>
+          <Route path="/registrar.archivo">
+            <ArchivoForm/>
           </Route>
           <Route path="/">
           </Route>

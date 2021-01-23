@@ -2,6 +2,7 @@ import {useForm} from 'react-hook-form'
 import {useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {getArchivoTipos} from '../redux/archivoTiposDucks'
+import {postArchivo} from '../redux/archivoDucks'
 
 const ArchivoForm = () => {
 
@@ -15,7 +16,7 @@ const ArchivoForm = () => {
   }, [])
 
   const onSubmit = (data, event) => {
-    
+    dispatch(postArchivo(data, event))
   }
 
   return (
@@ -43,6 +44,7 @@ const ArchivoForm = () => {
             ref={register}
           />
         </label>
+        <button className="button-default">Registrar</button>
       </form>
     </div>
   );

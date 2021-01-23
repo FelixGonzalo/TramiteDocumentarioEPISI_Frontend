@@ -31,3 +31,40 @@ export const getSolicitudes = () => async (dispatch, getState) => {
     alert.alertError(error)
   }
 }
+
+export const postSolicitud = (solicitud, event) => async (dispatch, getState) => {
+  try {
+    var myjson = {
+      "descripcion": solicitud.descripcion,
+      "tipoSolicitud": {
+          "id": solicitud.tipoTramite,
+      },
+      "personaEmisor": {
+          "id": solicitud.idSolicitante
+      },
+      "personasReceptoras": [
+          {
+              "id": solicitud.idDestinatario
+          },
+      ]
+    }
+    const response = await fetch('http://localhost:8090/api/solicitudes', {
+      method: 'POST',
+      headers: {
+      'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(myjson)
+    })
+    const data = await response.json()
+    if(data.status === 500) {
+      alert.alertError(`${data.status}: ${data.error}`)
+    } else {
+      // alert.alertOk(`${data.nombre} registrado !!`)
+      event.target.reset()
+    }
+    console.log(data)
+  } catch (error) {
+    console.log(error)
+    alert.alertError(error)
+  }
+}

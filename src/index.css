@@ -71,3 +71,7 @@ code {
   display: block;
   margin: 30px auto 0px;
 }
+
+.deshabilitar {
+  opacity: 0.2;
+}

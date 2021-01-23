@@ -18,15 +18,33 @@ const PersonaForm = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-
   const onSubmit = (data, event) => {
     dispatch(postPersona(data, event))
+  }
+
+  const inputEstudiante = document.getElementById('inputEstudiante')
+  const addInputsSegunPuesto = (e) => {
+    e !== '1' ? inputEstudiante.classList.add('deshabilitar') : inputEstudiante.classList.remove('deshabilitar')
   }
 
   return (
     <div className="container-main">
       <h2 className="default-title">Registrar persona</h2>
       <form className="form-default" onSubmit={handleSubmit(onSubmit)}>
+        <label className="label-default"> Puesto
+          <select 
+            onChange={e => addInputsSegunPuesto(e.currentTarget.value)}
+            name="puesto" 
+            className="input-default"
+            ref={register()}
+          >
+          {
+            puestos.map((item) => (
+              <option key={item.id} value={item.id}>{item.nombre}</option>
+            ))
+          }
+          </select>
+        </label>
         <label className="label-default"> Nombre
           <input
             type="text"
@@ -79,14 +97,13 @@ const PersonaForm = () => {
         <span className="input-error">
           {errors?.correo?.message}
         </span>
-        <label className="label-default"> Cod. estudiante
+        <label id="inputEstudiante" className="label-default" > Cod. estudiante
           <input
             type="text"
             name="codigoEstudiante"
             className="input-default"
             ref={
               register({
-                required : {value: true, message: 'código de estudiante obligatorio'},
                 pattern : {value: /[0-9]+$/, message: 'Solo números' },
                 minLength : {value: 10, message: 'muy corto, son 10 caracteres'},
                 maxLength : {value: 10, message: 'te pasaste, solo 10 caracteres'}
@@ -97,19 +114,6 @@ const PersonaForm = () => {
         <span className="input-error">
           {errors?.codigoEstudiante?.message}
         </span>
-        <label className="label-default"> Puesto
-          <select 
-            name="puesto" 
-            className="input-default"
-             ref={register()}
-          >
-          {
-            puestos.map((item) => (
-              <option key={item.id} value={item.id}>{item.nombre}</option>
-            ))
-          }
-          </select>
-        </label>
         <button className="button-default">Registrar</button>
       </form>
     </div>

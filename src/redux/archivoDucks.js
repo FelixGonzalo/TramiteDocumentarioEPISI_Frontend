@@ -37,7 +37,7 @@ export const postArchivo = (archivo, event) => async (dispatch, getState) => {
     var myjson = {
       "descripcion": archivo.descripcion,
       "tipoArchivo": {
-          "id": Number(archivo.id),
+          "id": Number(archivo.tipoArchivo),
       }
     }
     const response = await fetch('http://localhost:8090/api/archivos', {

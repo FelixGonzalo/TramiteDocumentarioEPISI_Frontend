@@ -32,7 +32,7 @@ export const getSolicitudes = () => async (dispatch, getState) => {
   }
 }
 
-export const postSolicitud = (solicitud, event) => async (dispatch, getState) => {
+export const postSolicitud = (solicitud, event, solicitante,destinatario) => async (dispatch, getState) => {
   try {
     var myjson = {
       "descripcion": solicitud.descripcion,
@@ -40,14 +40,15 @@ export const postSolicitud = (solicitud, event) => async (dispatch, getState) =>
           "id": solicitud.tipoTramite,
       },
       "personaEmisor": {
-          "id": solicitud.idSolicitante
+          "id": solicitante.id
       },
       "personasReceptoras": [
           {
-              "id": solicitud.idDestinatario
+              "id": destinatario.id
           },
       ]
     }
+    console.log(myjson)
     const response = await fetch('http://localhost:8090/api/solicitudes', {
       method: 'POST',
       headers: {

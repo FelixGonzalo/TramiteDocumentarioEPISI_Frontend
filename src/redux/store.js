@@ -4,13 +4,15 @@ import personaReducer from './personaDucks'
 import solicitudReducer from './solicitudDucks'
 import archivoReducer from './archivoDucks'
 import puestoReducer from './puestoDucks'
+import solicitudTiposReducer from './solicitudTiposDucks'
 //llamamos a todos los reducer de los DUCKS
 
 const rootReducer = combineReducers({
   personas: personaReducer,
   puestos: puestoReducer,
   archivos: archivoReducer,
-  solicitudes: solicitudReducer
+  solicitudes: solicitudReducer,
+  solicitudTipos: solicitudTiposReducer
 })
 
 //configuracion de herramienta en navegador

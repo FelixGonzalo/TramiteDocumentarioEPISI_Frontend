@@ -21,34 +21,31 @@ const ArchivoForm = () => {
   }
 
   return (
-    <div className="container-main">
-      <h2 className="default-title">Registrar Archivo</h2>
-      <form className="form-default" onSubmit={handleSubmit(onSubmit)}>
-      <label className="label-default"> Tipo
-          <select 
-            name="tipoArchivo" 
-            className="input-default"
-            ref={register()}
-          >
-          {
-            tipos.length > 0 ?
-            tipos.map((item) => (
-              <option key={item.id} value={item.id}>{item.nombre}</option>
-            )) : (<option>No hay datos</option>)
-          }
-          </select>
-        </label>
-        <label className="label-default"> Descripcion
-          <input
-            type="text"
-            name="descripcion"
-            className="input-default"
-            ref={register}
-          />
-        </label>
-        <button className="button-default">Registrar</button>
-      </form>
-    </div>
+    <form className="form-default" onSubmit={handleSubmit(onSubmit)}>
+    <label className="label-default"> Tipo
+        <select 
+          name="tipoArchivo" 
+          className="input-default"
+          ref={register()}
+        >
+        {
+          tipos.length > 0 ?
+          tipos.map((item) => (
+            <option key={item.id} value={item.id}>{item.nombre}</option>
+          )) : (<option>No hay datos</option>)
+        }
+        </select>
+      </label>
+      <label className="label-default"> Descripcion
+        <input
+          type="text"
+          name="descripcion"
+          className="input-default"
+          ref={register}
+        />
+      </label>
+      <button className="button-default">Registrar</button>
+    </form>
   );
 }
  

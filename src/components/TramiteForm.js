@@ -59,85 +59,82 @@ const TramiteForm = () => {
   }
 
   return (
-    <div className="container-main">
-      <h2 className="default-title">Registrar nuevo Trámite</h2>
-      <form className="form-default " onSubmit={handleSubmit(onSubmit)} onKeyDown={(e) => checkKeyDown(e)}>
+    <form className="form-default " onSubmit={handleSubmit(onSubmit)} onKeyDown={(e) => checkKeyDown(e)}>
       <p className="default-subtitle">Datos generales</p>
-        <label className="label-default"> Tipo de Trámite
-          <select 
-            name="tipoTramite" 
-            className="input-default"
-             ref={register()}
-          >
-          {
-            tiposTramite.length > 0 ? 
-            tiposTramite.map((item) => (
-              <option key={item.id} value={item.id}>{item.nombre}</option>
-            )) : (<option>No hay datos</option>)
-          }
-          </select>
-        </label>
-        <label className="label-default"> Descripción
-          <textarea
-            name="descripcion"
-            className="input-default"
+      <label className="label-default"> Tipo de Trámite
+        <select 
+          name="tipoTramite" 
+          className="input-default"
             ref={register()}
-          />
-        </label>
-        <p className="default-subtitle">Datos del Solicitante</p>
-        <input
-            onKeyDown={(e) => buscarSolicitante(e)}
-            type="search"
-            name="solicitante"
-            placeholder="Nombre de solicitante"
-            className="input-default input-buscador"
-            ref={
-              register({
-                required : {value: true, message: 'solicitante obligatorio'},
-              })
-            }
-          />
-        <span className="input-error">
-          {
-            errors?.solicitante?.message
-          }
-        </span>
+        >
         {
-          solicitante !== null ? (
-            <ul className="info-persona">
-            <li><span className="persona-dato">{solicitante.puesto.nombre}:</span> {solicitante.nombre}</li>
-            </ul>
-          ) : ( <ul className="info-persona"><li></li> </ul>)
+          tiposTramite.length > 0 ? 
+          tiposTramite.map((item) => (
+            <option key={item.id} value={item.id}>{item.nombre}</option>
+          )) : (<option>No hay datos</option>)
         }
-        <p className="default-subtitle">Datos del destinatario</p>
-        <input
-          onKeyDown={buscarDestinatario}
+        </select>
+      </label>
+      <label className="label-default"> Descripción
+        <textarea
+          name="descripcion"
+          className="input-default"
+          ref={register()}
+        />
+      </label>
+      <p className="default-subtitle">Datos del Solicitante</p>
+      <input
+          onKeyDown={(e) => buscarSolicitante(e)}
           type="search"
-          name="destinatario"
-          placeholder="Nombre de destinatario"
+          name="solicitante"
+          placeholder="Nombre de solicitante"
           className="input-default input-buscador"
           ref={
             register({
-              required : {value: true, message: 'destinatario obligatorio'},
+              required : {value: true, message: 'solicitante obligatorio'},
             })
           }
         />
-        <span className="input-error">
-          {
-            errors?.destinatario?.message
-          }
-        </span>
+      <span className="input-error">
         {
-          destinatario !== null ? (
-            <ul className="info-persona">
-            <li><span className="persona-dato">{destinatario.puesto.nombre}:</span> {destinatario.nombre}</li>
-            </ul>
-          ) : ( <ul className="info-persona"><li></li> </ul>)
+          errors?.solicitante?.message
         }
-        <button type="submit" className="button-default">Registrar</button>
-        <input name="fecha" type="text" value={fecha.fechaSistema()} readOnly="readonly" className="tramite-fecha" />
-      </form>
-    </div>
+      </span>
+      {
+        solicitante !== null ? (
+          <ul className="info-persona">
+          <li><span className="persona-dato">{solicitante.puesto.nombre}:</span> {solicitante.nombre}</li>
+          </ul>
+        ) : ( <ul className="info-persona"><li></li> </ul>)
+      }
+      <p className="default-subtitle">Datos del destinatario</p>
+      <input
+        onKeyDown={buscarDestinatario}
+        type="search"
+        name="destinatario"
+        placeholder="Nombre de destinatario"
+        className="input-default input-buscador"
+        ref={
+          register({
+            required : {value: true, message: 'destinatario obligatorio'},
+          })
+        }
+      />
+      <span className="input-error">
+        {
+          errors?.destinatario?.message
+        }
+      </span>
+      {
+        destinatario !== null ? (
+          <ul className="info-persona">
+          <li><span className="persona-dato">{destinatario.puesto.nombre}:</span> {destinatario.nombre}</li>
+          </ul>
+        ) : ( <ul className="info-persona"><li></li> </ul>)
+      }
+      <button type="submit" className="button-default">Registrar</button>
+      <input name="fecha" type="text" value={fecha.fechaSistema()} readOnly="readonly" className="tramite-fecha" />
+    </form>
   );
 }
  

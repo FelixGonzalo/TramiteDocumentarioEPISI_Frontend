@@ -13,41 +13,39 @@ const ArchivosList = () => {
   }, [])
 
   return (
-    <div>
-      <div className="table-responsive">
-        <table className="">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>descripcion</th>
-              <th>id_solicitud</th>
-              <th>file</th>
-              <th>tipo file</th>
-            </tr>
-          </thead>
-          <tbody>
-            {
-              archivos.length > 0 ? 
-                archivos.map((item, index) => (
-                  <tr key={item.id}>
-                    <td>{index+1 < 10 ? "0"+(index+1) : index+1}</td>
-                    <td>{item.descripcion}</td>
-                    <td>{item.idSolicitud}</td>
-                    <td></td>
-                    <td>{item.tipoArchivo.nombre}</td>
-                  </tr>
-                )) : (
-                  <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                )
-            }
-          </tbody>
-        </table>
-      </div>
+    <div className="table-responsive">
+      <table className="">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>descripcion</th>
+            <th>id_solicitud</th>
+            <th>file</th>
+            <th>tipo file</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            archivos.length > 0 ? 
+              archivos.map((item, index) => (
+                <tr key={item.id}>
+                  <td>{index+1 < 10 ? "0"+(index+1) : index+1}</td>
+                  <td>{item.descripcion}</td>
+                  <td>{item.idSolicitud}</td>
+                  <td></td>
+                  <td>{item.tipoArchivo.nombre}</td>
+                </tr>
+              )) : (
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              )
+          }
+        </tbody>
+      </table>
     </div>
   );
 }

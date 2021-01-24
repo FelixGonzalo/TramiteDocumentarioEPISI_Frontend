@@ -28,96 +28,93 @@ const PersonaForm = () => {
   }
 
   return (
-    <div className="container-main">
-      <h2 className="default-title">Registrar persona</h2>
-      <form className="form-default" onSubmit={handleSubmit(onSubmit)}>
-        <label className="label-default"> Puesto
-          <select 
-            onChange={e => addInputsSegunPuesto(e.currentTarget.value)}
-            name="puesto" 
-            className="input-default"
-            ref={register()}
-          >
-          {
-            puestos.length > 0 ? 
-            puestos.map((item) => (
-              <option key={item.id} value={item.id}>{item.nombre}</option>
-            )) : ( <option>No hay datos</option>)
+    <form className="form-default" onSubmit={handleSubmit(onSubmit)}>
+      <label className="label-default"> Puesto
+        <select 
+          onChange={e => addInputsSegunPuesto(e.currentTarget.value)}
+          name="puesto" 
+          className="input-default"
+          ref={register()}
+        >
+        {
+          puestos.length > 0 ? 
+          puestos.map((item) => (
+            <option key={item.id} value={item.id}>{item.nombre}</option>
+          )) : ( <option>No hay datos</option>)
+        }
+        </select>
+      </label>
+      <label className="label-default"> Nombre
+        <input
+          type="text"
+          name="nombre"
+          className="input-default"
+          ref={
+            register({
+              required : {value: true, message: 'nombre obligatorio'},
+              pattern : {value: /^[A-Za-zÀ-ÿ\s]+$/i, message: 'nombre no válido' }
+            })
           }
-          </select>
-        </label>
-        <label className="label-default"> Nombre
-          <input
-            type="text"
-            name="nombre"
-            className="input-default"
-            ref={
-              register({
-                required : {value: true, message: 'nombre obligatorio'},
-                pattern : {value: /^[A-Za-zÀ-ÿ\s]+$/i, message: 'nombre no válido' }
-              })
-            }
-          />
-        </label>
-        <span className="input-error">
-          {
-            errors?.nombre?.message
+        />
+      </label>
+      <span className="input-error">
+        {
+          errors?.nombre?.message
+        }
+      </span>
+      <label className="label-default"> DNI/RUC
+        <input
+          type="text"
+          name="dniOruc"
+          className="input-default"
+          ref={
+            register({
+              required : {value: true, message: 'DNI/RUC obligatorio'},
+              pattern : {value: /[0-9]+$/, message: 'se acepta solo números' },
+              minLength : {value: 8, message: 'muy corto, son 8 caracteres para DNI'},
+              maxLength : {value: 11, message: 'te pasaste, solo 11 caracteres para RUC'}
+            })
           }
-        </span>
-        <label className="label-default"> DNI/RUC
-          <input
-            type="text"
-            name="dniOruc"
-            className="input-default"
-            ref={
-              register({
-                required : {value: true, message: 'DNI/RUC obligatorio'},
-                pattern : {value: /[0-9]+$/, message: 'se acepta solo números' },
-                minLength : {value: 8, message: 'muy corto, son 8 caracteres para DNI'},
-                maxLength : {value: 11, message: 'te pasaste, solo 11 caracteres para RUC'}
-              })
-            }
-          />
-        </label>
-        <span className="input-error">
-          {errors?.dniOruc?.message}
-        </span>
-        <label className="label-default"> Correo
-          <input
-            type="text"
-            name="correo"
-            className="input-default"
-            ref={
-              register({
-                required : {value: true, message: 'Correo obligatorio'},
-                pattern : {value: /[a-z0-9_.-]+@[a-z]+\.[a-z0-9_.-]+[a-z0-9]/i, message: 'correo no válido' }
-              })
-            }
-          />
-        </label>
-        <span className="input-error">
-          {errors?.correo?.message}
-        </span>
-        <label id="inputEstudiante" className="label-default" > Cod. estudiante
-          <input
-            type="text"
-            name="codigoEstudiante"
-            className="input-default"
-            ref={
-              register({
-                pattern : {value: /[0-9]+$/, message: 'solo se acepta números' },
-                minLength : {value: 10, message: 'muy corto, son 10 números'},
-                maxLength : {value: 10, message: 'muy grande, solo 10 números'}
-              })
-            }
-          />
-        </label>
-        <span className="input-error">
-          {errors?.codigoEstudiante?.message}
-        </span>
-        <button className="button-default">Registrar</button>
-      </form>
-    </div>
+        />
+      </label>
+      <span className="input-error">
+        {errors?.dniOruc?.message}
+      </span>
+      <label className="label-default"> Correo
+        <input
+          type="text"
+          name="correo"
+          className="input-default"
+          ref={
+            register({
+              required : {value: true, message: 'Correo obligatorio'},
+              pattern : {value: /[a-z0-9_.-]+@[a-z]+\.[a-z0-9_.-]+[a-z0-9]/i, message: 'correo no válido' }
+            })
+          }
+        />
+      </label>
+      <span className="input-error">
+        {errors?.correo?.message}
+      </span>
+      <label id="inputEstudiante" className="label-default" > Cod. estudiante
+        <input
+          type="text"
+          name="codigoEstudiante"
+          className="input-default"
+          ref={
+            register({
+              pattern : {value: /[0-9]+$/, message: 'solo se acepta números' },
+              minLength : {value: 10, message: 'muy corto, son 10 números'},
+              maxLength : {value: 10, message: 'muy grande, solo 10 números'}
+            })
+          }
+        />
+      </label>
+      <span className="input-error">
+        {errors?.codigoEstudiante?.message}
+      </span>
+      <button className="button-default">Registrar</button>
+    </form>
   );
 }
  

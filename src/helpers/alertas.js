@@ -27,11 +27,10 @@ const miniAlert = (mensaje = "mensaje",icon = "info") => {
   })  
 }
 
-const alertOk = (mensaje) => {  
+const alertOk = () => {  
   Swal.fire({
     icon: 'success',
-    title: 'Listo...',
-    text: mensaje,
+    title: 'Listo !!',
   })
 }
 

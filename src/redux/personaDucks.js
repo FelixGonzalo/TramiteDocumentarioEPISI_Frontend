@@ -49,21 +49,21 @@ export const postPersona = (persona, event) => async () => {
       body: JSON.stringify(myjson)
     })
     const data = await response.json()
-    switch (response.status) {
-      case 500:
-          alert.alertError(`${response.status}: ${response.error}`)
-        break;
-      case 400:
-          alert.alertError(`${response.status}: Error`)
-        break;
-      default:
-        alert.alertOk(`${data.nombre} registrado !!`)
-        event.target.reset()
-        break;
-    }
+    valida.manejoErrorPost(response.status)
+    // switch (response.status) {
+    //   case 500:
+    //       alert.alertError(`${response.status}: ${response.error}`)
+    //     break;
+    //   case 400:
+    //       alert.alertError(`${response.status}: Error`)
+    //     break;
+    //   default:
+    //     alert.alertOk(`${data.nombre} registrado !!`)
+    //     event.target.reset()
+    //     break;
+    // }
   } catch (error) {
-    console.log(error)
-    alert.alertError(error)
+    alert.miniAlert(error,'warning')
   }
 }
 

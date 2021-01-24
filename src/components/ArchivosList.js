@@ -31,10 +31,10 @@ const ArchivosList = () => {
                 archivos.map((item, index) => (
                   <tr key={item.id}>
                     <td>{index+1 < 10 ? "0"+(index+1) : index+1}</td>
+                    <td>{item.descripcion}</td>
+                    <td>{item.idSolicitud}</td>
                     <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td>{item.tipoArchivo.nombre}</td>
                   </tr>
                 )) : (
                   <tr>

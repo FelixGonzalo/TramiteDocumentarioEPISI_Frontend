@@ -24,6 +24,7 @@ const TramiteForm = () => {
   useEffect(()=>{
     dispatch(getSolicitudesTipos())
     dispatch(getPersonas())
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const buscarPersona = (input) => {
@@ -31,34 +32,36 @@ const TramiteForm = () => {
     if (text.length > 0) {
       for (let item of personas){
         if (item.nombre.toLowerCase().indexOf(text.toLowerCase()) !== -1) {
-          // setSolicitante(item)
           return item
         }
       }
     } else {
-      // setSolicitante(null)
       return null
     }
   }
 
-  const buscarSolicitante = (input) => {
-    setSolicitante(buscarPersona(input))
+  const buscarSolicitante = (e) => {
+    setSolicitante(buscarPersona(e))
+    if (e.code === 'Enter') e.target.value = solicitante.nombre;
   }
 
-  const buscarDestinatario = (input) => {
-    setDestinatario(buscarPersona(input))
+  const buscarDestinatario = (e) => {
+    setDestinatario(buscarPersona(e))
+    if (e.code === 'Enter') e.target.value = destinatario.nombre;
   }
 
   const onSubmit = (data, event) => {
     dispatch(postSolicitud(data, event,solicitante, destinatario))
-    event.target.reset()
   }
 
+  const checkKeyDown = (e) => {
+    if (e.code === 'Enter') e.preventDefault();
+  }
 
   return (
     <div className="container-main">
       <h2 className="default-title">Registrar nuevo Trámite</h2>
-      <form className="form-default " onSubmit={handleSubmit(onSubmit)}>
+      <form className="form-default " onSubmit={handleSubmit(onSubmit)} onKeyDown={(e) => checkKeyDown(e)}>
       <p className="default-subtitle">Datos generales</p>
         <label className="label-default"> Tipo de Trámite
           <select 
@@ -82,20 +85,18 @@ const TramiteForm = () => {
           />
         </label>
         <p className="default-subtitle">Datos del Solicitante</p>
-        <label className="label-default"> Solicitante
-          <input
-            onKeyDown={buscarSolicitante}
+        <input
+            onKeyDown={(e) => buscarSolicitante(e)}
             type="search"
             name="solicitante"
-            placeholder="Buscador de solicitante"
-            className="input-buscador"
+            placeholder="Nombre de solicitante"
+            className="input-default input-buscador"
             ref={
               register({
                 required : {value: true, message: 'solicitante obligatorio'},
               })
             }
           />
-        </label>
         <span className="input-error">
           {
             errors?.solicitante?.message
@@ -104,28 +105,23 @@ const TramiteForm = () => {
         {
           solicitante !== null && solicitante ? (
             <ul className="info-persona">
-            <li className="info-persona-titulo">Solicitante</li>
-            <li><span className="persona-dato">Nombre:</span> {solicitante.nombre}</li>
-            <li><span className="persona-dato">Correo:</span> {solicitante.correo}</li>
-            <li><span className="persona-dato">Puesto:</span> {solicitante.puesto.nombre}</li>
+            <li><span className="persona-dato">{solicitante.puesto.nombre}:</span> {solicitante.nombre}</li>
             </ul>
-          ) : ( <ul className="info-persona"><li>No hay Datos, regístrelo !!</li> </ul>)
+          ) : ( <ul className="info-persona"><li></li> </ul>)
         }
         <p className="default-subtitle">Datos del destinatario</p>
-        <label className="label-default"> Destinatario
-          <input
-            onKeyDown={buscarDestinatario}
-            type="search"
-            name="destinatario"
-            placeholder="Buscador de destinatario"
-            className="input-buscador"
-            ref={
-              register({
-                required : {value: true, message: 'destinatario obligatorio'},
-              })
-            }
-          />
-        </label>
+        <input
+          onKeyDown={buscarDestinatario}
+          type="search"
+          name="destinatario"
+          placeholder="Nombre de destinatario"
+          className="input-default input-buscador"
+          ref={
+            register({
+              required : {value: true, message: 'destinatario obligatorio'},
+            })
+          }
+        />
         <span className="input-error">
           {
             errors?.destinatario?.message
@@ -134,14 +130,11 @@ const TramiteForm = () => {
         {
           destinatario !== null && destinatario ? (
             <ul className="info-persona">
-            <li className="info-persona-titulo">Destinatario</li>
-            <li><span className="persona-dato">Nombre:</span> {destinatario.nombre}</li>
-            <li><span className="persona-dato">Correo:</span> {destinatario.correo}</li>
-            <li><span className="persona-dato">Puesto:</span> {destinatario.puesto.nombre}</li>
+            <li><span className="persona-dato">{destinatario.puesto.nombre}:</span> {destinatario.nombre}</li>
             </ul>
-          ) : ( <ul className="info-persona"><li>No hay Datos, regístrelo !!</li> </ul>)
+          ) : ( <ul className="info-persona"><li></li> </ul>)
         }
-        <button className="button-default">Registrar</button>
+        <button type="submit" className="button-default">Registrar</button>
         <input name="fecha" type="text" value={fecha.fechaSistema()} readOnly="readonly" className="tramite-fecha" />
       </form>
     </div>

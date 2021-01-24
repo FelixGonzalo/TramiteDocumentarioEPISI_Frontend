@@ -8,19 +8,12 @@
 }
 
 .info-persona {
+  color: gray;
   font-size: 13px;
-  margin-top: 5px;
-  padding: 5px;
-
+  margin-top: 0;
+  padding: 0;
   list-style: none;
   display: inline-block;
-  border: 3px solid var(--cred);
-}
-
-.info-persona-titulo {
-  font-weight: bold;
-  text-align: right;
-  color: var(--cred);
 }
 
 .persona-dato {
@@ -33,4 +26,5 @@
   display: block;
   margin: auto;
   margin-right: 0;
+  width: 100%;
 }

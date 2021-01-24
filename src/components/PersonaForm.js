@@ -18,7 +18,7 @@ const PersonaForm = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const onSubmit = (data, event) => {
+  const onSubmit = async (data, event) => {
     dispatch(postPersona(data, event))
   }
 
@@ -27,8 +27,11 @@ const PersonaForm = () => {
     e !== '1' ? inputEstudiante.classList.add('deshabilitar') : inputEstudiante.classList.remove('deshabilitar')
   }
 
+  const checkKeyDown = (e) => {
+    if (e.code === 'Enter') e.preventDefault();
+  }
   return (
-    <form className="form-default" onSubmit={handleSubmit(onSubmit)}>
+    <form className="form-default" onSubmit={handleSubmit(onSubmit)} onKeyDown={(e) => checkKeyDown(e)}>
       <label className="label-default"> Puesto
         <select 
           onChange={e => addInputsSegunPuesto(e.currentTarget.value)}
@@ -62,6 +65,22 @@ const PersonaForm = () => {
           errors?.nombre?.message
         }
       </span>
+      <label className="label-default"> Correo
+        <input
+          type="text"
+          name="correo"
+          className="input-default"
+          ref={
+            register({
+              required : {value: true, message: 'Correo obligatorio'},
+              pattern : {value: /[a-z0-9_.-]+@[a-z]+\.[a-z0-9_.-]+[a-z0-9]/i, message: 'correo no válido' }
+            })
+          }
+        />
+      </label>
+      <span className="input-error">
+        {errors?.correo?.message}
+      </span>
       <label className="label-default"> DNI/RUC
         <input
           type="text"
@@ -79,22 +98,6 @@ const PersonaForm = () => {
       </label>
       <span className="input-error">
         {errors?.dniOruc?.message}
-      </span>
-      <label className="label-default"> Correo
-        <input
-          type="text"
-          name="correo"
-          className="input-default"
-          ref={
-            register({
-              required : {value: true, message: 'Correo obligatorio'},
-              pattern : {value: /[a-z0-9_.-]+@[a-z]+\.[a-z0-9_.-]+[a-z0-9]/i, message: 'correo no válido' }
-            })
-          }
-        />
-      </label>
-      <span className="input-error">
-        {errors?.correo?.message}
       </span>
       <label id="inputEstudiante" className="label-default" > Cod. estudiante
         <input

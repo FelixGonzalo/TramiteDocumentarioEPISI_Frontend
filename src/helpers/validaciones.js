@@ -1,6 +1,6 @@
 import alert from '../helpers/alertas'
 
-const manejoErrorGet = (status = 200, data = 0) => {
+const manejoErrorGet = (status = 200, data = "") => {
   let mensaje = "Error"
   if (status !== 200) {
     mensaje = status + ': Error al conectar con el servidor'
@@ -12,7 +12,6 @@ const manejoErrorGet = (status = 200, data = 0) => {
 }
 
 const manejoErrorPost = (status = 201) => {
-  console.log(status)
   if (status !== 201) {
     alert.miniAlert(`${status}: No se puede registrar`,'error')
   } else {

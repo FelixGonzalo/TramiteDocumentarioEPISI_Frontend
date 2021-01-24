@@ -1,4 +1,5 @@
 import alert from '../helpers/alertas'
+import valida from '../helpers/validaciones'
 
 const dataInicial = {
   array : []
@@ -23,11 +24,8 @@ export const getPuestos = () => async (dispatch, getState) => {
       type: GET_PUESTOS,
       payload: data
     })
-    if(data.status === 500) {
-      alert.alertError(`${data.status}: ${data.error}`)
-    }
+    valida.manejoErrorGet(response.status, data)
   } catch (error) {
-    console.log(error)
-    alert.alertError(error)
+    alert.miniAlert(error,'warning')
   }
 }

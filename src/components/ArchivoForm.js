@@ -4,10 +4,11 @@ import {useDispatch, useSelector} from 'react-redux'
 import {getArchivoTipos} from '../redux/archivoTiposDucks'
 import {postArchivo} from '../redux/archivoDucks'
 
+
 const ArchivoForm = () => {
 
   const dispatch = useDispatch()
-  const tiposArchivo = useSelector(store => store.archivoTipos.array)
+  const tipos = useSelector(store => store.archivoTipos.array)
   const {register, errors, handleSubmit} = useForm()
 
   useEffect(()=>{
@@ -30,9 +31,10 @@ const ArchivoForm = () => {
             ref={register()}
           >
           {
-            tiposArchivo.map((item) => (
+            tipos.length > 0 ?
+            tipos.map((item) => (
               <option key={item.id} value={item.id}>{item.nombre}</option>
-            ))
+            )) : (<option>No hay datos</option>)
           }
           </select>
         </label>

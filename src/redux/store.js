@@ -3,14 +3,14 @@ import thunk from 'redux-thunk'
 import personaReducer from './personaDucks'
 import solicitudReducer from './solicitudDucks'
 import archivoReducer from './archivoDucks'
-import puestoReducer from './puestoDucks'
+import puestoReducer from './personaPuestosDucks'
 import solicitudTiposReducer from './solicitudTiposDucks'
 import archivoTiposReducer from './archivoTiposDucks'
 //llamamos a todos los reducer de los DUCKS
 
 const rootReducer = combineReducers({
   personas: personaReducer,
-  puestos: puestoReducer,
+  personaPuestos: puestoReducer,
   archivos: archivoReducer,
   archivoTipos: archivoTiposReducer,
   solicitudes: solicitudReducer,

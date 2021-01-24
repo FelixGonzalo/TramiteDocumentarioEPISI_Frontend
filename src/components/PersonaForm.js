@@ -3,13 +3,13 @@ import {useEffect} from 'react'
 import './defaultForm.css'
 
 import {useDispatch, useSelector} from 'react-redux'
-import {getPuestos} from '../redux/puestoDucks'
+import {getPuestos} from '../redux/personaPuestosDucks'
 import {postPersona} from '../redux/personaDucks'
 
 const PersonaForm = () => {
 
   const dispatch = useDispatch()
-  const puestos = useSelector(store => store.puestos.array)
+  const puestos = useSelector(store => store.personaPuestos.array)
 
   const {register, errors, handleSubmit} = useForm()
 
@@ -39,9 +39,10 @@ const PersonaForm = () => {
             ref={register()}
           >
           {
+            puestos.length > 0 ? 
             puestos.map((item) => (
               <option key={item.id} value={item.id}>{item.nombre}</option>
-            ))
+            )) : ( <option>No hay datos</option>)
           }
           </select>
         </label>
@@ -71,7 +72,7 @@ const PersonaForm = () => {
             ref={
               register({
                 required : {value: true, message: 'DNI/RUC obligatorio'},
-                pattern : {value: /[0-9]+$/, message: 'Solo números' },
+                pattern : {value: /[0-9]+$/, message: 'se acepta solo números' },
                 minLength : {value: 8, message: 'muy corto, son 8 caracteres para DNI'},
                 maxLength : {value: 11, message: 'te pasaste, solo 11 caracteres para RUC'}
               })
@@ -104,9 +105,9 @@ const PersonaForm = () => {
             className="input-default"
             ref={
               register({
-                pattern : {value: /[0-9]+$/, message: 'Solo números' },
-                minLength : {value: 10, message: 'muy corto, son 10 caracteres'},
-                maxLength : {value: 10, message: 'te pasaste, solo 10 caracteres'}
+                pattern : {value: /[0-9]+$/, message: 'solo se acepta números' },
+                minLength : {value: 10, message: 'muy corto, son 10 números'},
+                maxLength : {value: 10, message: 'muy grande, solo 10 números'}
               })
             }
           />

@@ -73,7 +73,7 @@ const TramiteForm = () => {
             tiposTramite.length > 0 ? 
             tiposTramite.map((item) => (
               <option key={item.id} value={item.id}>{item.nombre}</option>
-            )) : (<option></option>)
+            )) : (<option>No hay datos</option>)
           }
           </select>
         </label>
@@ -103,7 +103,7 @@ const TramiteForm = () => {
           }
         </span>
         {
-          solicitante !== null && solicitante ? (
+          solicitante !== null ? (
             <ul className="info-persona">
             <li><span className="persona-dato">{solicitante.puesto.nombre}:</span> {solicitante.nombre}</li>
             </ul>
@@ -128,7 +128,7 @@ const TramiteForm = () => {
           }
         </span>
         {
-          destinatario !== null && destinatario ? (
+          destinatario !== null ? (
             <ul className="info-persona">
             <li><span className="persona-dato">{destinatario.puesto.nombre}:</span> {destinatario.nombre}</li>
             </ul>

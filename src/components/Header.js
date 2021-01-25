@@ -1,7 +1,6 @@
 import './header.css'
 import logoUns from './img/logo_uns.png'
 import logoEpisi from './img/logo_episi.jpg'
-import Navbar from './Navbar'
 
 const Header = () => {
   return (
@@ -11,7 +10,6 @@ const Header = () => {
         <h1 className="header-title">Sistema de Trámite Documentario de EPISI</h1>
         <img src={logoEpisi} alt="logo EPISI" height= "30px"/>
       </div>
-      <Navbar/>
     </header>
   );
 }

@@ -21,7 +21,7 @@ const Navbar = () => {
       <NavLink to="/registrar.tramite" className="navbar-option" activeClassName="navbar-activate">
         Registrar trámite
       </NavLink>
-      <NavLink to="/" exact className="navbar-option" activeClassName="navbar-activate">
+      <NavLink to="/login" exact className="navbar-option" activeClassName="navbar-activate">
         Salir
       </NavLink>
     </nav>

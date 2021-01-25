@@ -19,9 +19,10 @@ const ArchivoForm = () => {
   const onSubmit = (data, event) => {
     dispatch(postArchivo(data, event))
   }
-
+ 
   return (
     <form className="form-default" onSubmit={handleSubmit(onSubmit)}>
+    <p className="default-subtitle">Archivos</p>
     <label className="label-default"> Tipo
         <select 
           name="tipoArchivo" 
@@ -41,10 +42,19 @@ const ArchivoForm = () => {
           type="text"
           name="descripcion"
           className="input-default"
-          ref={register}
+          ref={
+            register({
+              required : {value: true, message: 'descripción obligatorio'},
+            })
+          }
         />
       </label>
-      <button className="button-default">Registrar</button>
+      <span className="input-error">
+        {
+          errors?.descripcion?.message
+        }
+      </span>
+      <button className="button-default btn-small">Agregar</button>
     </form>
   );
 }

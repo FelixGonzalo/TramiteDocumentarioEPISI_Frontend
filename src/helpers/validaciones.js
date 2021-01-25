@@ -19,9 +19,18 @@ const manejoErrorPost = (status = 201) => {
   }
 }
 
+const manejoMiniErrorPost = (status = 201) => {
+  if (status !== 201) {
+    alert.miniAlert(`${status}: No se puede registrar`,'error')
+  } else {
+    alert.miniAlert('Listo!','success')
+  }
+}
+
 const valida = {
   manejoErrorGet,
-  manejoErrorPost
+  manejoErrorPost,
+  manejoMiniErrorPost
 }
 
 export default valida

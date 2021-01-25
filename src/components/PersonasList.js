@@ -1,5 +1,4 @@
 import {useEffect} from 'react'
-import './personasList.css'
 import iconEstudiante from './img/estudiante.svg'
 import iconPersona from './img/persona.svg'
 import iconDni from './img/dni.svg'
@@ -21,7 +20,7 @@ const PersonasList = () => {
   
   return (
     <div className="table-responsive">
-      <table className="adminPerson-list">
+      <table>
         <thead>
           <tr>
             <th>#</th>
@@ -44,6 +43,7 @@ const PersonasList = () => {
                 </tr>
               )) : (
                 <tr>
+                  <td></td>
                   <td></td>
                   <td></td>
                   <td></td>

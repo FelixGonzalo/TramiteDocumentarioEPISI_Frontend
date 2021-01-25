@@ -41,7 +41,7 @@ const TramitesList = () => {
 
   return (
     <div className="table-responsive">
-      <table className="tramites-list">
+      <table>
         <thead>
           <tr>
             <th>#</th>

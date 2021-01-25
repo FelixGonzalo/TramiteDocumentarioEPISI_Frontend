@@ -9,7 +9,6 @@ import {getPersonas} from '../redux/personaDucks'
 import {postSolicitud} from '../redux/solicitudDucks'
 
 
-
 const TramiteForm = () => {
 
   const dispatch = useDispatch()

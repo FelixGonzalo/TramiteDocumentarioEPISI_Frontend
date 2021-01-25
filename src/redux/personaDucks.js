@@ -93,7 +93,7 @@ export const postPersona = (persona, event) => async () => {
           },
           body: JSON.stringify(myjson)
         })
-        const data = await response.json()
+        // const data = await response.json()
         valida.manejoErrorPost(response.status)
       }
     }

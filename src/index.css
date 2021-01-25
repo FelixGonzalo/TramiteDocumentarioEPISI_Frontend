@@ -46,8 +46,20 @@ code {
   overflow-x: auto;
 }
 
+.table-small {
+  overflow-y: auto;
+  max-height: 200px;
+  max-width: 450px;
+  margin: auto;
+}
+
+.table-small td {
+  max-width: 150px;
+}
+
 .table-responsive table {
   border-collapse: collapse;
+  margin: auto;
 }
 
 .table-responsive th,
@@ -60,18 +72,17 @@ code {
   background: var(--cred2);
 }
 
-.button-default {
-  background: var(--cred);
-  color: var(--cclear);
-  padding: 12px 25px;
-  border-radius: 20px;
-  outline: none;
-  border: none;
-  font-size: 20px;
-  display: block;
-  margin: 30px auto 0px;
-}
-
 .deshabilitar {
   opacity: 0.2;
+}
+
+.btn-actualizar {
+  background: none;
+  border: none;
+  outline: none;
+}
+
+.btn-actualizar img:hover {
+  background: #c96a7a;
+  border-radius: 20px;
 }

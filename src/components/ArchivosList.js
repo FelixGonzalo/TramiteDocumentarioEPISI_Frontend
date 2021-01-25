@@ -1,6 +1,7 @@
 import {useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
-import {getArchivos} from '../redux/archivoDucks'
+import {getArchivosSinSolicitud} from '../redux/archivoDucks'
+import iconActualizar from './img/actualizar_doc.svg'
 
 const ArchivosList = () => {
 
@@ -8,36 +9,38 @@ const ArchivosList = () => {
   const archivos = useSelector(store => store.archivos.array)
 
   useEffect(() => {
-    dispatch(getArchivos())
+    dispatch(getArchivosSinSolicitud())
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
-    <div className="table-responsive">
-      <table className="">
+    <div className="table-responsive table-small">
+      
+      <table>
         <thead>
           <tr>
-            <th>#</th>
-            <th>descripcion</th>
-            <th>id_solicitud</th>
-            <th>file</th>
+            <th>
+              <button className="btn-actualizar" onClick={(e)=> dispatch(getArchivosSinSolicitud())}>
+                <img src={iconActualizar} alt="" height="25px" />
+              </button>
+            </th>
             <th>tipo file</th>
+            <th>descripcion</th>
+            <th>file</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody  id="listaArchivos">
           {
             archivos.length > 0 ? 
               archivos.map((item, index) => (
                 <tr key={item.id}>
                   <td>{index+1 < 10 ? "0"+(index+1) : index+1}</td>
-                  <td>{item.descripcion}</td>
-                  <td>{item.idSolicitud}</td>
-                  <td></td>
                   <td>{item.tipoArchivo.nombre}</td>
+                  <td>{item.descripcion}</td>
+                  <td></td>
                 </tr>
               )) : (
                 <tr>
-                  <td></td>
                   <td></td>
                   <td></td>
                   <td></td>

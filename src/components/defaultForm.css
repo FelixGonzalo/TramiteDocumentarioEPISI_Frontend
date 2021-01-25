@@ -26,3 +26,21 @@
   color: var(--cred);
   margin: 5px 3px 0px 0px;
 }
+
+.button-default {
+  background: var(--cred);
+  color: var(--cclear);
+  padding: 12px 25px;
+  border-radius: 20px;
+  outline: none;
+  border: none;
+  font-size: 20px;
+  margin: 30px auto 0px;
+}
+
+.btn-small {
+  font-size: 15px;
+  padding: 5px 15px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}

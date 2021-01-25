@@ -58,7 +58,7 @@ export const postSolicitud = (solicitud, event, solicitante,destinatario) => asy
     if(data.status === 500) {
       alert.alertError(`${data.status}: ${data.error}`)
     } else {
-      // alert.alertOk(`${data.nombre} registrado !!`)
+      alert.alertOk()
       event.target.reset()
     }
     console.log(data)

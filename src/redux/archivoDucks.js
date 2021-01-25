@@ -30,6 +30,20 @@ export const getArchivos = () => async (dispatch, getState) => {
   }
 }
 
+export const getArchivosSinSolicitud = () => async (dispatch, getState) => {
+  try {
+    const response = await fetch('http://localhost:8090/api/archivos/archivos-sin-solicitud')
+    const data = await response.json()
+    dispatch({
+      type: GET_ARCHIVOS,
+      payload: data
+    })
+    valida.manejoErrorGet(response.status, data)
+  } catch (error) {
+    alert.miniAlert(error,'warning')
+  }
+}
+
 export const postArchivo = (archivo, event) => async (dispatch, getState) => {
   try {
     var myjson = {
@@ -45,13 +59,7 @@ export const postArchivo = (archivo, event) => async (dispatch, getState) => {
       },
       body: JSON.stringify(myjson)
     })
-    const data = await response.json()
-    if(data.status === 500) {
-      alert.alertError(`${data.status}: ${data.error}`)
-    } else {
-      alert.alertOk(`${data.nombre} registrado !!`)
-      event.target.reset()
-    }
+    valida.manejoMiniErrorPost(response.status)
   } catch (error) {
     console.log(error)
     alert.alertError(error)

@@ -7,6 +7,7 @@ import Header from './components/Header'
 import TramitesList from './components/TramitesList';
 import ArchivosList from './components/ArchivosList'
 import ArchivoForm from './components/ArchivoForm'
+import './general.css'
 
 const Routes = () => {
   return (
@@ -17,7 +18,13 @@ const Routes = () => {
           <Switch>
           <Route path="/registrar.tramite">
             <h2 className="default-title">Registrar trámite</h2>
-            <TramiteForm/>
+            <div className="containerFlex">
+              <div>
+                <ArchivoForm/>
+                <ArchivosList/>
+              </div>
+              <TramiteForm/>
+            </div>
           </Route>
           <Route path="/listar.tramites">
             <h2 className="default-title">Lista de Trámites</h2>
@@ -30,13 +37,6 @@ const Routes = () => {
           <Route path="/listar.personas">
             <h2 className="default-title">Lista de Personas</h2>
             <PersonasList/>
-          </Route>
-          <Route path="/listar.archivos">
-            <ArchivosList/>
-          </Route>
-          <Route path="/registrar.archivo">
-             <h2 className="default-title">Registrar Archivo</h2>
-            <ArchivoForm/>
           </Route>
           <Route path="/">
           </Route>

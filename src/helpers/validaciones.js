@@ -27,10 +27,19 @@ const manejoMiniErrorPost = (status = 201) => {
   }
 }
 
+const manejoMiniErrorDelete = (status = 204) => {
+  if (status !== 204) {
+    alert.miniAlert(`${status}: No se puede eliminar`,'error')
+  } else {
+    alert.miniAlert('Eliminación lista!','success')
+  }
+}
+
 const valida = {
   manejoErrorGet,
   manejoErrorPost,
-  manejoMiniErrorPost
+  manejoMiniErrorPost,
+  manejoMiniErrorDelete
 }
 
 export default valida

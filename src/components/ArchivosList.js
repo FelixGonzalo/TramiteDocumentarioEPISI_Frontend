@@ -1,7 +1,9 @@
 import {useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
-import {getArchivosSinSolicitud} from '../redux/archivoDucks'
+import {getArchivosSinSolicitud, deleteArchivo} from '../redux/archivoDucks'
 import iconActualizar from './img/actualizar_doc.svg'
+import iconVer from './img/ver.svg'
+import iconEliminar from './img/eliminar.svg'
 
 const ArchivosList = () => {
 
@@ -37,7 +39,14 @@ const ArchivosList = () => {
                   <td>{index+1 < 10 ? "0"+(index+1) : index+1}</td>
                   <td>{item.tipoArchivo.nombre}</td>
                   <td>{item.descripcion}</td>
-                  <td></td>
+                  <td>
+                    <a href={`http://localhost:8090/api/archivos/ver-archivo/${item.id}`} target="_blank" rel="noreferrer">
+                      <img src={iconVer} alt="" width="25px"/>
+                    </a>
+                    <button onClick={(e)=> dispatch(deleteArchivo(item.id))}>
+                      <img src={iconEliminar} alt="" width="25px"/>
+                    </button>
+                  </td>
                 </tr>
               )) : (
                 <tr>

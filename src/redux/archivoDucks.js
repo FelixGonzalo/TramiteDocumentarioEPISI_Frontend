@@ -54,9 +54,20 @@ export const postArchivo = (archivo, event) => async (dispatch, getState) => {
       method: 'POST',
       body: formdata
     })
-    const data = await response.json()
-    console.log(data)
     valida.manejoMiniErrorPost(response.status)
+  } catch (error) {
+    console.log(error)
+    alert.alertError(error)
+  }
+}
+
+export const deleteArchivo = (id) => async () => {
+  try {
+    const response = await fetch('http://localhost:8090/api/archivos/'+ id, {
+      method: 'DELETE'
+    })
+    console.log(response.status)
+    valida.manejoMiniErrorDelete(response.status)
   } catch (error) {
     console.log(error)
     alert.alertError(error)

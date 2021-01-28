@@ -25,3 +25,13 @@
   text-align: center;
   font-size: 12px;
 }
+
+/* Consulta del tramite */
+
+.container-tramite {
+  text-align: left;
+}
+
+.tramite-subtitle {
+  font-weight: bold;
+}

@@ -14,28 +14,92 @@ const TramitesList = () => {
   const tramites = useSelector(store => store.solicitudes.array)
 
   const consultarTramite = (data) => {
-    console.log("pulsado " + data.personaEmisor.nombre)
-    
+    var listaDestinatarios = ''
+    var listaEstado = ''
+    data.personasReceptoras.length > 0 ? 
+      data.personasReceptoras.map((item, index) => (
+        listaDestinatarios += `<tr>
+          <td>${index+1 < 10 ? "0"+(index+1) : index+1}</td>
+          <td>${item.puesto.nombre}</td>
+          <td>${item.nombre}</td>
+          <td>${item.correo}</td>
+          <td>${item.dniRuc}</td>
+        </tr>`
+      )) : listaDestinatarios = `<tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>`
+
+     data.estadoSolicitudes.length > 0 ? 
+      data.estadoSolicitudes.map((item, index) => (
+        listaEstado += `<tr>
+          <td>${index+1 < 10 ? "0"+(index+1) : index+1}</td>
+          <td>${item.estado.nombre}</td>
+          <td>${item.fecha}</td>
+          <td>${item.descripcion}</td>
+        </tr>`
+      )) : listaEstado = `<tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>`
+                
     Swal.fire({
       showCloseButton: true,
       showConfirmButton: false,
-      width: 600,
+      width: 800,
       title: "Consulta de Trámite",
       html:
-        `<b>Datos generales: </b>
-         <p className="pruebita">Tipo: ${data.tipoSolicitud.nombre} </p>
-         <p>Descripción: ${data.descripcion} </p> 
+        `
+          <div class="container-tramite">
+            <p class="tramite-subtitle">Datos generales: </p>
+            <p>Tipo: ${data.tipoSolicitud.nombre} </p>
+            <p>Descripción: ${data.descripcion} </p> 
 
-         <b>Datos del Solicitante: </b>
-         <p>${data.personaEmisor.puesto.nombre}: ${data.personaEmisor.nombre} </p> 
-         <p>Correo:  ${data.personaEmisor.correo} </p>
-         <p>Dni/Ruc:  ${data.personaEmisor.dniRuc} </p>
-         <p>Cod Estudiante:  ${data.personaEmisor.codEstudiante} </p>
+            <p class="tramite-subtitle">Datos del Solicitante: </p>
+            <p>${data.personaEmisor.puesto.nombre}: ${data.personaEmisor.nombre} </p> 
+            <p>Correo:  ${data.personaEmisor.correo} </p>
+            <p>Dni/Ruc:  ${data.personaEmisor.dniRuc} </p>
+            <p>Cod Estudiante:  ${data.personaEmisor.codEstudiante} </p>
 
-         <b>Datos de Destinatarios: </b>
-         <p></p>
-         <b>Datos del Estado: </b>
-         <p></p>
+            <p class="tramite-subtitle">Datos de Destinatarios: </p>
+            <div class="table-responsive">
+              <table class="">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Puesto</th>
+                    <th>Nombre</th>
+                    <th>Correo</th>
+                    <th>Dni/Ruc</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${listaDestinatarios}
+                </tbody>
+              </table>
+            </div>
+            <p class="tramite-subtitle">Datos del Estado: </p>
+            <div class="table-responsive">
+              <table class="">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Estado</th>
+                    <th>fecha</th>
+                    <th>descripcion</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${listaEstado}
+                </tbody>
+              </table>
+            </div>
+          <div/>
         `,
       footer: "Sistema de EPISI"
     })

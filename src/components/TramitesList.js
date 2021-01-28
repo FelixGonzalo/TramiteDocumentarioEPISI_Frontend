@@ -23,14 +23,21 @@ const TramitesList = () => {
       title: "Consulta de Trámite",
       html:
         `<b>Datos generales: </b>
-         <p><b>Tipo: </b> ${data.tipoSolicitud.nombre} </p>
-         <p><b>Descripción: </b> ${data.descripcion} </p> 
+         <p className="pruebita">Tipo: ${data.tipoSolicitud.nombre} </p>
+         <p>Descripción: ${data.descripcion} </p> 
 
          <b>Datos del Solicitante: </b>
-         <p><b>${data.personaEmisor.puesto.nombre}: </b> ${data.personaEmisor.nombre} </p> 
-         <p><b>Correo: </b> ${data.personaEmisor.correo} </p>
+         <p>${data.personaEmisor.puesto.nombre}: ${data.personaEmisor.nombre} </p> 
+         <p>Correo:  ${data.personaEmisor.correo} </p>
+         <p>Dni/Ruc:  ${data.personaEmisor.dniRuc} </p>
+         <p>Cod Estudiante:  ${data.personaEmisor.codEstudiante} </p>
+
+         <b>Datos de Destinatarios: </b>
+         <p></p>
+         <b>Datos del Estado: </b>
+         <p></p>
         `,
-      footer: "para SPRINT 2"
+      footer: "Sistema de EPISI"
     })
   }
 

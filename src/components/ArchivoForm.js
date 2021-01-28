@@ -54,7 +54,7 @@ const ArchivoForm = () => {
           errors?.descripcion?.message
         }
       </span>
-      <input ref={register} type="file" name="documento"/>
+      <input ref={register()} type="file" name="documento"/>
       <button className="button-default btn-small">Agregar</button>
     </form>
   );

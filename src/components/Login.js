@@ -14,7 +14,7 @@ const Login = () => {
     <div className="container-login">
       <h2 className="default-title">Login</h2>
       <div className="container-login-flex">
-        <img src={iconLogin} width="150px"/>
+        <img src={iconLogin} width="150px" alt=""/>
         <form onSubmit={handleSubmit(onSubmit)}>
           <label className="login-label"> Correo
             <input

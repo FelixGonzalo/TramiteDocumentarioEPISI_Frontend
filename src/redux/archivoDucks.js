@@ -46,23 +46,12 @@ export const getArchivosSinSolicitud = () => async (dispatch, getState) => {
 
 export const postArchivo = (archivo, event) => async (dispatch, getState) => {
   try {
-    // var myjson = {
-    //   "descripcion": archivo.descripcion,
-    //   "documento": archivo.documento,
-    //   "tipoArchivo": {
-    //       "id": Number(archivo.tipoArchivo),
-    //   }
-    // }
     let formdata = new FormData();
+    formdata.append('documento', archivo.documento[0]);
     formdata.append('descripcion', archivo.descripcion);
-    formdata.append('documento', archivo.documento);
-    formdata.append('tipoArchivo.id', Number(archivo.tipoArchivo));
-    // http://localhost:8090/api/archivos
+    formdata.append('tipoArchivo.id', archivo.tipoArchivo);
     const response = await fetch('http://localhost:8090/api/archivos/crear-con-file', {
       method: 'POST',
-      headers: {
-      'Content-Type': 'application/json'
-      },
       body: formdata
     })
     const data = await response.json()

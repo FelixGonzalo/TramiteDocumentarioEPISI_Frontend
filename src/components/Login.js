@@ -1,13 +1,16 @@
 import {useForm} from 'react-hook-form'
+import {useDispatch, useSelector} from 'react-redux'
+import {iniciarSesion} from '../redux/loginDucks'
 import './login.css'
 import iconLogin from './img/login.svg'
 
 const Login = () => {
 
+  const dispatch = useDispatch()
   const {register, errors, handleSubmit} = useForm()
 
   const onSubmit = async (data, event) => {
-    
+    dispatch(iniciarSesion(data,event))
   }
 
   return (
@@ -16,28 +19,27 @@ const Login = () => {
       <div className="container-login-flex">
         <img src={iconLogin} width="150px" alt=""/>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <label className="login-label"> Correo
+          <label className="login-label"> Username
             <input
               type="text"
-              name="correo"
+              name="username"
               className="login-input"
               ref={
                 register({
-                  required : {value: true, message: 'correo obligatorio'},
-                  pattern : {value: /[a-z0-9_.-]+@[a-z]+\.[a-z0-9_.-]+[a-z0-9]/i, message: 'correo no válido' }
+                  required : {value: true, message: 'username obligatorio'}
                 })
               }
             />
           </label>
           <span className="login-error">
             {
-              errors?.correo?.message
+              errors?.username?.message
             }
           </span>
           <label className="login-label"> Contraseña
             <input
               type="password"
-              name="contrasenia"
+              name="password"
               className="login-input"
               ref={
                 register({
@@ -49,13 +51,13 @@ const Login = () => {
           </label>
           <span className="login-error">
             {
-              errors?.contrasenia?.message
+              errors?.password?.message
             }
           </span>
           <button className="login-btn">Registrar</button>
         </form>
       </div>
-      <p class="login-footer">
+      <p className="login-footer">
         Demo del Sistema
       </p>
     </div>

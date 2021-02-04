@@ -1,9 +1,18 @@
 import {NavLink} from "react-router-dom"
+import {useDispatch} from 'react-redux'
+import {cerrarSesion} from '../redux/loginDucks'
 
 import './navbar.css'
 import iconInicio from './img/hogar.svg'
 
 const Navbar = () => {
+
+  const dispatch = useDispatch()
+
+  const salir = () => {
+    dispatch(cerrarSesion())
+  }
+
   return (
     <nav className="navbar">
       <NavLink to="/" exact className="navbar-option">
@@ -21,7 +30,7 @@ const Navbar = () => {
       <NavLink to="/registrar.tramite" className="navbar-option" activeClassName="navbar-activate">
         Registrar trámite
       </NavLink>
-      <NavLink to="/login" exact className="navbar-option" activeClassName="navbar-activate">
+      <NavLink to="/login" exact className="navbar-option" activeClassName="navbar-activate" onClick={(e) => salir()}>
         Salir
       </NavLink>
     </nav>

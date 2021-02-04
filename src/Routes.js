@@ -55,7 +55,7 @@ const Routes = () => {
             <Login/>
           </Route>
           <Route path="/">
-            <Login/>
+            <Navbar/>
           </Route>
         </Switch>
       </Router>

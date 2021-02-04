@@ -15,29 +15,31 @@ export default function loginReducer(state = dataInicial, action){
 }
 
 export const iniciarSesion = (usuario,event) => async () => {
-  let username = 'frontendapp';
-  let password = '12345';
-  let formdata = new FormData();
-  let headers = new Headers();
+  try {
+    let username = 'frontendapp';
+    let password = '12345';
+    let formdata = new FormData();
+    let headers = new Headers();
 
-  formdata.append('grant_type','password');
-  formdata.append('username', usuario.username);
-  formdata.append('password', usuario.password);
+    formdata.append('grant_type','password');
+    formdata.append('username', usuario.username);
+    formdata.append('password', usuario.password);
 
-  headers.append('Authorization', 'Basic ' + btoa(username + ":" + password));
-  fetch('http://localhost:8090/api/security/oauth/token', {
-    method: 'POST',
-    headers: headers,
-    body: formdata
-  })
-  .then((response) => response.json())
-  .then((responseJson) => {
-    console.log(responseJson);
-    localStorage.setItem('mitoken',responseJson.access_token)
-  })
-  .catch((error) => {
-    console.error(error);
-  })
+    headers.append('Authorization', 'Basic ' + btoa(username + ":" + password));
+    const response = await fetch('http://localhost:8090/api/security/oauth/token', {
+      method: 'POST',
+      headers: headers,
+      body: formdata
+    })
+    const data = await response.json()
+
+    if (response.status === 200) {
+      localStorage.setItem('mitoken', data.access_token)
+      window.location.href = "/inicio";
+    }
+  } catch (error) {
+    
+  }
 }
 
 export const cerrarSesion = () => async () => {

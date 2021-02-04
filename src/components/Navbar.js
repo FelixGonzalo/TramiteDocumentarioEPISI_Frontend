@@ -11,11 +11,12 @@ const Navbar = () => {
 
   const salir = () => {
     dispatch(cerrarSesion())
+    // mejorar validacion con intervencion del servidor
   }
 
   return (
     <nav className="navbar">
-      <NavLink to="/" exact className="navbar-option">
+      <NavLink to="/inicio" exact className="navbar-option">
         <img src={iconInicio} alt="inicio" height="25px"/>
       </NavLink>
       <NavLink to="/listar.personas" className="navbar-option" activeClassName="navbar-activate">

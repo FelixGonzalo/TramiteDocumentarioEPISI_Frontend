@@ -54,8 +54,11 @@ const Routes = () => {
           <Route path="/login">
             <Login/>
           </Route>
-          <Route path="/">
+          <Route path="/inicio">
             <Navbar/>
+          </Route>
+          <Route path="/">
+            <Login/>
           </Route>
         </Switch>
       </Router>

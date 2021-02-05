@@ -8,6 +8,7 @@ import TramitesList from './components/TramitesList';
 import ArchivosList from './components/ArchivosList'
 import ArchivoForm from './components/ArchivoForm'
 import Login from './components/Login'
+import RecuperarContraseniaForm from './components/RecuperarContraseniaForm'
 import Navbar from './components/Navbar'
 import './general.css'
 
@@ -50,6 +51,9 @@ const Routes = () => {
               <h2 className="default-title">Lista de Personas</h2>
               <PersonasList/>
             </main>
+          </Route>
+          <Route path="/recuperar.contrasenia">
+            <RecuperarContraseniaForm/>
           </Route>
           <Route path="/login">
             <Login/>

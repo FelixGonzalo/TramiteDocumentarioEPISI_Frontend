@@ -1,6 +1,7 @@
 .container-login {
   background: white;
   border-radius: 50px;
+  width: 80%;
   max-width: 380px;
   margin: auto;
   margin-top: 20px;
@@ -52,5 +53,17 @@
 .login-footer {
   text-align: center;
   margin: 5px;
+  margin-top: 10px;
   font-size: 13px;
+}
+
+.login-footer-link {
+  color: var(--cred);
+  text-decoration: none;
+  display: block;
+  margin-top: 10px;
+}
+
+.login-footer-link:hover {
+  font-weight: bold;
 }

@@ -1,4 +1,5 @@
 import {useForm} from 'react-hook-form'
+import {NavLink} from "react-router-dom"
 import {useDispatch, useSelector} from 'react-redux'
 import {iniciarSesion} from '../redux/loginDucks'
 import './login.css'
@@ -54,12 +55,14 @@ const Login = () => {
               errors?.password?.message
             }
           </span>
-          <button className="login-btn">Registrar</button>
+          <button className="login-btn">Entrar</button>
         </form>
       </div>
-      <p className="login-footer">
-        Demo del Sistema
-      </p>
+      <div className="login-footer">
+        <NavLink to="/recuperar.contrasenia" className="login-footer-link">
+          Recuperar Contraseña
+        </NavLink>
+      </div>
     </div>
   );
 }

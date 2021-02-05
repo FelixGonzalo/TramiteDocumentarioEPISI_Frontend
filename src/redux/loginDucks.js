@@ -46,10 +46,20 @@ export const cerrarSesion = () => async () => {
   localStorage.removeItem('mitoken')
 }
 
-export const getToken = () => async (dispatch) => {
+export const verificarSesion = () => async (dispatch) => {
   try {
     console.log()
   } catch (error) {
     alert.miniAlert(error,'warning')
   }
+}
+
+export const verificarToken = () => async () => {
+  const response = await fetch('http://localhost:8090/verificarSesion',{
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify()
+  })
 }

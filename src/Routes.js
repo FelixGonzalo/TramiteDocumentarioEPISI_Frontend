@@ -52,6 +52,9 @@ const Routes = () => {
               <PersonasList/>
             </main>
           </Route>
+          <Route path="/cambiar.contrasenia">
+            cambiar contrasenia
+          </Route>
           <Route path="/recuperar.contrasenia">
             <RecuperarContraseniaForm/>
           </Route>

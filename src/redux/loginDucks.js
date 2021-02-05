@@ -55,11 +55,10 @@ export const verificarSesion = () => async (dispatch) => {
 }
 
 export const verificarToken = () => async () => {
-  const response = await fetch('http://localhost:8090/verificarSesion',{
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify()
+  let headers = new Headers();
+  headers.append('Authorization', 'Bearer ' + localStorage.getItem('mitoken'));
+  const response = await fetch('http://localhost:8090/verificarSesion', {
+      method: 'GET',
+      headers: headers
   })
 }

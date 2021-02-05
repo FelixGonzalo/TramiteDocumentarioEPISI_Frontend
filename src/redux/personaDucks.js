@@ -24,7 +24,12 @@ export default function personaReducer(state = dataInicial, action){
 
 export const getPersonas = () => async (dispatch) => {
   try {
-    const response = await fetch('http://localhost:8090/api/personas')
+    let headers = new Headers();
+    headers.append('Authorization', 'Bearer ' + localStorage.getItem('mitoken'));
+    const response = await fetch('http://localhost:8090/api/personas', {
+      method: 'GET',
+      headers: headers
+    })
     const data = await response.json()
     dispatch({
       type: GET_PERSONAS,

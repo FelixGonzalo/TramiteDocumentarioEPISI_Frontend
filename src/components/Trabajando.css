@@ -1,0 +1,56 @@
+.container-UrlDesconocida {
+  background: var(--cclear);
+  width: 80%;
+  height: 70vh;
+  margin: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 20px;
+  overflow-y: none;
+  overflow-x: auto;
+  text-align: center;
+}
+
+.container-UrlDesconocida img {
+  margin-top: 50px;
+}
+
+.container-UrlDesconocida p {
+  position: relative;
+  display: inline-block;
+  font-weight: 500;
+  letter-spacing: 4px;
+}
+
+.container-UrlDesconocida p::after {
+  content: "";
+  background: rgba(255, 0, 0, 0.185);
+  border-radius: 10px;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 0%;
+  position: absolute;
+  border-left: 3px solid var(--cred);
+  animation: maquinaescribir 3s infinite alternate;
+}
+
+.container-UrlDesconocida p::before {
+  content: "";
+  background: rgba(223, 212, 61, 0.185);
+  border-radius: 10px;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0%;
+  position: absolute;
+  border-right: 3px solid var(--cred);
+  animation: maquinaescribir 3s infinite alternate;
+  z-index: 1;
+}
+
+@keyframes maquinaescribir {
+  to {
+    width: 100%;
+  }
+}

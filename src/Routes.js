@@ -9,6 +9,7 @@ import ArchivosList from './components/ArchivosList'
 import ArchivoForm from './components/ArchivoForm'
 import Login from './components/Login'
 import RecuperarContraseniaForm from './components/RecuperarContraseniaForm'
+import Trabajando from './components/Trabajando'
 import Navbar from './components/Navbar'
 import './general.css'
 
@@ -53,7 +54,7 @@ const Routes = () => {
             </main>
           </Route>
           <Route path="/cambiar.contrasenia">
-            cambiar contrasenia
+            <Trabajando/>
           </Route>
           <Route path="/recuperar.contrasenia">
             <RecuperarContraseniaForm/>

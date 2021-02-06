@@ -10,8 +10,10 @@ import ArchivoForm from './components/ArchivoForm'
 import Login from './components/Login'
 import RecuperarContraseniaForm from './components/RecuperarContraseniaForm'
 import Trabajando from './components/Trabajando'
+import CambiarContraseniaForm from "./components/CambiarContraseniaForm";
 import Navbar from './components/Navbar'
 import './general.css'
+
 
 const Routes = () => {
   return (
@@ -54,7 +56,7 @@ const Routes = () => {
             </main>
           </Route>
           <Route path="/cambiar.contrasenia">
-            <Trabajando/>
+            <CambiarContraseniaForm/>
           </Route>
           <Route path="/recuperar.contrasenia">
             <RecuperarContraseniaForm/>
@@ -64,6 +66,7 @@ const Routes = () => {
           </Route>
           <Route path="/inicio">
             <Navbar/>
+            <Trabajando/>
           </Route>
           <Route path="/">
             <Login/>

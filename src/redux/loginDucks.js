@@ -37,9 +37,11 @@ export const iniciarSesion = (usuario,event) => async () => {
     if (response.status === 200) {
       localStorage.setItem('mitoken', data.access_token)
       window.location.href = "/inicio";
+    } else {
+      alert.miniAlert('Usuario no encontrado','error')
     }
   } catch (error) {
-    
+    console.log(error)
   }
 }
 
@@ -79,7 +81,7 @@ export const recuperarPassword = (correo) => async () => {
           alert.bigAlert('Correo no encontrado !!',`Ningun usuario con ( ${correo.correo} ) en el sistema`)
         break;
       case 500:
-          alert.bigAlert('Oops !!',`Algo anda mal`)
+          alert.bigAlert('Oops !! Correo no se encuentra',`Si afirma que el correo es correcto pruebe más tarde`)
         break;
       case 200:
           alert.bigAlert('Revise su correo !!','Puede cerrar esta pestaña', 'success')
@@ -87,6 +89,34 @@ export const recuperarPassword = (correo) => async () => {
       default:
           alert.miniAlert('Ahora no podemos atenderlo','error')
         break;
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export const cambiarPassword = (newPassword, token) => async () => {
+  try {
+    if (newPassword.password !== newPassword.repeat_password) {
+      alert.miniAlert('Error al repetir contraseña','error')
+    } else {
+      let formdata = new FormData()
+      formdata.append('token', token);
+      formdata.append('password', newPassword.password);
+      formdata.append('repeat-password', newPassword.repeat_password);
+      const response = await fetch('http://localhost:8090/api/usuarios/cambiar_contrasenia',{
+        method: 'POST',
+        body: formdata
+      })
+      const data = response.json()
+      switch (response.status) {
+        case 201:
+            alert.miniAlert('Listo ahora puede iniciar sesión !!','success')
+          break;
+        default:
+            alert.miniAlert('No se pudo cambiar la contraseña !!','error')
+          break;
+      }
     }
   } catch (error) {
     console.log(error)

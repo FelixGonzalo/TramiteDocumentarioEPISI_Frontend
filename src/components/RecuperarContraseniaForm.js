@@ -1,6 +1,7 @@
 import {useForm} from 'react-hook-form'
-import {useDispatch, useSelector} from 'react-redux'
+import {useDispatch} from 'react-redux'
 import {NavLink} from "react-router-dom"
+import {recuperarPassword} from '../redux/loginDucks'
 import iconLogin from './img/login.svg'
 import './login.css'
 
@@ -10,7 +11,7 @@ const RecuperarContraseniaForm = () => {
   const {register, errors, handleSubmit} = useForm()
 
   const onSubmit = async (data, event) => {
-    
+    dispatch(recuperarPassword(data))
   }
 
   return (

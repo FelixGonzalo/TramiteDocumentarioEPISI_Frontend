@@ -1,3 +1,4 @@
+import alert from '../helpers/alertas'
 
 const dataInicial = {
   array: []
@@ -61,4 +62,33 @@ export const verificarToken = () => async () => {
       method: 'GET',
       headers: headers
   })
+}
+
+export const recuperarPassword = (correo) => async () => {
+  try {
+    let formdata = new FormData();
+    formdata.append('correo', correo.correo);
+    const response = await fetch('http://localhost:8090/api/usuarios/forgot_password',{
+      method: 'POST',
+      body: formdata
+    })
+    const data = await response.json()
+    console.log(data)
+    switch (response.status) {
+      case 404:
+          alert.bigAlert('Correo no encontrado !!',`Ningun usuario con ( ${correo.correo} ) en el sistema`)
+        break;
+      case 500:
+          alert.bigAlert('Oops !!',`Algo anda mal`)
+        break;
+      case 200:
+          alert.bigAlert('Revise su correo !!','Puede cerrar esta pestaña', 'success')
+        break;
+      default:
+          alert.miniAlert('Ahora no podemos atenderlo','error')
+        break;
+    }
+  } catch (error) {
+    console.log(error)
+  }
 }

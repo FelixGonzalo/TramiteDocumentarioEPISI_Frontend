@@ -27,6 +27,14 @@ const miniAlert = (mensaje = "mensaje",icon = "info") => {
   })  
 }
 
+const bigAlert = (titulo = 'Verifique',mensaje = "mensaje",icon = "info") => {  
+  Swal.fire({
+    icon: icon,
+    title: titulo,
+    text: mensaje,
+  })
+}
+
 const alertOk = () => {  
   Swal.fire({
     icon: 'success',
@@ -37,7 +45,8 @@ const alertOk = () => {
 const alert = {
   alertError,
   alertOk,
-  miniAlert
+  miniAlert,
+  bigAlert
 }
 
 export default alert

@@ -73,3 +73,21 @@ export const deleteArchivo = (id) => async () => {
     alert.alertError(error)
   }
 }
+
+export const sendArchivoXcorreo = (data) => async () => {
+  try {
+    var myjson = {
+      "correos": [data.correo]
+    }
+    const response = await fetch('http://localhost:8090/api/archivos/enviar-archivo/' + data.idDocumento, {
+      method: 'POST',
+      body: JSON.stringify(myjson)
+    })
+    const data = response.json()
+    console.log(response.status)
+    console.log("----")
+    console.log(data)
+  } catch (error) {
+    console.log(error)
+  }
+}

@@ -74,11 +74,9 @@ export const recuperarPassword = (correo) => async () => {
       method: 'POST',
       body: formdata
     })
-    const data = await response.json()
-    console.log(data)
     switch (response.status) {
       case 404:
-          alert.bigAlert('Correo no encontrado !!',`Ningun usuario con ( ${correo.correo} ) en el sistema`)
+          alert.bigAlert('Correo sin permisos de acceso !!',`Ningun usuario con ( ${correo.correo} ) tiene acceso al sistema`)
         break;
       case 500:
           alert.bigAlert('Oops !! Correo no se encuentra',`Si afirma que el correo es correcto pruebe más tarde`)
@@ -91,6 +89,7 @@ export const recuperarPassword = (correo) => async () => {
         break;
     }
   } catch (error) {
+    console.log("errorrr")
     console.log(error)
   }
 }

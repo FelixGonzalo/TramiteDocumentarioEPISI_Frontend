@@ -90,22 +90,27 @@ export const deleteArchivo = (id) => async () => {
   }
 }
 
-export const sendArchivoXcorreo = (data) => async () => {
+export const sendArchivoXcorreo = (correos, idArchivo) => async () => {
   try {
     var myjson = {
-      "correos": [data.correo]
+      "correos": correos
     }
     let headers = new Headers();
     headers.append('Authorization', 'Bearer ' + localStorage.getItem('mitoken'));
-    const response = await fetch('http://localhost:8090/api/archivos/enviar-archivo/' + data.idDocumento, {
+    headers.append('Content-Type', 'application/json');
+    const response = await fetch('http://localhost:8090/api/archivos/enviar-archivo/' + idArchivo, {
       method: 'POST',
       headers: headers,
       body: JSON.stringify(myjson)
     })
-    const data = response.json()
-    console.log(response.status)
-    console.log("----")
-    console.log(data)
+    switch (response.status) {
+      case 200:
+          alert.bigAlert('Archivo enviado al correo: ', correos[0], 'success')
+        break;
+      default:
+          alert.miniAlert('Ahora no podemos atenderlo','warning')
+        break;
+    }
   } catch (error) {
     console.log(error)
   }

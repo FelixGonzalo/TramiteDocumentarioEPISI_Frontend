@@ -18,7 +18,12 @@ export default function archivoTiposReducer(state = dataInicial, action) {
 
 export const getArchivoTipos = () => async (dispatch, getState) => {
   try {
-    const response = await fetch('http://localhost:8090/api/archivos/tipoArchivos')
+    let headers = new Headers();
+    headers.append('Authorization', 'Bearer ' + localStorage.getItem('mitoken'));
+    const response = await fetch('http://localhost:8090/api/archivos/tipoArchivos', {
+      method: 'GET',
+      headers: headers
+    })
     const data = await response.json()
     dispatch({
       type: GET_ARCHIVOS_TIPOS,

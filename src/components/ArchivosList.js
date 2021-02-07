@@ -53,6 +53,7 @@ const ArchivosList = () => {
                   <td></td>
                   <td></td>
                   <td></td>
+                  <td></td>
                 </tr>
               )
           }

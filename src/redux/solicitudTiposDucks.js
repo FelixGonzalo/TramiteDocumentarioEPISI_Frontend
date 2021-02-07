@@ -18,7 +18,12 @@ export default function solicitudTiposReducer(state = dataInicial, action) {
 
 export const getSolicitudesTipos = () => async (dispatch, getState) => {
   try {
-    const response = await fetch('http://localhost:8090/api/solicitudes/tipo-solicitudes')
+    let headers = new Headers();
+    headers.append('Authorization', 'Bearer ' + localStorage.getItem('mitoken'));
+    const response = await fetch('http://localhost:8090/api/solicitudes/tipo-solicitudes', {
+      method: 'GET',
+      headers: headers
+    })
     const data = await response.json()
     dispatch({
       type: GET_SOLICITUD_TIPOS,

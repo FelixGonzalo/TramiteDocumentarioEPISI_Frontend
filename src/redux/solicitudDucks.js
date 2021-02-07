@@ -18,7 +18,12 @@ export default function solicitudReducer(state = dataInicial, action) {
 
 export const getSolicitudes = () => async (dispatch, getState) => {
   try {
-    const response = await fetch('http://localhost:8090/api/solicitudes')
+    let headers = new Headers();
+    headers.append('Authorization', 'Bearer ' + localStorage.getItem('mitoken'));
+    const response = await fetch('http://localhost:8090/api/solicitudes', {
+      method: 'GET',
+      headers: headers
+    })
     const data = await response.json()
     dispatch({
       type: GET_SOLICITUDES,
@@ -46,12 +51,12 @@ export const postSolicitud = (solicitud, event, solicitante,destinatario) => asy
           },
       ]
     }
-    console.log(myjson)
+    let headers = new Headers();
+    headers.append('Authorization', 'Bearer ' + localStorage.getItem('mitoken'));
+    headers.append('Content-Type', 'application/json');
     const response = await fetch('http://localhost:8090/api/solicitudes', {
       method: 'POST',
-      headers: {
-      'Content-Type': 'application/json'
-      },
+      headers: headers,
       body: JSON.stringify(myjson)
     })
     const data = await response.json()

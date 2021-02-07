@@ -43,7 +43,12 @@ export const getPersonas = () => async (dispatch) => {
 
 export const getPersonasDniRuc = (dni = -1) => async (dispatch) => {
   try {
-    const response = await fetch('http://localhost:8090/api/personas/buscar-por-dni/' +  dni)
+    let headers = new Headers();
+    headers.append('Authorization', 'Bearer ' + localStorage.getItem('mitoken'));
+    const response = await fetch('http://localhost:8090/api/personas/buscar-por-dni/' +  dni, {
+      method: 'GET',
+      headers: headers
+    })
     const data = await response.json()
     dispatch({
       type: GET_PERSONAS_DNIRUC,
@@ -57,7 +62,12 @@ export const getPersonasDniRuc = (dni = -1) => async (dispatch) => {
 
 export const getPersonasCodEstudiante = (codigoEstudiante = -1) => async (dispatch) => {
   try {
-    const response = await fetch('http://localhost:8090/api/personas/buscar-por-codEstudiante/' +  codigoEstudiante)
+    let headers = new Headers();
+    headers.append('Authorization', 'Bearer ' + localStorage.getItem('mitoken'));
+    const response = await fetch('http://localhost:8090/api/personas/buscar-por-codEstudiante/' +  codigoEstudiante, {
+      method: 'GET',
+      headers: headers
+    })
     const data = await response.json()
     dispatch({
       type: GET_PERSONAS_CODESTUDIANTE,
@@ -71,17 +81,25 @@ export const getPersonasCodEstudiante = (codigoEstudiante = -1) => async (dispat
 
 export const postPersona = (persona, event) => async () => {
   try {
-
-    const validarDniRuc = await fetch('http://localhost:8090/api/personas/buscar-por-dni/' +  persona.dniOruc)
+    let headers = new Headers();
+    headers.append('Authorization', 'Bearer ' + localStorage.getItem('mitoken'));
+    const validarDniRuc = await fetch('http://localhost:8090/api/personas/buscar-por-dni/' +  persona.dniOruc,{
+      method: 'GET',
+      headers: headers
+    })
     const DniRuc = await validarDniRuc.json()
     if (validarDniRuc.status === 200 && DniRuc.length > 0) {
       alert.miniAlert('Este DNI ya existe','warning')
     } else {
-      const validarCodEstudiante = await fetch('http://localhost:8090/api/personas/buscar-por-codEstudiante/' +  persona.codigoEstudiante)
+      const validarCodEstudiante = await fetch('http://localhost:8090/api/personas/buscar-por-codEstudiante/' +  persona.codigoEstudiante, {
+        method: 'GET',
+        headers: headers
+      })
       const CodEstudiante = await validarCodEstudiante.json()
       if (validarCodEstudiante.status === 200 && CodEstudiante.length > 0) {
         alert.miniAlert('Este Código de estudiante ya existe','warning')
       } else {
+        headers.append('Content-Type', 'application/json');
         var myjson = {
           "dniRuc": persona.dniOruc,
           "nombre": persona.nombre,
@@ -93,13 +111,18 @@ export const postPersona = (persona, event) => async () => {
         }
         const response = await fetch('http://localhost:8090/api/personas', {
           method: 'POST',
-          headers: {
-          'Content-Type': 'application/json'
-          },
+          headers: headers,
           body: JSON.stringify(myjson)
         })
-        // const data = await response.json()
-        valida.manejoErrorPost(response.status)
+        switch (response.status) {
+          case 201:
+              alert.bigAlert('Usuario registrado',persona.nombre, 'success')
+              event.target.reset()
+            break;
+          default:
+              alert.miniAlert('Ahora no podemos atenderlo','warning')
+            break;
+        }
       }
     }
   } catch (error) {

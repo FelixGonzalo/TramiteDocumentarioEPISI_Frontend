@@ -18,7 +18,12 @@ export default function puestoReducer(state = dataInicial, action){
 
 export const getPuestos = () => async (dispatch, getState) => {
   try {
-    const response = await fetch('http://localhost:8090/api/personas/puestos')
+    let headers = new Headers();
+    headers.append('Authorization', 'Bearer ' + localStorage.getItem('mitoken'));
+    const response = await fetch('http://localhost:8090/api/personas/puestos', {
+      method: 'GET',
+      headers: headers
+    })
     const data = await response.json()
     dispatch({
       type: GET_PUESTOS,

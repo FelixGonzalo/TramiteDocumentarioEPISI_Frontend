@@ -48,7 +48,11 @@ export const getArchivosSinSolicitud = () => async (dispatch, getState) => {
       type: GET_ARCHIVOS,
       payload: data
     })
-    valida.manejoErrorGet(response.status, data)
+    if (response.status !== 200) {
+      alert.miniAlert(response.status + ': Error al conectar con el servidor','warning')
+    } else if (data.length === 0) {
+      alert.miniAlert('No hay archivos Registrados','warning')
+    }
   } catch (error) {
     alert.miniAlert(error,'warning')
   }
@@ -60,14 +64,19 @@ export const postArchivo = (archivo, event) => async (dispatch, getState) => {
     headers.append('Authorization', 'Bearer ' + localStorage.getItem('mitoken'));
     let formdata = new FormData();
     formdata.append('documento', archivo.documento[0]);
-    formdata.append('descripcion', archivo.descripcion);
+    formdata.append('descripcion', archivo.descripcion === '' ? ' ' : archivo.descripcion);
     formdata.append('tipoArchivo.id', archivo.tipoArchivo);
     const response = await fetch('http://localhost:8090/api/archivos/crear-con-file', {
       method: 'POST',
       headers: headers,
       body: formdata
     })
-    valida.manejoMiniErrorPost(response.status)
+    if (response.status !== 201) {
+      alert.miniAlert(`${response.status}: No se puede registrar`,'error')
+    } else {
+      alert.miniAlert('archivo agregado !','success')
+      event.target.reset()
+    }
   } catch (error) {
     console.log(error)
     alert.alertError(error)

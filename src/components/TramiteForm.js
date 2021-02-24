@@ -7,6 +7,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import {getSolicitudesTipos} from '../redux/solicitudTiposDucks'
 import {getPersonas} from '../redux/personaDucks'
 import {postSolicitud} from '../redux/solicitudDucks'
+import {getArchivosSinSolicitud} from '../redux/archivoDucks'
 
 
 const TramiteForm = () => {
@@ -14,6 +15,7 @@ const TramiteForm = () => {
   const dispatch = useDispatch()
   const tiposTramite = useSelector(store => store.solicitudTipos.array)
   const personas = useSelector(store => store.personas.array)
+  const archivos = useSelector(store => store.archivos.array)
 
   const {register, errors, handleSubmit} = useForm()
 
@@ -50,7 +52,10 @@ const TramiteForm = () => {
   }
 
   const onSubmit = (data, event) => {
-    dispatch(postSolicitud(data, event,solicitante, destinatario))
+    dispatch(getArchivosSinSolicitud())
+    if (archivos.length > 0 ) {
+      dispatch(postSolicitud(data, event,solicitante, destinatario))
+    }
   }
 
   const checkKeyDown = (e) => {

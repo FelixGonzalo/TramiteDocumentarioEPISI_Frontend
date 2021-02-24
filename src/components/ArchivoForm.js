@@ -17,6 +17,7 @@ const ArchivoForm = () => {
   }, [])
 
   const onSubmit = (data, event) => {
+    console.log("descripcion: "+data.descripcion)
     dispatch(postArchivo(data, event))
   }
  
@@ -42,11 +43,7 @@ const ArchivoForm = () => {
           type="text"
           name="descripcion"
           className="input-default"
-          ref={
-            register({
-              required : {value: true, message: 'descripción obligatorio'},
-            })
-          }
+          ref={register()}
         />
       </label>
       <span className="input-error">

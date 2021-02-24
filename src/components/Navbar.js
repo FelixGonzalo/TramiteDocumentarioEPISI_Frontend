@@ -1,8 +1,9 @@
 import {NavLink} from "react-router-dom"
 import {useDispatch} from 'react-redux'
 import {cerrarSesion} from '../redux/loginDucks'
-
+import {useEffect, useState} from 'react'
 import './navbar.css'
+import iconUser from './img/carnet_estudiante.svg'
 import iconInicio from './img/hogar.svg'
 
 const Navbar = () => {
@@ -14,8 +15,19 @@ const Navbar = () => {
     // mejorar validacion con intervencion del servidor
   }
 
+  const [usuarioActual, setUsuarioActual] = useState(null)
+
+  useEffect(() => {
+    setUsuarioActual(JSON.parse(window.atob(localStorage.getItem('mitoken').split('.')[1])))
+    console.log(usuarioActual)
+  }, [])
+
   return (
     <nav className="navbar">
+      <div class="usuario-actual">
+        <img src={iconUser} alt="" height="20px"/>
+        <span>{usuarioActual !== null && (usuarioActual.user_name)}</span>
+      </div>
       <NavLink to="/inicio" exact className="navbar-option">
         <img src={iconInicio} alt="inicio" height="25px"/>
       </NavLink>

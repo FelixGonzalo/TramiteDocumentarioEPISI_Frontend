@@ -66,7 +66,7 @@ const Routes = () => {
           </Route>
           <Route path="/inicio">
             <Navbar/>
-            <Trabajando/>
+            <Trabajando mensaje="LISTOS PARA TRABAJAR" />
           </Route>
           <Route path="/">
             <Login/>

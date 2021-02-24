@@ -4,11 +4,13 @@
   font-weight: bold;
 }
 
-.Registrado {
+.Registrado,
+.Proceso {
   color: rgb(86, 85, 172);
 }
 
-.Aceptado {
+.Aceptado,
+.Aprobado {
   color: rgb(52, 155, 66);
 }
 

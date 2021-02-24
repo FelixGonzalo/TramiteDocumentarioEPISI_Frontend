@@ -35,7 +35,7 @@ const TramitesList = () => {
 
      data.estadoSolicitudes.length > 0 ? 
       data.estadoSolicitudes.map((item, index) => (
-        listaEstado += `<tr>
+        listaEstado += `<tr class=${item.estado.nombre}>
           <td>${index+1 < 10 ? "0"+(index+1) : index+1}</td>
           <td>${item.estado.nombre}</td>
           <td>${item.fecha}</td>

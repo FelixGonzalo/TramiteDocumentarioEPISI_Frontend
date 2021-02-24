@@ -27,7 +27,7 @@ export const getSolicitudes = () => async (dispatch, getState) => {
     const data = await response.json()
     dispatch({
       type: GET_SOLICITUDES,
-      payload: data
+      payload: data.reverse()
     })
     valida.manejoErrorGet(response.status, data)
   } catch (error) {

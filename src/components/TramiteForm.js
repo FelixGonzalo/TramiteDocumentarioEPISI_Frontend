@@ -41,12 +41,12 @@ const TramiteForm = () => {
 
   const buscarSolicitante = (e) => {
     setSolicitante(buscarPersona(e))
-    if (e.code === 'Enter') e.target.value = solicitante.nombre;
+    if (e.code === 'Enter' && solicitante !== null && solicitante !== undefined) e.target.value = solicitante.nombre;
   }
 
   const buscarDestinatario = (e) => {
     setDestinatario(buscarPersona(e))
-    if (e.code === 'Enter') e.target.value = destinatario.nombre;
+    if (e.code === 'Enter' && destinatario !== null && destinatario !== undefined ) e.target.value = destinatario.nombre;
   }
 
   const onSubmit = (data, event) => {
@@ -83,7 +83,7 @@ const TramiteForm = () => {
       </label>
       <p className="default-subtitle">Datos del Solicitante</p>
       <input
-          onKeyDown={(e) => buscarSolicitante(e)}
+          onKeyDown={e => buscarSolicitante(e)}
           type="search"
           name="solicitante"
           placeholder="Nombre de solicitante"
@@ -100,7 +100,7 @@ const TramiteForm = () => {
         }
       </span>
       {
-        solicitante !== null ? (
+        solicitante !== null && solicitante !== undefined ? (
           <ul className="info-persona">
           <li><span className="persona-dato">{solicitante.puesto.nombre}:</span> {solicitante.nombre}</li>
           </ul>
@@ -108,7 +108,7 @@ const TramiteForm = () => {
       }
       <p className="default-subtitle">Datos del destinatario</p>
       <input
-        onKeyDown={buscarDestinatario}
+        onKeyDown={(e) => buscarDestinatario(e)}
         type="search"
         name="destinatario"
         placeholder="Nombre de destinatario"
@@ -125,7 +125,7 @@ const TramiteForm = () => {
         }
       </span>
       {
-        destinatario !== null ? (
+        destinatario !== null && destinatario !== undefined ? (
           <ul className="info-persona">
           <li><span className="persona-dato">{destinatario.puesto.nombre}:</span> {destinatario.nombre}</li>
           </ul>

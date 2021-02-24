@@ -99,29 +99,37 @@ export const postPersona = (persona, event) => async () => {
       if (validarCodEstudiante.status === 200 && CodEstudiante.length > 0) {
         alert.miniAlert('Este Código de estudiante ya existe','warning')
       } else {
-        headers.append('Content-Type', 'application/json');
-        var myjson = {
-          "dniRuc": persona.dniOruc,
-          "nombre": persona.nombre,
-          "correo": persona.correo,
-          "codEstudiante": persona.codigoEstudiante,
-          "puesto": {
-              "id": Number(persona.puesto),
-          }
-        }
-        const response = await fetch('http://localhost:8090/api/personas', {
-          method: 'POST',
-          headers: headers,
-          body: JSON.stringify(myjson)
+        const validarCorreo = await fetch('http://localhost:8090/api/personas/buscar-por-email/' +  persona.correo, {
+          method: 'GET',
+          headers: headers
         })
-        switch (response.status) {
-          case 201:
-              alert.bigAlert('Usuario registrado',persona.nombre, 'success')
-              event.target.reset()
-            break;
-          default:
-              alert.miniAlert('Ahora no podemos atenderlo','warning')
-            break;
+        if (validarCorreo.status === 200) {
+          alert.miniAlert('Este Correo ya existe','warning')
+        } else {
+          headers.append('Content-Type', 'application/json');
+          var myjson = {
+            "dniRuc": persona.dniOruc,
+            "nombre": persona.nombre,
+            "correo": persona.correo,
+            "codEstudiante": persona.codigoEstudiante,
+            "puesto": {
+                "id": Number(persona.puesto),
+            }
+          }
+          const response = await fetch('http://localhost:8090/api/personas', {
+            method: 'POST',
+            headers: headers,
+            body: JSON.stringify(myjson)
+          })
+          switch (response.status) {
+            case 201:
+                alert.bigAlert('Usuario registrado',persona.nombre, 'success')
+                event.target.reset()
+              break;
+            default:
+                alert.miniAlert('Ahora no podemos atenderlo','warning')
+              break;
+          }
         }
       }
     }

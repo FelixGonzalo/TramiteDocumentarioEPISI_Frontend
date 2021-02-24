@@ -117,6 +117,7 @@ const TramitesList = () => {
           <tr>
             <th>#</th>
             <th>Solicitante</th>
+            <th>Destinatario</th>
             <th>Tipo de trámite</th>
             <th>Estado de solicitud</th>
             <th></th>
@@ -129,6 +130,7 @@ const TramitesList = () => {
                 <tr key={item.id}>
                   <td>{index+1 < 10 ? "0"+(index+1) : index+1}</td>
                   <td><img src={item.personaEmisor.puesto.id === 1 ? iconEstudiante : iconPersona} alt="" height="18px"/> {item.personaEmisor.nombre}</td>
+                  <td><img src={item.personasReceptoras[0].puesto.id === 1 ? iconEstudiante : iconPersona} alt="" height="18px"/> {item.personasReceptoras[0].nombre}</td>
                   <td>{item.tipoSolicitud.nombre}</td>
                   <td>
                     <span className={ "estado-tramite "+ item.estadoSolicitudes[item.estadoSolicitudes.length-1].estado.nombre}>
@@ -140,6 +142,7 @@ const TramitesList = () => {
                 </tr>
               )) : (
                 <tr>
+                  <td></td>
                   <td></td>
                   <td></td>
                   <td></td>

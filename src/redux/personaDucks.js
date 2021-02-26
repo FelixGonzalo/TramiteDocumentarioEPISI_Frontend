@@ -110,6 +110,7 @@ export const postPersona = (persona, event) => async () => {
           var myjson = {
             "dniRuc": persona.dniOruc,
             "nombre": persona.nombre,
+            "apellidos": persona.apellidos,
             "correo": persona.correo,
             "codEstudiante": persona.codigoEstudiante,
             "puesto": {
@@ -127,7 +128,7 @@ export const postPersona = (persona, event) => async () => {
                 event.target.reset()
               break;
             default:
-                alert.miniAlert('Ahora no podemos atenderlo','warning')
+                alert.miniAlert('Error al registrar persona','warning')
               break;
           }
         }

@@ -17,7 +17,6 @@ const ArchivoForm = () => {
   }, [])
 
   const onSubmit = (data, event) => {
-    console.log("descripcion: "+data.descripcion)
     dispatch(postArchivo(data, event))
   }
  

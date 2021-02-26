@@ -65,6 +65,24 @@ const PersonaForm = () => {
           errors?.nombre?.message
         }
       </span>
+      <label className="label-default"> Apellidos
+        <input
+          type="text"
+          name="apellidos"
+          className="input-default"
+          ref={
+            register({
+              required : {value: true, message: 'apellidos obligatorio'},
+              pattern : {value: /^[A-Za-zÀ-ÿ\s]+$/i, message: 'apellidos no válido' }
+            })
+          }
+        />
+      </label>
+      <span className="input-error">
+        {
+          errors?.apellidos?.message
+        }
+      </span>
       <label className="label-default"> Correo
         <input
           type="text"

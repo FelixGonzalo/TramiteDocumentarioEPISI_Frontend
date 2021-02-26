@@ -21,7 +21,10 @@ const TramitesList = () => {
         listaDestinatarios += `<tr>
           <td>${index+1 < 10 ? "0"+(index+1) : index+1}</td>
           <td>${item.puesto.nombre}</td>
-          <td>${item.nombre}</td>
+          <td>
+            ${item.apellidos}
+            ${item.nombre}
+          </td>
           <td>${item.correo}</td>
           <td>${item.dniRuc}</td>
         </tr>`
@@ -61,7 +64,7 @@ const TramitesList = () => {
             <p>Descripción: ${data.descripcion} </p> 
 
             <p class="tramite-subtitle">Datos del Solicitante: </p>
-            <p>${data.personaEmisor.puesto.nombre}: ${data.personaEmisor.nombre} </p> 
+            <p>${data.personaEmisor.puesto.nombre}: ${data.personaEmisor.apellidos} ${data.personaEmisor.nombre} </p> 
             <p>Correo:  ${data.personaEmisor.correo} </p>
             <p>Dni/Ruc:  ${data.personaEmisor.dniRuc} </p>
             <p>Cod Estudiante:  ${data.personaEmisor.codEstudiante} </p>
@@ -129,8 +132,16 @@ const TramitesList = () => {
               tramites.map((item, index) => (
                 <tr key={item.id}>
                   <td>{index+1 < 10 ? "0"+(index+1) : index+1}</td>
-                  <td><img src={item.personaEmisor.puesto.id === 1 ? iconEstudiante : iconPersona} alt="" height="18px"/> {item.personaEmisor.nombre}</td>
-                  <td><img src={item.personasReceptoras[0].puesto.id === 1 ? iconEstudiante : iconPersona} alt="" height="18px"/> {item.personasReceptoras[0].nombre}</td>
+                  <td>
+                    <img src={item.personaEmisor.puesto.id === 1 ? iconEstudiante : iconPersona} alt="" height="18px"/>
+                    <span className="apellidos">{' '+item.personaEmisor.apellidos} </span>
+                    {' '+item.personaEmisor.nombre}
+                  </td>
+                  <td className="apellidoYnombre">
+                    <img src={item.personasReceptoras[0].puesto.id === 1 ? iconEstudiante : iconPersona} alt="" height="18px"/>
+                    <span className="apellidos">{item.personasReceptoras[0].apellidos}</span>
+                    {' '+item.personasReceptoras[0].nombre}
+                  </td>
                   <td>{item.tipoSolicitud.nombre}</td>
                   <td>
                     <span className={ "estado-tramite "+ item.estadoSolicitudes[item.estadoSolicitudes.length-1].estado.nombre}>

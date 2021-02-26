@@ -1,6 +1,6 @@
 import {useForm} from 'react-hook-form'
 import {NavLink} from "react-router-dom"
-import {useDispatch, useSelector} from 'react-redux'
+import {useDispatch} from 'react-redux'
 import {iniciarSesion} from '../redux/loginDucks'
 import './login.css'
 import iconLogin from './img/login.svg'
@@ -10,8 +10,8 @@ const Login = () => {
   const dispatch = useDispatch()
   const {register, errors, handleSubmit} = useForm()
 
-  const onSubmit = async (data, event) => {
-    dispatch(iniciarSesion(data,event))
+  const onSubmit = async (data) => {
+    dispatch(iniciarSesion(data))
   }
 
   return (

@@ -36,8 +36,14 @@ const PersonasList = () => {
               personas.map((item, index) => (
                 <tr key={item.id}>
                   <td>{index+1 < 10 ? "0"+(index+1) : index+1}</td>
-                  <td>{item.nombre}</td>
-                  <td><img src={item.puesto.id === 1 ? iconCarnetEstudiante : item.dniRuc.length === 8 ? iconDni : iconEmpresa} alt="" height="18px" />{item.puesto.id === 1 ?  " "+ item.codEstudiante : " "+ item.dniRuc}</td>
+                  <td>
+                    <span className="apellidos">{item.apellidos}</span>
+                    {' '+item.nombre}
+                  </td>
+                  <td>
+                    <img src={item.puesto.id === 1 ? iconCarnetEstudiante : item.dniRuc.length === 8 ? iconDni : iconEmpresa} alt="" height="18px" />
+                    {item.puesto.id === 1 ?  " "+ item.codEstudiante : " "+ item.dniRuc}
+                  </td>
                   <td>{item.correo}</td>
                   <td><img src={item.puesto.id === 1 ? iconEstudiante : iconPersona} alt="" height="18px" /> {item.puesto.nombre}</td>
                 </tr>

@@ -15,7 +15,7 @@ export default function loginReducer(state = dataInicial, action){
   }
 }
 
-export const iniciarSesion = (usuario,event) => async () => {
+export const iniciarSesion = (usuario) => async () => {
   try {
     let username = 'frontendapp';
     let password = '12345';
@@ -50,22 +50,22 @@ export const cerrarSesion = () => async () => {
   localStorage.removeItem('mitoken')
 }
 
-export const verificarSesion = () => async (dispatch) => {
-  try {
-    console.log()
-  } catch (error) {
-    alert.miniAlert(error,'warning')
-  }
-}
+// export const verificarSesion = () => async (dispatch) => {
+//   try {
+//     console.log()
+//   } catch (error) {
+//     alert.miniAlert(error,'warning')
+//   }
+// }
 
-export const verificarToken = () => async () => {
-  let headers = new Headers();
-  headers.append('Authorization', 'Bearer ' + localStorage.getItem('mitoken'));
-  const response = await fetch('http://localhost:8090/verificarSesion', {
-      method: 'GET',
-      headers: headers
-  })
-}
+// export const verificarToken = () => async () => {
+//   let headers = new Headers();
+//   headers.append('Authorization', 'Bearer ' + localStorage.getItem('mitoken'));
+//   const response = await fetch('http://localhost:8090/verificarSesion', {
+//       method: 'GET',
+//       headers: headers
+//   })
+// }
 
 export const recuperarPassword = (correo) => async () => {
   try {
@@ -108,7 +108,7 @@ export const cambiarPassword = (newPassword, token) => async () => {
         method: 'POST',
         body: formdata
       })
-      const data = response.json()
+      // const data = response.json()
       switch (response.status) {
         case 201:
             alert.miniAlert('Listo ahora puede iniciar sesión !!','success')

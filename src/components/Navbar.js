@@ -19,12 +19,11 @@ const Navbar = () => {
 
   useEffect(() => {
     setUsuarioActual(JSON.parse(window.atob(localStorage.getItem('mitoken').split('.')[1])))
-    console.log(usuarioActual)
   }, [])
 
   return (
     <nav className="navbar">
-      <div class="usuario-actual">
+      <div className="usuario-actual">
         <img src={iconUser} alt="" height="20px"/>
         <span>{usuarioActual !== null && (usuarioActual.user_name)}</span>
       </div>

@@ -15,7 +15,7 @@ export default function loginReducer(state = dataInicial, action){
   }
 }
 
-export const iniciarSesion = (usuario) => async () => {
+export const iniciarSesion = (usuario, rutaDestino) => async () => {
   try {
     let username = 'frontendapp';
     let password = '12345';
@@ -37,7 +37,7 @@ export const iniciarSesion = (usuario) => async () => {
     if (response.status === 200) {
       localStorage.setItem('mitoken', data.access_token)
       alert.bigAlert('Listos para trabajar','Usuario: ' + usuario.username,'success')
-      setTimeout(() => window.location.href = "/inicio" ,1500);
+      rutaDestino.push('/inicio')
     } else {
       alert.miniAlert('Usuario no encontrado','error')
     }

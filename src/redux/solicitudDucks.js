@@ -33,7 +33,7 @@ export const getSolicitudes = () => async (dispatch, getState) => {
   } catch (error) {
     alert.miniAlert(error,'warning')
   }
-}
+} // Solicitudes que no estan archivadas
 
 export const postSolicitud = (solicitud, event, solicitante,destinatario) => async (dispatch, getState) => {
   try {

@@ -2,16 +2,19 @@ import {useForm} from 'react-hook-form'
 import {NavLink} from "react-router-dom"
 import {useDispatch} from 'react-redux'
 import {iniciarSesion} from '../redux/loginDucks'
+import {withRouter} from 'react-router-dom'
+
 import './login.css'
 import iconLogin from './img/login.svg'
 
-const Login = () => {
+const Login = (props) => {
 
   const dispatch = useDispatch()
   const {register, errors, handleSubmit} = useForm()
 
   const onSubmit = async (data) => {
-    dispatch(iniciarSesion(data))
+    // props.history.push('/admin')
+    dispatch(iniciarSesion(data, props.history))
   }
 
   return (
@@ -67,4 +70,4 @@ const Login = () => {
   );
 }
  
-export default Login;
+export default withRouter(Login);

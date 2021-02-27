@@ -4,6 +4,7 @@ import './tramitesList.css'
 import iconAbrir from './img/abrir_documento.svg'
 import iconEstudiante from './img/estudiante.svg'
 import iconPersona from './img/persona.svg'
+import iconVer from './img/ver.svg'
 
 import {useDispatch, useSelector} from 'react-redux'
 import {getSolicitudes} from '../redux/solicitudDucks'
@@ -16,6 +17,7 @@ const TramitesList = () => {
   const consultarTramite = (data) => {
     var listaDestinatarios = ''
     var listaEstado = ''
+    var listaArchivos = ''
     data.personasReceptoras.length > 0 ? 
       data.personasReceptoras.map((item, index) => (
         listaDestinatarios += `<tr>
@@ -50,6 +52,25 @@ const TramitesList = () => {
           <td></td>
           <td></td>
         </tr>`
+      
+      data.archivos.length > 0 ? 
+      data.archivos.map((item, index) => (
+        listaArchivos += `<tr>
+          <td>${index+1 < 10 ? "0"+(index+1) : index+1}</td>
+          <td>${item.tipoArchivo.nombre}</td>
+          <td>${item.descripcion}</td>
+          <td>
+            <a href="http://localhost:8090/api/archivos/ver-archivo/${item.id}/" target="_blank" rel="noreferrer">
+              <img src=${iconVer} alt="" width="25px"/>
+            </a>
+          </td>
+        </tr>`
+      )) : listaArchivos = `<tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>`
                 
     Swal.fire({
       showCloseButton: true,
@@ -62,7 +83,21 @@ const TramitesList = () => {
             <p class="tramite-subtitle">Datos generales: </p>
             <p>Tipo: ${data.tipoSolicitud.nombre} </p>
             <p>Descripción: ${data.descripcion} </p> 
-
+            <div class="table-responsive">
+              <table class="">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Estado</th>
+                    <th>fecha</th>
+                    <th>descripcion</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${listaEstado}
+                </tbody>
+              </table>
+            </div>
             <p class="tramite-subtitle">Datos del Solicitante: </p>
             <p>${data.personaEmisor.puesto.nombre}: ${data.personaEmisor.apellidos} ${data.personaEmisor.nombre} </p> 
             <p>Correo:  ${data.personaEmisor.correo} </p>
@@ -86,22 +121,23 @@ const TramitesList = () => {
                 </tbody>
               </table>
             </div>
-            <p class="tramite-subtitle">Datos del Estado: </p>
+            <p class="tramite-subtitle">Archivos: </p>
             <div class="table-responsive">
               <table class="">
                 <thead>
                   <tr>
                     <th>#</th>
-                    <th>Estado</th>
-                    <th>fecha</th>
-                    <th>descripcion</th>
+                    <th>Tipo</th>
+                    <th>Descripción</th>
+                    <th>operaciones</th>
                   </tr>
                 </thead>
                 <tbody>
-                  ${listaEstado}
+                  ${listaArchivos}
                 </tbody>
               </table>
             </div>
+            
           <div/>
         `,
       footer: "Sistema de EPISI"

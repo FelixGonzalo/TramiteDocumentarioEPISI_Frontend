@@ -71,6 +71,11 @@ export const postArchivo = (archivo, event) => async (dispatch, getState) => {
       headers: headers,
       body: formdata
     })
+    const data = await response.json()
+    console.log('respuesta de postArchivo')
+    console.log(data)
+    console.log('respuesta de postArchivo respues')
+    console.log(response)
     if (response.status !== 201) {
       alert.miniAlert(`${response.status}: No se puede registrar`,'error')
     } else {
@@ -91,8 +96,16 @@ export const deleteArchivo = (id) => async () => {
       method: 'DELETE',
       headers: headers
     })
-    console.log(response.status)
-    valida.manejoMiniErrorDelete(response.status)
+    const data = await response.json()
+    console.log('respuesta de deleteArchivo')
+    console.log(data)
+    console.log('respuesta de deleteArchivo respues')
+    console.log(response)
+    if (response.status !== 200) {
+      alert.miniAlert(`${response.status}: Error al eliminar archivo`,'error')
+    } else {
+      alert.miniAlert('archivo eliminado !','success')
+    }
   } catch (error) {
     console.log(error)
     alert.alertError(error)

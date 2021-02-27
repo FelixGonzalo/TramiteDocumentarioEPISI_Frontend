@@ -16,11 +16,30 @@ export default function puestoReducer(state = dataInicial, action){
   }
 }
 
-export const getPuestos = () => async (dispatch, getState) => {
+// export const getPuestos = () => async (dispatch, getState) => {
+//   try {
+//     let headers = new Headers();
+//     headers.append('Authorization', 'Bearer ' + localStorage.getItem('mitoken'));
+//     const response = await fetch('http://localhost:8090/api/personas/puestos', {
+//       method: 'GET',
+//       headers: headers
+//     })
+//     const data = await response.json()
+//     dispatch({
+//       type: GET_PUESTOS,
+//       payload: data
+//     })
+//     valida.manejoErrorGet(response.status, data)
+//   } catch (error) {
+//     alert.miniAlert(error,'warning')
+//   }
+// }
+
+export const getPuestosToRegistrar = () => async (dispatch, getState) => {
   try {
     let headers = new Headers();
     headers.append('Authorization', 'Bearer ' + localStorage.getItem('mitoken'));
-    const response = await fetch('http://localhost:8090/api/personas/puestos', {
+    const response = await fetch('http://localhost:8090/api/personas/puestos-registro', {
       method: 'GET',
       headers: headers
     })

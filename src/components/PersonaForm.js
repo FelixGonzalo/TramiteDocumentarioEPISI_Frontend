@@ -3,7 +3,7 @@ import {useEffect} from 'react'
 import './defaultForm.css'
 
 import {useDispatch, useSelector} from 'react-redux'
-import {getPuestos} from '../redux/personaPuestosDucks'
+import {getPuestosToRegistrar} from '../redux/personaPuestosDucks'
 import {postPersona} from '../redux/personaDucks'
 
 const PersonaForm = () => {
@@ -14,7 +14,7 @@ const PersonaForm = () => {
   const {register, errors, handleSubmit} = useForm()
 
   useEffect(()=>{
-    dispatch(getPuestos())
+    dispatch(getPuestosToRegistrar())
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 

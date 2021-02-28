@@ -3,6 +3,7 @@ import './tramitesList.css'
 import iconAbrir from './img/abrir_documento.svg'
 import iconEstudiante from './img/estudiante.svg'
 import iconPersona from './img/persona.svg'
+import iconPDF from './img/pdf.svg'
 
 import {useDispatch, useSelector} from 'react-redux'
 import {getSolicitudes} from '../redux/solicitudDucks'
@@ -67,7 +68,10 @@ const TramitesList = () => {
                         </span>
                       <span className="fecha-tramite">{item.estadoSolicitudes[item.estadoSolicitudes.length-1].fecha}</span>
                     </td>
-                    <td><button onClick={() => abrirConsulta(item)}><img src={iconAbrir} alt="Abrir documento" height= "20px"/></button></td>
+                    <td>
+                      <button className="botonToicon" onClick={() => abrirConsulta(item)}><img src={iconAbrir} alt="Abrir documento" height= "20px"/></button>
+                      <a className="botonToicon" href={'http://localhost:8090/api/solicitudes/exportar/' + item.id + '/'} target="_blank" rel="noreferrer"><img src={iconPDF} alt="generar PDF" height= "20px"/></a>
+                    </td>
                   </tr>
                 )) : (
                   <tr>

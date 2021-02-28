@@ -86,3 +86,10 @@ code {
   background: #c96a7a;
   border-radius: 20px;
 }
+
+.botonToicon {
+  background: none;
+  outline: none;
+  border: none;
+  cursor: pointer;
+}

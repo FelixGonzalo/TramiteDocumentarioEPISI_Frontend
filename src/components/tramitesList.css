@@ -39,9 +39,43 @@ tbody td {
 /* Consulta del tramite */
 
 .container-tramite {
-  text-align: left;
+  text-align: center;
+}
+
+.tramite-title {
+  color: var(--cred);
 }
 
 .tramite-subtitle {
   font-weight: bold;
+  color: var(--cred);
+}
+
+.btnCerrarConsulta {
+  padding: 5px;
+  color: var(--cred);
+  background: none;
+  border: 2px solid var(--cred);
+  border-radius: 4px;
+  outline: none;
+  margin: auto;
+  display: inline-block;
+}
+
+.btnCerrarConsulta:hover {
+  background: var(--cred);
+  color: var(--cclear);
+}
+
+.botonToicon {
+  background: none;
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* Ocultar lista de tramite*/
+
+.lista-tramites {
+  display: none;
 }

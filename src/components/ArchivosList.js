@@ -1,7 +1,6 @@
 import {useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
-import {getArchivosSinSolicitud, deleteArchivo,sendArchivoXcorreo} from '../redux/archivoDucks'
-import Swal from 'sweetalert2'
+import {getArchivosSinSolicitud, deleteArchivo} from '../redux/archivoDucks'
 import iconActualizar from './img/actualizar_doc.svg'
 import iconVer from './img/ver.svg'
 import iconEliminar from './img/eliminar.svg'
@@ -15,21 +14,6 @@ const ArchivosList = () => {
     dispatch(getArchivosSinSolicitud())
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
-
-  const enviarArchivoXcorreo = async (idArchivo) => {
-    console.log("imra:" + idArchivo)
-    
-    const { value: email } = await Swal.fire({
-      input: 'email',
-      inputLabel: 'Enviar de documento a',
-      inputPlaceholder: 'Correo destino'
-    })
-    if (email) {
-      let arrayCorreo = []
-      arrayCorreo.push(email)
-      dispatch(sendArchivoXcorreo(arrayCorreo,idArchivo))
-    }
-  }
 
   return (
     <div className="table-responsive table-small">
@@ -59,11 +43,8 @@ const ArchivosList = () => {
                     <a href={`http://localhost:8090/api/archivos/ver-archivo/${item.id}/`} target="_blank" rel="noreferrer">
                       <img src={iconVer} alt="" width="25px"/>
                     </a>
-                    <button onClick={(e)=> dispatch(deleteArchivo(item.id))}>
+                    <button className="botonToicon" onClick={(e)=> dispatch(deleteArchivo(item.id))}>
                       <img src={iconEliminar} alt="" width="25px"/>
-                    </button>
-                    <button onClick={(e)=> enviarArchivoXcorreo(item.id)}>
-                      enviar
                     </button>
                   </td>
                 </tr>

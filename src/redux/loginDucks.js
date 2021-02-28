@@ -33,13 +33,12 @@ export const iniciarSesion = (usuario, rutaDestino) => async () => {
       body: formdata
     })
     const data = await response.json()
-
     if (response.status === 200) {
       localStorage.setItem('mitoken', data.access_token)
       alert.bigAlert('Listos para trabajar','Usuario: ' + usuario.username,'success')
       rutaDestino.push('/inicio')
     } else {
-      alert.miniAlert('Usuario no encontrado','error')
+      alert.miniAlert('Usuario o contraseña incorrecto','error')
     }
   } catch (error) {
     console.log(error)
@@ -95,7 +94,7 @@ export const recuperarPassword = (correo) => async () => {
   }
 }
 
-export const cambiarPassword = (newPassword, token) => async () => {
+export const cambiarPassword = (newPassword, token, rutaDestino) => async () => {
   try {
     if (newPassword.password !== newPassword.repeat_password) {
       alert.miniAlert('Error al repetir contraseña','error')
@@ -108,10 +107,10 @@ export const cambiarPassword = (newPassword, token) => async () => {
         method: 'POST',
         body: formdata
       })
-      // const data = response.json()
       switch (response.status) {
         case 201:
             alert.miniAlert('Listo ahora puede iniciar sesión !!','success')
+            rutaDestino.push('/login')
           break;
         default:
             alert.miniAlert('No se pudo cambiar la contraseña !!','error')

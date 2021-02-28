@@ -3,16 +3,17 @@ import {useForm} from 'react-hook-form'
 import {useDispatch} from 'react-redux'
 import {NavLink} from "react-router-dom"
 import {cambiarPassword} from '../redux/loginDucks'
+import {withRouter} from 'react-router-dom'
 import './login.css'
 
-const CambiarContraseniaForm = () => {
+const CambiarContraseniaForm = (props) => {
 
   const dispatch = useDispatch()
   const {register, errors, handleSubmit} = useForm()
 
   const onSubmit = async (data, event) => {
     let token = window.location.href.split('token=')
-    dispatch(cambiarPassword(data, token[1]))
+    dispatch(cambiarPassword(data, token[1], props.history))
   }
 
   return (
@@ -27,7 +28,9 @@ const CambiarContraseniaForm = () => {
               className="login-input"
               ref={
                 register({
-                  required : {value: true, message: 'contraseña obligatorio'}
+                  required : {value: true, message: 'contraseña obligatorio'},
+                  pattern: {value: /(?=.*[A-Z])(?=.*[0-9])(?=.*[a-z]).{8,}/, message:'debe tener 1 mayuscula y 1 número'},
+                  minLength: {value:8, message: 'debe teber 8 caracteres mínimo'}
                 })
               }
             />
@@ -44,7 +47,9 @@ const CambiarContraseniaForm = () => {
               className="login-input"
               ref={
                 register({
-                  required : {value: true, message: 'repetir contraseña obligatorio'}
+                  required : {value: true, message: 'repetir contraseña obligatorio'},
+                  pattern: {value: /(?=.*[A-Z])(?=.*[0-9])(?=.*[a-z]).{8,}/, message:'debe tener 1 mayuscula y 1 número'},
+                  minLength: {value:8, message: 'debe teber 8 caracteres mínimo'}
                 })
               }
             />
@@ -58,6 +63,8 @@ const CambiarContraseniaForm = () => {
         </form>
       </div>
       <div className="login-footer">
+        Todo cambio debe ser a través de link por correo y
+        <br/>el link solo le sirve para un cambio
         <NavLink to="/login" className="login-footer-link">
           Iniciar Sesión
         </NavLink>
@@ -66,4 +73,4 @@ const CambiarContraseniaForm = () => {
   );
 }
  
-export default CambiarContraseniaForm;
+export default withRouter(CambiarContraseniaForm);

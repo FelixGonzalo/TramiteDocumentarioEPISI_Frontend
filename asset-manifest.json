@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/TramiteDocumentarioEPISI_Frontend/static/css/main.af3b2286.chunk.css",
-    "main.js": "/TramiteDocumentarioEPISI_Frontend/static/js/main.243b18ed.chunk.js",
-    "main.js.map": "/TramiteDocumentarioEPISI_Frontend/static/js/main.243b18ed.chunk.js.map",
+    "main.css": "/TramiteDocumentarioEPISI_Frontend/static/css/main.243bbc18.chunk.css",
+    "main.js": "/TramiteDocumentarioEPISI_Frontend/static/js/main.9f9eca17.chunk.js",
+    "main.js.map": "/TramiteDocumentarioEPISI_Frontend/static/js/main.9f9eca17.chunk.js.map",
     "runtime-main.js": "/TramiteDocumentarioEPISI_Frontend/static/js/runtime-main.c96afc76.js",
     "runtime-main.js.map": "/TramiteDocumentarioEPISI_Frontend/static/js/runtime-main.c96afc76.js.map",
-    "static/js/2.6d87f1d0.chunk.js": "/TramiteDocumentarioEPISI_Frontend/static/js/2.6d87f1d0.chunk.js",
-    "static/js/2.6d87f1d0.chunk.js.map": "/TramiteDocumentarioEPISI_Frontend/static/js/2.6d87f1d0.chunk.js.map",
+    "static/js/2.7e31874b.chunk.js": "/TramiteDocumentarioEPISI_Frontend/static/js/2.7e31874b.chunk.js",
+    "static/js/2.7e31874b.chunk.js.map": "/TramiteDocumentarioEPISI_Frontend/static/js/2.7e31874b.chunk.js.map",
     "index.html": "/TramiteDocumentarioEPISI_Frontend/index.html",
-    "static/css/main.af3b2286.chunk.css.map": "/TramiteDocumentarioEPISI_Frontend/static/css/main.af3b2286.chunk.css.map",
-    "static/js/2.6d87f1d0.chunk.js.LICENSE.txt": "/TramiteDocumentarioEPISI_Frontend/static/js/2.6d87f1d0.chunk.js.LICENSE.txt",
+    "static/css/main.243bbc18.chunk.css.map": "/TramiteDocumentarioEPISI_Frontend/static/css/main.243bbc18.chunk.css.map",
+    "static/js/2.7e31874b.chunk.js.LICENSE.txt": "/TramiteDocumentarioEPISI_Frontend/static/js/2.7e31874b.chunk.js.LICENSE.txt",
     "static/media/abrir_documento.6376c73e.svg": "/TramiteDocumentarioEPISI_Frontend/static/media/abrir_documento.6376c73e.svg",
     "static/media/actualizar_doc.a46459c9.svg": "/TramiteDocumentarioEPISI_Frontend/static/media/actualizar_doc.a46459c9.svg",
     "static/media/carnet_estudiante.b051cd98.svg": "/TramiteDocumentarioEPISI_Frontend/static/media/carnet_estudiante.b051cd98.svg",
@@ -22,13 +22,14 @@
     "static/media/logo_episi.35a32d18.jpg": "/TramiteDocumentarioEPISI_Frontend/static/media/logo_episi.35a32d18.jpg",
     "static/media/logo_uns.23e16e39.png": "/TramiteDocumentarioEPISI_Frontend/static/media/logo_uns.23e16e39.png",
     "static/media/persona.2c218a33.svg": "/TramiteDocumentarioEPISI_Frontend/static/media/persona.2c218a33.svg",
+    "static/media/send.411a97f6.svg": "/TramiteDocumentarioEPISI_Frontend/static/media/send.411a97f6.svg",
     "static/media/trabajando.e05b1822.svg": "/TramiteDocumentarioEPISI_Frontend/static/media/trabajando.e05b1822.svg",
     "static/media/ver.d7f731bb.svg": "/TramiteDocumentarioEPISI_Frontend/static/media/ver.d7f731bb.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.c96afc76.js",
-    "static/js/2.6d87f1d0.chunk.js",
-    "static/css/main.af3b2286.chunk.css",
-    "static/js/main.243b18ed.chunk.js"
+    "static/js/2.7e31874b.chunk.js",
+    "static/css/main.243bbc18.chunk.css",
+    "static/js/main.9f9eca17.chunk.js"
   ]
 }

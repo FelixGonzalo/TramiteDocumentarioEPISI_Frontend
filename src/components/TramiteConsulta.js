@@ -1,7 +1,10 @@
 import iconVer from './img/ver.svg'
 import iconSend from './img/send.svg'
 import Swal from 'sweetalert2'
+import './tramiteConsulta.css'
 import {sendArchivoXcorreo} from '../redux/archivoDucks'
+import {cambiarEstadoSolicitud} from '../redux/SolicitudEstadosDucks'
+
 import {useDispatch} from 'react-redux'
 
 const TramiteConsulta = (props) => {
@@ -19,6 +22,15 @@ const TramiteConsulta = (props) => {
       arrayCorreo.push(email)
       dispatch(sendArchivoXcorreo(arrayCorreo,idArchivo))
     }
+  }
+
+  const cambiarEstado = (e) => {
+    const form = document.getElementById('formCambiarEstadoSolicitud')
+    e.preventDefault()
+    const formData = new FormData(form);
+    console.log(formData.get('documentoRespuesta'))
+    // API REST 
+    // dispatch(cambiarEstadoSolicitud(idSolicitud, idEstado, formdata))
   }
 
   return (
@@ -147,6 +159,23 @@ const TramiteConsulta = (props) => {
           </tbody>
         </table>
       </div>
+      <form className="cambiarEstadoSolicitud" id="formCambiarEstadoSolicitud">
+        <p>Cambiar estado de la solicitud</p>
+        <label> Descripción
+          <textarea
+            name="descripcion"
+            className="input-default"
+          />
+        </label>
+        <input type="file" name="documento"/>
+        <div>
+          {
+            props.estadosPendientes.map((item) => (
+              <button key={item.id} onClick={(e) => cambiarEstado(e)}>{item.nombre}</button>
+            ))
+          }
+        </div>
+      </form>
     </div>
   );
 }

@@ -7,6 +7,7 @@ import puestoReducer from './personaPuestosDucks'
 import solicitudTiposReducer from './solicitudTiposDucks'
 import archivoTiposReducer from './archivoTiposDucks'
 import loginReducer from './loginDucks'
+import solicitudEstadosReducer from './SolicitudEstadosDucks'
 //llamamos a todos los reducer de los DUCKS
 
 const rootReducer = combineReducers({
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
   archivoTipos: archivoTiposReducer,
   solicitudes: solicitudReducer,
   solicitudTipos: solicitudTiposReducer,
+  solicitudEstados: solicitudEstadosReducer,
   login :loginReducer
 })
 

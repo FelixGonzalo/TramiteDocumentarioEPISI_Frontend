@@ -4,6 +4,7 @@ import iconAbrir from './img/abrir_documento.svg'
 import iconEstudiante from './img/estudiante.svg'
 import iconPersona from './img/persona.svg'
 import iconPDF from './img/pdf.svg'
+import {getSolicitudEstadosPendiente} from '../redux/SolicitudEstadosDucks'
 
 import {useDispatch, useSelector} from 'react-redux'
 import {getSolicitudes} from '../redux/solicitudDucks'
@@ -13,6 +14,7 @@ const TramitesList = () => {
 
   const dispatch = useDispatch()
   const tramites = useSelector(store => store.solicitudes.array)
+  const estadosPendientes = useSelector(store => store.solicitudEstados.array)
 
   const [dataConsulta, setDataConsulta] = useState(null)
 
@@ -22,6 +24,7 @@ const TramitesList = () => {
   }, [])
 
   const abrirConsulta = (item) => {
+    dispatch(getSolicitudEstadosPendiente(item.id))
     setDataConsulta(item)
     document.getElementById('tabla-lista-tramites').classList.add('lista-tramites')
   }
@@ -88,7 +91,7 @@ const TramitesList = () => {
         </table>
       </div>
       {
-        dataConsulta !== null && (<TramiteConsulta data={dataConsulta} cerrarConsulta={(e) => cerrarConsulta()}/>)
+        dataConsulta !== null && (<TramiteConsulta data={dataConsulta} estadosPendientes={estadosPendientes} cerrarConsulta={(e) => cerrarConsulta()}/>)
       }
     </div>
   );

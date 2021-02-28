@@ -1,0 +1,29 @@
+.cambiarEstadoSolicitud {
+  padding: 60px 0px 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.cambiarEstadoSolicitud textarea {
+  margin-top: 10px;
+  display: block;
+}
+
+.cambiarEstadoSolicitud button {
+  width: 100px;
+  padding: 5px 10px;
+  margin: 5px;
+  font-weight: bold;
+  border: 2px solid var(--cred);
+  border-radius: 10px;
+  color: var(--cred);
+  background: none;
+  cursor: pointer;
+  outline: none;
+}
+
+.cambiarEstadoSolicitud button:active {
+  background: var(--cred);
+}

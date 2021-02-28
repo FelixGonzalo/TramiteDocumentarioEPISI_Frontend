@@ -27,7 +27,7 @@ const TramiteConsulta = (props) => {
         cerrar
       </button>
       <h3 className="tramite-title">Consulta de trámite</h3>
-      <p className="tramite-subtitle">Datos generales: </p>
+      <p className="tramite-subtitle">Datos generales </p>
       <p>Tipo: {props.data.tipoSolicitud.nombre} </p>
       <p>Descripción: {props.data.descripcion} </p> 
       <div className="table-responsive">
@@ -55,7 +55,7 @@ const TramiteConsulta = (props) => {
           </tbody>
         </table>
       </div>
-      <p className="tramite-subtitle">Datos del Solicitante: </p>
+      <p className="tramite-subtitle">Datos del Solicitante </p>
       <div className="table-responsive">
         <table className="">
           <thead>
@@ -83,7 +83,7 @@ const TramiteConsulta = (props) => {
       </div>
 
 
-      <p className="tramite-subtitle">Datos del Destinatario: </p>
+      <p className="tramite-subtitle">Datos del Destinatario </p>
       <div className="table-responsive">
         <table className="">
           <thead>
@@ -114,7 +114,7 @@ const TramiteConsulta = (props) => {
           </tbody>
         </table>
       </div>
-      <p className="tramite-subtitle">Archivos: </p>
+      <p className="tramite-subtitle">Archivos </p>
       <div className="table-responsive">
         <table className="">
           <thead>

@@ -71,16 +71,32 @@ export const postArchivo = (archivo, event) => async (dispatch, getState) => {
       headers: headers,
       body: formdata
     })
-    const data = await response.json()
-    console.log('respuesta de postArchivo')
-    console.log(data)
-    console.log('respuesta de postArchivo respues')
-    console.log(response)
     if (response.status !== 201) {
       alert.miniAlert(`${response.status}: No se puede registrar`,'error')
     } else {
       alert.miniAlert('archivo agregado !','success')
       event.target.reset()
+      // obtener solicitudes
+      try {
+        let headers = new Headers();
+        headers.append('Authorization', 'Bearer ' + localStorage.getItem('mitoken'));
+        const response = await fetch('http://localhost:8090/api/archivos/archivos-sin-solicitud', {
+          method: 'GET',
+          headers: headers
+        })
+        const data = await response.json()
+        dispatch({
+          type: GET_ARCHIVOS,
+          payload: data
+        })
+        if (response.status !== 200) {
+          alert.miniAlert(response.status + ': Error al conectar con el servidor','warning')
+        } else if (data.length === 0) {
+          alert.miniAlert('No hay archivos Registrados','warning')
+        }
+      } catch (error) {
+        alert.miniAlert(error,'warning')
+      }
     }
   } catch (error) {
     console.log(error)
@@ -88,7 +104,7 @@ export const postArchivo = (archivo, event) => async (dispatch, getState) => {
   }
 }
 
-export const deleteArchivo = (id) => async () => {
+export const deleteArchivo = (id) => async (dispatch) => {
   try {
     let headers = new Headers();
     headers.append('Authorization', 'Bearer ' + localStorage.getItem('mitoken'));
@@ -96,15 +112,31 @@ export const deleteArchivo = (id) => async () => {
       method: 'DELETE',
       headers: headers
     })
-    const data = await response.json()
-    console.log('respuesta de deleteArchivo')
-    console.log(data)
-    console.log('respuesta de deleteArchivo respues')
-    console.log(response)
     if (response.status !== 200) {
       alert.miniAlert(`${response.status}: Error al eliminar archivo`,'error')
     } else {
       alert.miniAlert('archivo eliminado !','success')
+      // obtener solicitudes
+      try {
+        let headers = new Headers();
+        headers.append('Authorization', 'Bearer ' + localStorage.getItem('mitoken'));
+        const response = await fetch('http://localhost:8090/api/archivos/archivos-sin-solicitud', {
+          method: 'GET',
+          headers: headers
+        })
+        const data = await response.json()
+        dispatch({
+          type: GET_ARCHIVOS,
+          payload: data
+        })
+        if (response.status !== 200) {
+          alert.miniAlert(response.status + ': Error al conectar con el servidor','warning')
+        } else if (data.length === 0) {
+          alert.miniAlert('No hay archivos Registrados','warning')
+        }
+      } catch (error) {
+        alert.miniAlert(error,'warning')
+      }
     }
   } catch (error) {
     console.log(error)

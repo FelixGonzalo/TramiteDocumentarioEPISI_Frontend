@@ -1,5 +1,5 @@
 import {useForm} from 'react-hook-form'
-import {useEffect} from 'react'
+import {useEffect, useState} from 'react'
 import './defaultForm.css'
 
 import {useDispatch, useSelector} from 'react-redux'
@@ -10,6 +10,8 @@ const PersonaForm = () => {
 
   const dispatch = useDispatch()
   const puestos = useSelector(store => store.personaPuestos.array)
+
+  const [registrarEmpresa, setRegistrarEmpresa] = useState(false)
 
   const {register, errors, handleSubmit} = useForm()
 
@@ -22,9 +24,8 @@ const PersonaForm = () => {
     dispatch(postPersona(data, event))
   }
 
-  const inputEstudiante = document.getElementById('inputEstudiante')
   const addInputsSegunPuesto = (e) => {
-    e !== '1' ? inputEstudiante.classList.add('deshabilitar') : inputEstudiante.classList.remove('deshabilitar')
+    e !== '1' ? setRegistrarEmpresa(true) : setRegistrarEmpresa(false)
   }
 
   const checkKeyDown = (e) => {
@@ -65,24 +66,30 @@ const PersonaForm = () => {
           errors?.nombre?.message
         }
       </span>
-      <label className="label-default"> Apellidos
-        <input
-          type="text"
-          name="apellidos"
-          className="input-default"
-          ref={
-            register({
-              required : {value: true, message: 'apellidos obligatorio'},
-              pattern : {value: /^[A-Za-zÀ-ÿ\s]+$/i, message: 'apellidos no válido' }
-            })
-          }
-        />
-      </label>
-      <span className="input-error">
-        {
-          errors?.apellidos?.message
-        }
-      </span>
+      {
+        registrarEmpresa !== true ? (
+          <div>
+            <label className="label-default"> Apellidos
+            <input
+                type="text"
+                name="apellidos"
+                className="input-default"
+                ref={
+                  register({
+                    required : {value: true, message: 'Apelligos obligatorio'},
+                    pattern : {value: /^[A-Za-zÀ-ÿ\s]+$/i, message: 'apellidos no válido' }
+                  })
+                }
+              />
+            </label>
+            <span className="input-error">
+              {
+                errors?.apellidos?.message
+              }
+            </span>
+          </div>
+        ) : null
+      }
       <label className="label-default"> Correo
         <input
           type="text"
@@ -117,23 +124,30 @@ const PersonaForm = () => {
       <span className="input-error">
         {errors?.dniOruc?.message}
       </span>
-      <label id="inputEstudiante" className="label-default" > Cod. estudiante
-        <input
-          type="text"
-          name="codigoEstudiante"
-          className="input-default"
-          ref={
-            register({
-              pattern : {value: /[0-9]+$/, message: 'solo se acepta números' },
-              minLength : {value: 10, message: 'muy corto, son 10 números'},
-              maxLength : {value: 10, message: 'muy grande, solo 10 números'}
-            })
-          }
-        />
-      </label>
-      <span className="input-error">
-        {errors?.codigoEstudiante?.message}
-      </span>
+      {
+        registrarEmpresa !== true ? (
+          <div>
+            <label className="label-default" > Cod. estudiante
+              <input
+                type="text"
+                name="codigoEstudiante"
+                className="input-default"
+                ref={
+                  register({
+                    required : {value: true, message: 'Cod. estudiante obligatorio'},
+                    pattern : {value: /[0-9]+$/, message: 'solo se acepta números' },
+                    minLength : {value: 10, message: 'muy corto, son 10 números'},
+                    maxLength : {value: 10, message: 'muy grande, solo 10 números'}
+                  })
+                }
+              />
+            </label>
+            <span className="input-error">
+              {errors?.codigoEstudiante?.message}
+            </span>
+          </div>
+        ) : null
+      }
       <button className="button-default">Registrar</button>
     </form>
   );

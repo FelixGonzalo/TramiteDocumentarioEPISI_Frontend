@@ -32,7 +32,7 @@ const ArchivoForm = () => {
         {
           tipos.length > 0 ?
           tipos.map((item) => (
-            <option key={item.id} value={item.id}>{item.nombre}</option>
+            item.nombre !== 'RESPUESTA' && (<option key={item.id} value={item.id}>{item.nombre}</option>)
           )) : (<option>No hay datos</option>)
         }
         </select>

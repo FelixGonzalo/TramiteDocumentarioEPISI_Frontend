@@ -17,9 +17,16 @@ const TramitesList = () => {
   const estadosPendientes = useSelector(store => store.solicitudEstados.array)
 
   const [dataConsulta, setDataConsulta] = useState(null)
+  const [usuarioActual, setUsuarioActual] = useState('')
+  const [tipoUsuario, setTipoUsuario] = useState('ROLE_USER')
 
   useEffect(() => {
     dispatch(getSolicitudes())
+    const usuarioActual = JSON.parse(window.atob(localStorage.getItem('mitoken').split('.')[1]))
+    setUsuarioActual(usuarioActual.dniRuc)
+    usuarioActual.authorities.forEach(tipo => {
+      tipo === 'ROLE_ADMIN' && (setTipoUsuario('ROLE_ADMIN'))
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -52,40 +59,33 @@ const TramitesList = () => {
             {
               tramites.length > 0 ? 
                 tramites.map((item, index) => (
-                  <tr key={item.id}>
-                    <td>{index+1 < 10 ? "0"+(index+1) : index+1}</td>
-                    <td>
-                      <img src={item.personaEmisor.puesto.id === 1 ? iconEstudiante : iconPersona} alt="" height="18px"/>
-                      <span className="apellidos">{' '+item.personaEmisor.apellidos} </span>
-                      {' '+item.personaEmisor.nombre}
-                    </td>
-                    <td className="apellidoYnombre">
-                      <img src={item.personasReceptoras[0].puesto.id === 1 ? iconEstudiante : iconPersona} alt="" height="18px"/>
-                      <span className="apellidos">{item.personasReceptoras[0].apellidos}</span>
-                      {' '+item.personasReceptoras[0].nombre}
-                    </td>
-                    <td>{item.tipoSolicitud.nombre}</td>
-                    <td>
-                      <span className={ "estado-tramite "+ item.estadoSolicitudes[item.estadoSolicitudes.length-1].estado.nombre}>
-                        {item.estadoSolicitudes[item.estadoSolicitudes.length-1].estado.nombre}
-                        </span>
-                      <span className="fecha-tramite">{item.estadoSolicitudes[item.estadoSolicitudes.length-1].fecha}</span>
-                    </td>
-                    <td>
-                      <button className="botonToicon" onClick={() => abrirConsulta(item)}><img src={iconAbrir} alt="Abrir documento" height= "20px"/></button>
-                      <a className="botonToicon" href={'http://localhost:8090/api/solicitudes/exportar/' + item.id + '/'} target="_blank" rel="noreferrer"><img src={iconPDF} alt="generar PDF" height= "20px"/></a>
-                    </td>
-                  </tr>
-                )) : (
-                  <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                )
+                  (usuarioActual === item.personasReceptoras[0].dniRuc || tipoUsuario === 'ROLE_ADMIN') && (
+                    <tr key={item.id}>
+                      <td>{index+1 < 10 ? "0"+(index+1) : index+1}</td>
+                      <td>
+                        <img src={item.personaEmisor.puesto.id === 1 ? iconEstudiante : iconPersona} alt="" height="18px"/>
+                        <span className="apellidos">{' '+item.personaEmisor.apellidos} </span>
+                        {' '+item.personaEmisor.nombre}
+                      </td>
+                      <td className="apellidoYnombre">
+                        <img src={item.personasReceptoras[0].puesto.id === 1 ? iconEstudiante : iconPersona} alt="" height="18px"/>
+                        <span className="apellidos">{item.personasReceptoras[0].apellidos}</span>
+                        {' '+item.personasReceptoras[0].nombre}
+                      </td>
+                      <td>{item.tipoSolicitud.nombre}</td>
+                      <td>
+                        <span className={ "estado-tramite "+ item.estadoSolicitudes[item.estadoSolicitudes.length-1].estado.nombre}>
+                          {item.estadoSolicitudes[item.estadoSolicitudes.length-1].estado.nombre}
+                          </span>
+                        <span className="fecha-tramite">{item.estadoSolicitudes[item.estadoSolicitudes.length-1].fecha}</span>
+                      </td>
+                      <td>
+                        <button className="botonToicon" onClick={() => abrirConsulta(item)}><img src={iconAbrir} alt="Abrir documento" height= "20px"/></button>
+                        <a className="botonToicon" href={'http://localhost:8090/api/solicitudes/exportar/' + item.id + '/'} target="_blank" rel="noreferrer"><img src={iconPDF} alt="generar PDF" height= "20px"/></a>
+                      </td>
+                    </tr>
+                    )
+                )) : null
             }
           </tbody>
         </table>

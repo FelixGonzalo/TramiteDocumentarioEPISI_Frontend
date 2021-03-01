@@ -8,9 +8,19 @@ import {withRouter} from 'react-router-dom'
 
 import {useDispatch} from 'react-redux'
 
+import {useEffect, useState} from 'react'
+
 const TramiteConsulta = (props) => {
 
   const dispatch = useDispatch()
+  const [tipoUsuario, setTipoUsuario] = useState('ROLE_USER')
+
+  useEffect(() => {
+    const usuarioActual = JSON.parse(window.atob(localStorage.getItem('mitoken').split('.')[1]))
+    usuarioActual.authorities.forEach(tipo => {
+      tipo === 'ROLE_ADMIN' && (setTipoUsuario('ROLE_ADMIN'))
+    });
+  }, [])
 
   const enviarArchivoXcorreo = async (idArchivo) => {
     const { value: email } = await Swal.fire({
@@ -85,7 +95,7 @@ const TramiteConsulta = (props) => {
               <td>01</td>
               <td>{props.data.personaEmisor.puesto.nombre}</td>
               <td>
-                {props.data.personaEmisor.apellidos}
+                {props.data.personaEmisor.apellidos + ' '}
                 {props.data.personaEmisor.nombre} 
               </td>
               <td>{props.data.personaEmisor.correo}</td>
@@ -116,11 +126,11 @@ const TramiteConsulta = (props) => {
                     <td>{index+1 < 10 ? "0"+(index+1) : index+1}</td>
                     <td>{item.puesto.nombre}</td>
                     <td>
-                      {item.apellidos}
+                      {item.apellidos + ' '}
                       {item.nombre}
                     </td>
                     <td>{item.correo}</td>
-                    <td>{item.dniRuc} / </td>
+                    <td>{item.dniRuc} / {item.codEstudiante} </td>
                   </tr>
                 )) : null
             }
@@ -160,25 +170,32 @@ const TramiteConsulta = (props) => {
           </tbody>
         </table>
       </div>
-      <form className="cambiarEstadoSolicitud" id="formCambiarEstadoSolicitud">
-        <p>Cambiar estado de la solicitud</p>
-        <label> Descripción (opcional)
-          <textarea
-            name="descripcion"
-            className="input-default"
-          />
-        </label>
-        {
-          props.estadosPendientes.length > 1 && (<input type="file" name="documento"/>)
-        }
-        <div>
-          {
-            props.estadosPendientes.map((item) => (
-              <button key={item.id} onClick={(e) => cambiarEstado(e, item.id, props.data.id, item.nombre)}>{item.nombre}</button>
-            ))
-          }
-        </div>
-      </form>
+      {
+        tipoUsuario !== 'ROLE_ADMIN' && props.estadosPendientes.length === 1 ? (null) : (
+          <form className="cambiarEstadoSolicitud" id="formCambiarEstadoSolicitud">
+            <p>Cambiar estado de la solicitud</p>
+            <label> Descripción (opcional)
+              <textarea
+                name="descripcion"
+                className="input-default"
+              />
+            </label>
+            {
+              props.estadosPendientes.length > 1 && (<input type="file" name="documento"/>)
+            }
+            <div>
+              {
+                props.estadosPendientes.map((item) => (
+                  (tipoUsuario === 'ROLE_ADMIN' && (item.nombre === 'Aprobado' || item.nombre === 'Rechazado')) || 
+                  (tipoUsuario !== 'ROLE_ADMIN' && item.nombre === 'Archivado') ? (
+                    null
+                  ) : (<button key={item.id} onClick={(e) => cambiarEstado(e, item.id, props.data.id, item.nombre)}>{item.nombre}</button>)
+                ))
+              }
+            </div>
+          </form>
+        )
+      }
     </div>
   );
 }

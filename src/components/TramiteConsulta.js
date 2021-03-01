@@ -4,6 +4,7 @@ import Swal from 'sweetalert2'
 import './tramiteConsulta.css'
 import {sendArchivoXcorreo} from '../redux/archivoDucks'
 import {cambiarEstadoSolicitud} from '../redux/SolicitudEstadosDucks'
+import {withRouter} from 'react-router-dom'
 
 import {useDispatch} from 'react-redux'
 
@@ -24,13 +25,13 @@ const TramiteConsulta = (props) => {
     }
   }
 
-  const cambiarEstado = (e) => {
+  const cambiarEstado = async (e, idEstado, idSolicitud, nombreEstado) => {
     const form = document.getElementById('formCambiarEstadoSolicitud')
     e.preventDefault()
-    const formData = new FormData(form);
-    console.log(formData.get('documentoRespuesta'))
+    const formdata = new FormData(form);
+    // console.log(formData.get('documentoRespuesta'))
     // API REST 
-    // dispatch(cambiarEstadoSolicitud(idSolicitud, idEstado, formdata))
+    dispatch(cambiarEstadoSolicitud(idSolicitud, idEstado, formdata, nombreEstado, props.history))
   }
 
   return (
@@ -40,7 +41,7 @@ const TramiteConsulta = (props) => {
       </button>
       <h3 className="tramite-title">Consulta de trámite</h3>
       <p className="tramite-subtitle">Datos generales </p>
-      <p>Tipo: {props.data.tipoSolicitud.nombre} </p>
+      <p>Tipo: {props.data.tipoSolicitud.nombre}</p>
       <p>Descripción: {props.data.descripcion} </p> 
       <div className="table-responsive">
         <table className="">
@@ -161,17 +162,19 @@ const TramiteConsulta = (props) => {
       </div>
       <form className="cambiarEstadoSolicitud" id="formCambiarEstadoSolicitud">
         <p>Cambiar estado de la solicitud</p>
-        <label> Descripción
+        <label> Descripción (opcional)
           <textarea
             name="descripcion"
             className="input-default"
           />
         </label>
-        <input type="file" name="documento"/>
+        {
+          props.estadosPendientes.length > 1 && (<input type="file" name="documento"/>)
+        }
         <div>
           {
             props.estadosPendientes.map((item) => (
-              <button key={item.id} onClick={(e) => cambiarEstado(e)}>{item.nombre}</button>
+              <button key={item.id} onClick={(e) => cambiarEstado(e, item.id, props.data.id, item.nombre)}>{item.nombre}</button>
             ))
           }
         </div>
@@ -180,4 +183,4 @@ const TramiteConsulta = (props) => {
   );
 }
  
-export default TramiteConsulta;
+export default withRouter(TramiteConsulta);

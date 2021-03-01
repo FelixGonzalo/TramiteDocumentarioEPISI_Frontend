@@ -36,7 +36,7 @@ export const getSolicitudEstadosPendiente = (idSolicitud) => async (dispatch) =>
   }
 }
 
-export const cambiarEstadoSolicitud = (idSolicitud, idEstado, formdata) => async (dispatch) => {
+export const cambiarEstadoSolicitud = (idSolicitud, idEstado, formdata, nombreEstado, rutaDestino) => async (dispatch) => {
   try {
     let headers = new Headers();
     headers.append('Authorization', 'Bearer ' + localStorage.getItem('mitoken'));
@@ -46,8 +46,15 @@ export const cambiarEstadoSolicitud = (idSolicitud, idEstado, formdata) => async
       body: formdata
     })
     const data = await response.json()
-    if (response.status !== 200) {
+    console.log('respuesta de cambiar estado:')
+    console.log(response.status)
+    console.log('data:')
+    console.log(data)
+    if (response.status !== 201) {
       alert.miniAlert(response.status + ': error al cambiar el estado de la solicitud','warning')
+    } else if (response.status === 201)  {
+      alert.miniAlert('Archivo cambiado a estado: ' + nombreEstado,'success')
+      rutaDestino.push('/inicio')
     }
   } catch (error) {
     alert.miniAlert(error,'warning')

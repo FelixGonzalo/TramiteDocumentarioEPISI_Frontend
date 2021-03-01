@@ -66,7 +66,6 @@ export const postSolicitud = (solicitud, event, solicitante,destinatario) => asy
       alert.alertOk()
       event.target.reset()
     }
-    console.log(data)
   } catch (error) {
     console.log(error)
     alert.alertError(error)

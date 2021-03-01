@@ -16,9 +16,14 @@ const Navbar = () => {
   }
 
   const [usuarioActual, setUsuarioActual] = useState(null)
+  const [tipoUsuario, setTipoUsuario] = useState('ROLE_USER')
 
   useEffect(() => {
-    setUsuarioActual(JSON.parse(window.atob(localStorage.getItem('mitoken').split('.')[1])))
+    const usuarioActual = JSON.parse(window.atob(localStorage.getItem('mitoken').split('.')[1]))
+    setUsuarioActual(usuarioActual)
+    usuarioActual.authorities.forEach(tipo => {
+      tipo === 'ROLE_ADMIN' && (setTipoUsuario('ROLE_ADMIN'))
+    });
   }, [])
 
   return (
@@ -30,18 +35,30 @@ const Navbar = () => {
       <NavLink to="/inicio" exact className="navbar-option">
         <img src={iconInicio} alt="inicio" height="25px"/>
       </NavLink>
-      <NavLink to="/listar.personas" className="navbar-option" activeClassName="navbar-activate">
-        Listar personas
-      </NavLink>
-      <NavLink to="/registrar.persona" className="navbar-option" activeClassName="navbar-activate">
-        Registrar persona
-      </NavLink>
+      {
+        tipoUsuario === 'ROLE_ADMIN' && (
+          <NavLink to="/listar.personas" className="navbar-option" activeClassName="navbar-activate">
+            Listar personas
+          </NavLink>
+        )
+      }
+      {
+        tipoUsuario === 'ROLE_ADMIN' && (
+          <NavLink to="/registrar.persona" className="navbar-option" activeClassName="navbar-activate">
+            Registrar persona
+          </NavLink>
+        )
+      }
       <NavLink to="/listar.tramites" className="navbar-option" activeClassName="navbar-activate">
         Lista de trámites
       </NavLink>
-      <NavLink to="/registrar.tramite" className="navbar-option" activeClassName="navbar-activate">
-        Registrar trámite
-      </NavLink>
+      {
+        tipoUsuario === 'ROLE_ADMIN' && (
+          <NavLink to="/registrar.tramite" className="navbar-option" activeClassName="navbar-activate">
+            Registrar trámite
+          </NavLink>
+        )
+      }
       <NavLink to="/login" exact className="navbar-option" activeClassName="navbar-activate" onClick={(e) => salir()}>
         Salir
       </NavLink>

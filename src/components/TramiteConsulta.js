@@ -16,10 +16,12 @@ const TramiteConsulta = (props) => {
 
   const dispatch = useDispatch()
   const [tipoUsuario, setTipoUsuario] = useState('ROLE_USER')
+  const [usuarioActual, setUsuarioActual] = useState(JSON.parse(window.atob(localStorage.getItem('mitoken').split('.')[1])))
 
   useEffect(() => {
-    const usuarioActual = JSON.parse(window.atob(localStorage.getItem('mitoken').split('.')[1]))
-    usuarioActual.authorities.forEach(tipo => {
+    const tempusuarioActual = JSON.parse(window.atob(localStorage.getItem('mitoken').split('.')[1]))
+    setUsuarioActual(tempusuarioActual)
+    tempusuarioActual.authorities.forEach(tipo => {
       tipo === 'ROLE_ADMIN' && (setTipoUsuario('ROLE_ADMIN'))
     });
   }, [])
@@ -188,7 +190,7 @@ const TramiteConsulta = (props) => {
         </table>
       </div>
       {
-        props.data.firma === null && (
+        ( props.data.firma === null && usuarioActual.apellido === props.data.personasReceptoras[0].apellidos ) && (
           <div className="botonfirmar">
             <p>Firmar documento </p>
             <button className="botonToicon" onClick={(e)=> firmarSolicitudCodigo(props.data.id)}>
@@ -213,7 +215,7 @@ const TramiteConsulta = (props) => {
             <div>
               {
                 props.estadosPendientes.map((item) => (
-                  (tipoUsuario === 'ROLE_ADMIN' && (item.nombre === 'Aprobado' || item.nombre === 'Rechazado')) || 
+                  (tipoUsuario === 'ROLE_ADMIN' && (item.nombre === 'Aprobado' || item.nombre === 'Rechazado') && usuarioActual.apellido !== props.data.personasReceptoras[0].apellidos) || 
                   (tipoUsuario !== 'ROLE_ADMIN' && item.nombre === 'Archivado') ? (
                     null
                   ) : (<button key={item.id} onClick={(e) => cambiarEstado(e, item.id, props.data.id, item.nombre)}>{item.nombre}</button>)

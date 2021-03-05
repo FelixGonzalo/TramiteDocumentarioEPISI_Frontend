@@ -71,3 +71,52 @@ export const postSolicitud = (solicitud, event, solicitante,destinatario) => asy
     alert.alertError(error)
   }
 }
+
+export const enviarCodigoTofirmarSolicitud = (idSolicitud) => async () => {
+  try {
+    let headers = new Headers();
+    headers.append('Authorization', 'Bearer ' + localStorage.getItem('mitoken'));
+    headers.append('Content-Type', 'application/json');
+    const response = await fetch('http://localhost:8090/api/solicitudes/firmar/' + idSolicitud, {
+      method: 'POST',
+      headers: headers
+    })
+    switch (response.status) {
+      case 200:
+          return 'codigo Enviado'
+        break;
+      default:
+          alert.miniAlert('Ahora no podemos atenderlo','warning')
+          return 'codigo Error'
+        break;
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export const firmarSolicitud = (codigoFirma, rutaDestino) => async () => {
+  try {
+    let miformdata = new FormData()
+    miformdata.append('codigo', codigoFirma);
+    console.log('codigo ' + miformdata.get('codigo'))
+    let headers = new Headers();
+    headers.append('Authorization', 'Bearer ' + localStorage.getItem('mitoken'));
+    const response = await fetch('http://localhost:8090/api/solicitudes/firmar', {
+      method: 'POST',
+      headers: headers,
+      body: miformdata
+    })
+    switch (response.status) {
+      case 201:
+          alert.bigAlert('Solicitud firmada: ', codigoFirma, 'success')
+          rutaDestino.push('/inicio')
+        break;
+      default:
+          alert.miniAlert('Error al firmar solicitud','warning')
+        break;
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}

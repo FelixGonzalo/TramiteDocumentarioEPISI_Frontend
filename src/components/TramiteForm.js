@@ -32,7 +32,7 @@ const TramiteForm = () => {
     let text =  input.target.value.trim()
     if (text.length > 0) {
       for (let item of personas){
-        if (item.nombre.toLowerCase().indexOf(text.toLowerCase()) !== -1) {
+        if (item.apellidos.toLowerCase().indexOf(text.toLowerCase()) !== -1) {
           return item
         }
       }
@@ -43,12 +43,12 @@ const TramiteForm = () => {
 
   const buscarSolicitante = (e) => {
     setSolicitante(buscarPersona(e))
-    if (e.code === 'Enter' && solicitante !== null && solicitante !== undefined) e.target.value = solicitante.nombre;
+    if (e.code === 'Enter' && solicitante !== null && solicitante !== undefined) e.target.value = solicitante.apellidos;
   }
 
   const buscarDestinatario = (e) => {
     setDestinatario(buscarPersona(e))
-    if (e.code === 'Enter' && destinatario !== null && destinatario !== undefined ) e.target.value = destinatario.nombre;
+    if (e.code === 'Enter' && destinatario !== null && destinatario !== undefined ) e.target.value = destinatario.apellidos;
   }
 
   const onSubmit = (data, event) => {
@@ -107,7 +107,7 @@ const TramiteForm = () => {
       {
         solicitante !== null && solicitante !== undefined ? (
           <ul className="info-persona">
-          <li><span className="persona-dato">{solicitante.puesto.nombre}:</span> {solicitante.nombre}</li>
+          <li><span className="persona-dato">{solicitante.puesto.nombre}:</span> {solicitante.nombre} {' '+solicitante.apellidos}</li>
           </ul>
         ) : ( <ul className="info-persona"><li></li> </ul>)
       }
@@ -132,7 +132,7 @@ const TramiteForm = () => {
       {
         destinatario !== null && destinatario !== undefined ? (
           <ul className="info-persona">
-          <li><span className="persona-dato">{destinatario.puesto.nombre}:</span> {destinatario.nombre}</li>
+          <li><span className="persona-dato">{destinatario.puesto.nombre}:</span> {destinatario.nombre} {' '+destinatario.apellidos}</li>
           </ul>
         ) : ( <ul className="info-persona"><li></li> </ul>)
       }

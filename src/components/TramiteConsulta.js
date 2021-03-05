@@ -1,9 +1,11 @@
 import iconVer from './img/ver.svg'
 import iconSend from './img/send.svg'
+import iconFirmar from './img/firmar_documento.svg'
 import Swal from 'sweetalert2'
 import './tramiteConsulta.css'
 import {sendArchivoXcorreo} from '../redux/archivoDucks'
 import {cambiarEstadoSolicitud} from '../redux/SolicitudEstadosDucks'
+import {enviarCodigoTofirmarSolicitud, firmarSolicitud} from '../redux/solicitudDucks'
 import {withRouter} from 'react-router-dom'
 
 import {useDispatch} from 'react-redux'
@@ -32,6 +34,21 @@ const TramiteConsulta = (props) => {
       let arrayCorreo = []
       arrayCorreo.push(email)
       dispatch(sendArchivoXcorreo(arrayCorreo,idArchivo))
+    }
+  }
+
+  const firmarSolicitudCodigo = async (idSolicitud) => {
+    const respuesta = await dispatch(enviarCodigoTofirmarSolicitud(idSolicitud))
+    if (respuesta === 'codigo Enviado') {
+      const { value: codigoFirma } = await Swal.fire({
+        input: 'text',
+        inputLabel: 'Ingrese el código que recibió en su correo',
+        inputPlaceholder: 'Código de verificación'
+      })
+      if (codigoFirma) {
+        let codigo = codigoFirma
+        dispatch(firmarSolicitud(codigo, props.history))
+      }
     }
   }
 
@@ -170,6 +187,16 @@ const TramiteConsulta = (props) => {
           </tbody>
         </table>
       </div>
+      {
+        props.data.firma === null && (
+          <div className="botonfirmar">
+            <p>Firmar documento </p>
+            <button className="botonToicon" onClick={(e)=> firmarSolicitudCodigo(props.data.id)}>
+              <img src={iconFirmar} alt="" width="25px"/>
+            </button>
+          </div>
+        )
+      }
       {
         tipoUsuario !== 'ROLE_ADMIN' && props.estadosPendientes.length === 1 ? (null) : (
           <form className="cambiarEstadoSolicitud" id="formCambiarEstadoSolicitud">

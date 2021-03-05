@@ -27,3 +27,14 @@
 .cambiarEstadoSolicitud button:active {
   background: var(--cred);
 }
+
+.botonfirmar {
+  border: 1px solid black;
+  border-radius: 4px;
+  cursor: pointer;
+  max-width: 140px;
+  font-size: 12px;
+  padding: 5px;
+  margin: auto;
+  margin-top: 40px;
+}
